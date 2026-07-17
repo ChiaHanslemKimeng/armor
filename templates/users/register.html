@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Create Account | Armor Systems{% endblock %}
+
+{% block content %}
+<div class="container py-5 my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="glass-card p-5 border-glass shadow-lg">
+                <div class="text-center mb-4">
+                    <div class="p-3 rounded-circle text-white fw-bold d-inline-flex align-items-center justify-content-center mb-3" style="background: var(--accent-gradient); width: 64px; height: 64px;">
+                        <i class="bi bi-person-badge-fill fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold tracking-tight text-white font-outfit">Create Your Account</h3>
+                    <p class="text-secondary small font-monospace">Sign up to earn loyalty points, track orders, and save shipping addresses.</p>
+                </div>
+
+                {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                    <div class="alert alert-danger py-2 px-3 small rounded-3 border-0 bg-danger bg-opacity-10 text-danger font-monospace">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="/users/register/">
+                    {% csrf_token %}
+                    <div class="row g-3 mb-3 font-monospace">
+                        <div class="col-sm-6">
+                            <label class="form-label small fw-semibold text-secondary">First Name</label>
+                            <input type="text" name="first_name" class="form-control bg-transparent border-glass text-reset" placeholder="John" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label small fw-semibold text-secondary">Last Name</label>
+                            <input type="text" name="last_name" class="form-control bg-transparent border-glass text-reset" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 font-monospace">
+                        <label class="form-label small fw-semibold text-secondary">Email Address</label>
+                        <input type="email" name="email" class="form-control bg-transparent border-glass text-reset" placeholder="shooter@example.com" required>
+                    </div>
+
+                    <div class="mb-4 font-monospace">
+                        <label class="form-label small fw-semibold text-secondary">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-glass"><i class="bi bi-key text-muted"></i></span>
+                            <input type="password" name="password" id="registerPasswordInput" class="form-control bg-transparent border-glass text-reset" placeholder="Minimum 8 characters" required>
+                            <button class="btn btn-outline-secondary border-glass text-muted px-3" type="button" onclick="togglePasswordVisibility('registerPasswordInput', this)" title="Toggle Password Visibility">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-4 font-monospace">
+                        <input class="form-check-input border-glass" type="checkbox" required id="termsCheck">
+                        <label class="form-check-label small text-secondary" for="termsCheck">
+                            I agree to Armor's <a href="#" class="text-info text-decoration-none">Terms of Service</a> and Privacy Policy.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-tactical-yellow w-100 justify-content-center py-3 fs-6 fw-bold">
+                        Create Account <i class="bi bi-check-circle-fill ms-1"></i>
+                    </button>
+                </form>
+
+                <div class="text-center border-top border-glass pt-3 mt-4 font-monospace">
+                    <p class="small text-secondary mb-0">Already registered? <a href="/users/login/" class="text-info fw-bold text-decoration-none">Sign In Here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

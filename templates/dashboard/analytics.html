@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% block title %}Store Analytics & Sales Dashboard | Armor Systems{% endblock %}
+
+{% block content %}
+<div class="container py-5" x-data="{
+    revenue: '1,842,600.00',
+    orders: 148,
+    activeCustomers: 1420,
+    initTelemetry() {
+        const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+        const wsUrl = protocol + window.location.host + '/ws/dashboard/telemetry/';
+        try {
+            const socket = new WebSocket(wsUrl);
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                if (data.revenue) this.revenue = Number(data.revenue).toLocaleString('en-US', {minimumFractionDigits: 2});
+                if (data.orders) this.orders = data.orders;
+            };
+        } catch(e) {
+            console.log('WebSocket fallback to static telemetry.');
+        }
+    }
+}" x-init="initTelemetry()">
+
+    <!-- Header & Feed Link -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="badge bg-info animate-pulse"><i class="bi bi-broadcast"></i> LIVE STORE TELEMETRY</span>
+                <span class="font-monospace small text-muted">PERSONAL STORE ADMIN DASHBOARD</span>
+            </div>
+            <h1 class="fw-bold mb-0 text-white font-outfit">Store Sales &amp; Revenue Analytics</h1>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="/dashboard/scraper/" class="btn btn-outline-info border-glass rounded-3 px-4 d-flex align-items-center gap-2 text-info hover-glass font-monospace">
+                <i class="bi bi-terminal-fill"></i> Live Scraper Console
+            </a>
+            <a href="/dashboard/feed/google.xml" target="_blank" class="btn btn-outline-secondary border-glass rounded-3 px-4 d-flex align-items-center gap-2 text-white hover-glass font-monospace">
+                <i class="bi bi-file-code-fill text-warning"></i> Google Merchant Product Feed (XML)
+            </a>
+            <a href="/dashboard/seed/" class="btn-tactical-yellow rounded-3 px-4 d-flex align-items-center gap-2">
+                <i class="bi bi-database-fill-add"></i> Seed Catalog Data
+            </a>
+        </div>
+    </div>
+
+    <!-- KPI Metric Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="glass-card p-4 border-glass position-relative overflow-hidden h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="small fw-bold text-uppercase text-muted tracking-widest font-monospace">Gross Store Revenue</span>
+                    <i class="bi bi-currency-dollar fs-3 text-info"></i>
+                </div>
+                <h2 class="display-6 fw-bold font-monospace mb-2" style="color: #ffb800;">$<span x-text="revenue"></span></h2>
+                <div class="d-flex align-items-center gap-2 small text-success font-monospace">
+                    <i class="bi bi-arrow-up-right-circle-fill"></i>
+                    <span>+18.4% vs last quarter (Precision Rifles surge)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="glass-card p-4 border-glass position-relative overflow-hidden h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="small fw-bold text-uppercase text-muted tracking-widest font-monospace">Total Orders Fulfilled</span>
+                    <i class="bi bi-file-earmark-check fs-3 text-success"></i>
+                </div>
+                <h2 class="display-6 fw-bold text-white font-monospace mb-2" x-text="orders"></h2>
+                <div class="d-flex align-items-center gap-2 small text-success font-monospace">
+                    <i class="bi bi-shield-check"></i>
+                    <span>100% On-Time Delivery Rate</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="glass-card p-4 border-glass position-relative overflow-hidden h-100">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="small fw-bold text-uppercase text-muted tracking-widest font-monospace">Active Customers</span>
+                    <i class="bi bi-people-fill fs-3 text-info"></i>
+                </div>
+                <h2 class="display-6 fw-bold text-white font-monospace mb-2" x-text="activeCustomers"></h2>
+                <div class="d-flex align-items-center gap-2 small text-info font-monospace">
+                    <i class="bi bi-person-check-fill"></i>
+                    <span>1,420+ repeat customers nationwide</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js Revenue & Category Velocity -->
+    <div class="row g-5 mb-5">
+        <div class="col-lg-8">
+            <div class="glass-card p-4 border-glass h-100">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0 text-white font-outfit"><i class="bi bi-graph-up text-info me-2"></i> Monthly Sales Revenue ($ USD)</h5>
+                    <span class="badge bg-secondary bg-opacity-25 text-muted font-monospace">LAST 6 MONTHS</span>
+                </div>
+                <canvas id="revenueChart" height="120"></canvas>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="glass-card p-4 border-glass h-100">
+                <h5 class="fw-bold mb-4 text-white font-outfit"><i class="bi bi-pie-chart-fill text-warning me-2"></i> Category Share</h5>
+                <canvas id="categoryChart" height="220"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders Table -->
+    <div class="glass-card p-4 border-glass">
+        <h5 class="fw-bold mb-4 text-white font-outfit"><i class="bi bi-list-check text-success me-2"></i> Recent Store Orders</h5>
+        <div class="table-responsive">
+            <table class="table table-borderless align-middle text-reset mb-0">
+                <thead class="border-bottom border-glass small text-muted text-uppercase tracking-wider font-monospace">
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Customer Name &amp; Location</th>
+                        <th>Items Ordered</th>
+                        <th>Total Value</th>
+                        <th>Order Status</th>
+                    </tr>
+                </thead>
+                <tbody class="small font-monospace">
+                    <tr class="border-bottom border-glass">
+                        <td class="text-info fw-bold">#ORD-2026-8891</td>
+                        <td>John D. (Austin, TX)</td>
+                        <td>1x Armor PSR-338 Sniper System</td>
+                        <td class="fw-bold" style="color: #ffb800;">$8,450.00</td>
+                        <td><span class="badge bg-success bg-opacity-25 text-success">SHIPPED TO FFL</span></td>
+                    </tr>
+                    <tr class="border-bottom border-glass">
+                        <td class="text-info fw-bold">#ORD-2026-8892</td>
+                        <td>Michael R. (Dallas, TX)</td>
+                        <td>2x Aegis Level IV Ceramic Plate Pairs</td>
+                        <td class="fw-bold" style="color: #ffb800;">$2,500.00</td>
+                        <td><span class="badge bg-success bg-opacity-25 text-success">DELIVERED</span></td>
+                    </tr>
+                    <tr class="border-bottom border-glass">
+                        <td class="text-info fw-bold">#ORD-2026-8893</td>
+                        <td>Sarah K. (Houston, TX)</td>
+                        <td>1x Specter Gen 3+ Thermal NVG</td>
+                        <td class="fw-bold" style="color: #ffb800;">$14,800.00</td>
+                        <td><span class="badge bg-info bg-opacity-25 text-info">IN TRANSIT</span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-info fw-bold">#ORD-2026-8894</td>
+                        <td>David M. (San Antonio, TX)</td>
+                        <td>5x .338 Lapua Match Ammunition Boxes</td>
+                        <td class="fw-bold" style="color: #ffb800;">$750.00</td>
+                        <td><span class="badge bg-warning bg-opacity-25 text-warning">PROCESSING</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Revenue Line Chart
+    const ctxRev = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctxRev, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Ordnance & Armor Revenue ($)',
+                data: [240000, 310000, 285000, 420000, 390000, 520000],
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.15)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#ec4899'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+                x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+            }
+        }
+    });
+
+    // Category Doughnut Chart
+    const ctxCat = document.getElementById('categoryChart').getContext('2d');
+    new Chart(ctxCat, {
+        type: 'doughnut',
+        data: {
+            labels: ['Precision Sniper Rifles', 'Level IV Armor Plates', 'Thermal NVG Optics', 'NFA Suppressors'],
+            datasets: [{
+                data: [42, 28, 18, 12],
+                backgroundColor: ['#3b82f6', '#10b981', '#ec4899', '#f59e0b'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 11 } } } }
+        }
+    });
+});
+</script>
+{% endblock %}

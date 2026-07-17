@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Customer Reviews & Testimonials | Armor Systems{% endblock %}
+
+{% block content %}
+<section class="container py-5 my-4">
+    <div class="text-center max-w-3xl mx-auto mb-5">
+        <span class="badge-hud badge-hud-gold mb-3"><i class="bi bi-star-fill me-1"></i> VERIFIED ARMORY TESTIMONIALS</span>
+        <h1 class="display-4 fw-black font-outfit mb-3" style="font-weight: 900;">WHAT MARKSMEN ARE SAYING</h1>
+        <p class="lead text-secondary font-inter">Real feedback from law enforcement, competitive precision shooters, and personal firearm builders across America.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="bg-tactical-navy p-4 rounded-4 shadow-lg text-center h-100 d-flex flex-column justify-content-center border-glass">
+                <span class="display-3 fw-bold font-monospace" style="color: #ffb800;">4.9 / 5</span>
+                <div class="text-warning fs-5 my-2">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <span class="text-secondary font-monospace small text-uppercase">Based on 14,820 Verified Orders</span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="glass-card p-4 rounded-4 shadow-lg h-100 d-flex flex-column justify-content-center border-glass">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="font-monospace small text-muted w-25">5 Stars</span>
+                    <div class="progress flex-grow-1 bg-dark" style="height: 10px;">
+                        <div class="progress-bar bg-warning" style="width: 94%;"></div>
+                    </div>
+                    <span class="font-monospace small fw-bold text-dark">94%</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="font-monospace small text-muted w-25">4 Stars</span>
+                    <div class="progress flex-grow-1 bg-dark" style="height: 10px;">
+                        <div class="progress-bar bg-info" style="width: 5%;"></div>
+                    </div>
+                    <span class="font-monospace small fw-bold text-dark">5%</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="font-monospace small text-muted w-25">3 Stars & Under</span>
+                    <div class="progress flex-grow-1 bg-dark" style="height: 10px;">
+                        <div class="progress-bar bg-secondary" style="width: 1%;"></div>
+                    </div>
+                    <span class="font-monospace small fw-bold text-dark">1%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews List -->
+    <div class="row g-4">
+        {% for review in reviews %}
+        <div class="col-md-6">
+            <div class="glass-card p-4 rounded-4 shadow-lg h-100 d-flex flex-column justify-content-between border-glass">
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="text-warning">
+                            {% for i in "12345"|make_list %}
+                                {% if forloop.counter <= review.rating %}
+                                    <i class="bi bi-star-fill"></i>
+                                {% else %}
+                                    <i class="bi bi-star text-muted"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <span class="badge bg-success bg-opacity-10 text-success font-monospace small"><i class="bi bi-patch-check-fill me-1"></i> Verified Buyer</span>
+                    </div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2">{{ review.title }}</h5>
+                    <p class="text-secondary font-inter small lh-base mb-4">"{{ review.comment }}"</p>
+                </div>
+                <div class="pt-3 border-top border-glass d-flex justify-content-between align-items-center small font-monospace">
+                    <span class="text-muted"><i class="bi bi-person-fill me-1"></i> {{ review.user.first_name }} • <a href="/product/{{ review.product.slug }}/" class="text-info text-decoration-none">{{ review.product.sku }}</a></span>
+                    <button class="btn btn-sm btn-outline-secondary py-1 px-2 font-monospace" onclick="voteHelpful('{{ review.id }}', this)">
+                        <i class="bi bi-hand-thumbs-up"></i> Helpful ({{ review.helpful_votes }})
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="glass-card p-5 rounded-4 border-glass">
+                <i class="bi bi-chat-quote-fill text-info display-4 mb-3 d-block"></i>
+                <h3 class="font-outfit fw-bold text-dark">No Testimonials Displayed Yet</h3>
+                <p class="text-secondary font-monospace">Be the first verified marksman to leave a review on your recently acquired armory products.</p>
+                <a href="/products/?category=guns" class="btn-tactical-yellow mt-3">SHOP PRODUCTS &gt;</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+function voteHelpful(reviewId, btnElement) {
+    // Prevent multiple clicks
+    if (btnElement.disabled) return;
+    btnElement.disabled = true;
+
+    fetch('/reviews/vote/' + reviewId + '/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.text())
+    .then(html => {
+        btnElement.outerHTML = html;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        btnElement.disabled = false;
+    });
+}
+
+// Helper to get CSRF token from cookies
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endblock %}

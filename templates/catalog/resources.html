@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Armory Resources & Gun Schematics | Armor Systems{% endblock %}
+
+{% block content %}
+<section class="container py-5 my-4">
+    <div class="text-center max-w-3xl mx-auto mb-5">
+        <span class="badge-hud badge-hud-gold mb-3"><i class="bi bi-tools me-1"></i> TECHNICAL ARCHIVES & SCHEMATICS</span>
+        <h1 class="display-4 fw-black font-outfit mb-3" style="font-weight: 900;">ARMORY RESOURCE CENTER</h1>
+        <p class="lead text-secondary font-inter">Access exploded gun diagrams, torque specification charts, ballistic calculators, and our nationwide FFL transfer directory.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-card p-4 rounded-4 shadow-lg h-100 d-flex flex-column justify-content-between feature-card">
+                <div>
+                    <div class="glow-icon-box mb-3" style="width:56px; height:56px; border-radius:12px;"><i class="bi bi-file-earmark-code-fill text-warning fs-3"></i></div>
+                    <h4 class="font-outfit fw-bold text-dark mb-2">Gun Schematics & Exploded Views</h4>
+                    <p class="text-secondary small font-monospace lh-base mb-4">
+                        Interactive exploded diagrams for over 1,500 firearms. Click on any part in the schematic to immediately check live armory stock and add it to your cart.
+                    </p>
+                </div>
+                <a href="/gun-schematics/" class="btn-tactical-yellow w-100 py-2 small">BROWSE SCHEMATICS &gt;</a>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-card p-4 rounded-4 shadow-lg h-100 d-flex flex-column justify-content-between feature-card">
+                <div>
+                    <div class="glow-icon-box mb-3" style="width:56px; height:56px; border-radius:12px;"><i class="bi bi-calculator-fill text-info fs-3"></i></div>
+                    <h4 class="font-outfit fw-bold text-dark mb-2">Ballistic & Reloading Calculator</h4>
+                    <p class="text-secondary small font-monospace lh-base mb-4">
+                        Calculate trajectory drop, windage drift, kinetic energy, and recoil velocity for match-grade rifle cartridges and custom handloads.
+                    </p>
+                </div>
+                <a href="/products/?category=reloading" class="btn btn-dark w-100 py-2 small fw-bold" style="background: #0f172a; border-color: #ffb800; color: #ffb800;">LAUNCH CALCULATOR &gt;</a>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-card p-4 rounded-4 shadow-lg h-100 d-flex flex-column justify-content-between feature-card">
+                <div>
+                    <div class="glow-icon-box mb-3" style="width:56px; height:56px; border-radius:12px;"><i class="bi bi-map-fill text-success fs-3"></i></div>
+                    <h4 class="font-outfit fw-bold text-dark mb-2">Nationwide FFL Transfer Directory</h4>
+                    <p class="text-secondary small font-monospace lh-base mb-4">
+                        Search over 12,000 pre-approved Federal Firearms Licensees across all 50 states for seamless, hassle-free online firearm transfers.
+                    </p>
+                </div>
+                <a href="/faq/" class="btn btn-dark w-100 py-2 small fw-bold" style="background: #0f172a; border-color: #ffb800; color: #ffb800;">FIND AN FFL DEALER &gt;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Torque Spec Reference Table -->
+    <div class="bg-tactical-navy p-5 rounded-4 shadow-lg border-glass">
+        <h3 class="font-outfit fw-bold text-white mb-3"><i class="bi bi-wrench-adjustable me-2 text-warning"></i> AR-15 / AR-10 TORQUE SPECIFICATION CHART</h3>
+        <p class="text-secondary font-monospace small mb-4">Always use a quality torque wrench and proper grease/threadlocker when assembling upper and lower receivers.</p>
+        <div class="table-responsive font-monospace small">
+            <table class="table table-dark table-hover table-bordered border-glass align-middle mb-0">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>COMPONENT / PART</th>
+                        <th>RECOMMENDED TORQUE SPEC</th>
+                        <th>THREAD COMPOUND / NOTES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold text-white">Barrel Nut (Standard Mil-Spec)</td>
+                        <td class="text-warning fw-bold">30 - 80 ft-lbs</td>
+                        <td>AeroShell 33MS / MS28654 Grease. Align gas tube hole.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-white">Castle Nut (Receiver Extension)</td>
+                        <td class="text-warning fw-bold">38 - 42 ft-lbs</td>
+                        <td>Stake end plate into castle nut notches in 2 places.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-white">Muzzle Device / Flash Hider</td>
+                        <td class="text-warning fw-bold">15 - 20 ft-lbs</td>
+                        <td>Use crush washer or peel washer. Do not overtorque suppressors.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-white">Gas Key Screws (Carrier)</td>
+                        <td class="text-warning fw-bold">50 - 58 in-lbs</td>
+                        <td>Permatex High-Temp Threadlocker & properly stake bolt carrier.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Downloadable Armory Reference Guides & Manuals -->
+    <div class="mt-5 pt-4 border-top border-light">
+        <div class="text-center mb-5 max-w-2xl mx-auto">
+            <span class="badge-hud mb-2" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1;"><i class="bi bi-file-earmark-pdf-fill me-1"></i> PDF ARCHIVES</span>
+            <h2 class="display-6 fw-black font-outfit text-dark mb-3" style="font-weight: 900;">Downloadable Armory Reference Guides</h2>
+            <p class="text-secondary font-inter">Official technical manuals, torque specification sheets, and armor sizing guides available for offline field reference.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-danger font-monospace">PDF • 14.2 MB</span>
+                            <i class="bi bi-download text-primary fs-5"></i>
+                        </div>
+                        <h6 class="font-outfit fw-bold text-dark mb-2">AR-15 Complete Assembly &amp; Armorer's Manual</h6>
+                        <p class="small text-secondary font-inter mb-0" style="line-height: 1.5;">Comprehensive 112-page manual detailing receiver staking, headspace verification, and gas port sizing.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light">
+                        <a href="javascript:void(0)" onclick="alert('Downloading AR-15 Armorer Manual PDF...')" class="small font-monospace fw-bold text-primary text-decoration-none">DOWNLOAD MANUAL &gt;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-danger font-monospace">PDF • 8.5 MB</span>
+                            <i class="bi bi-download text-primary fs-5"></i>
+                        </div>
+                        <h6 class="font-outfit fw-bold text-dark mb-2">Long-Range Ballistics &amp; Reticle Holdover Chart</h6>
+                        <p class="small text-secondary font-inter mb-0" style="line-height: 1.5;">Reference tables for .338 Lapua, 6.5 Creedmoor, and .308 Win trajectory drop out to 1,500 meters.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light">
+                        <a href="javascript:void(0)" onclick="alert('Downloading Ballistics Chart PDF...')" class="small font-monospace fw-bold text-primary text-decoration-none">DOWNLOAD CHART &gt;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-danger font-monospace">PDF • 5.1 MB</span>
+                            <i class="bi bi-download text-primary fs-5"></i>
+                        </div>
+                        <h6 class="font-outfit fw-bold text-dark mb-2">NIJ Body Armor Threat Level &amp; Sizing Guide</h6>
+                        <p class="small text-secondary font-inter mb-0" style="line-height: 1.5;">Learn how to measure torso vitals for 10x12 vs 11x14 plates and understand Level III+ vs IV ratings.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light">
+                        <a href="javascript:void(0)" onclick="alert('Downloading Body Armor Guide PDF...')" class="small font-monospace fw-bold text-primary text-decoration-none">DOWNLOAD GUIDE &gt;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <span class="badge bg-danger font-monospace">PDF • 6.8 MB</span>
+                            <i class="bi bi-download text-primary fs-5"></i>
+                        </div>
+                        <h6 class="font-outfit fw-bold text-dark mb-2">NFA Suppressor Maintenance &amp; Cleaning Handbook</h6>
+                        <p class="small text-secondary font-inter mb-0" style="line-height: 1.5;">Instructions for ultrasonic cleaning titanium and Inconel baffles without damaging protective finishes.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light">
+                        <a href="javascript:void(0)" onclick="alert('Downloading Suppressor Handbook PDF...')" class="small font-monospace fw-bold text-primary text-decoration-none">DOWNLOAD HANDBOOK &gt;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

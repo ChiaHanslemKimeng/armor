@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Trigger Times | Armor Systems{% endblock %}
+
+{% block content %}
+<!-- Top Header / Breadcrumbs -->
+<div class="bg-white py-2 border-bottom">
+    <div class="container text-center">
+        <small class="text-muted font-monospace">
+            Home &gt; <span class="fw-bold text-dark">The Trigger Times</span> &gt; How To &gt; <span class="fw-bold color-primary-red">Rifle Builds &amp; Installs</span>
+        </small>
+    </div>
+</div>
+
+<!-- Banner -->
+<div class="bg-black py-4 text-center border-bottom border-danger border-3">
+    <h1 class="font-outfit fw-bold text-white mb-0" style="letter-spacing: 2px;">
+        Trigger<span class="text-danger">Times</span>
+    </h1>
+    <span class="badge bg-danger mt-2 font-monospace">RIFLE BUILDS / INSTALLS</span>
+</div>
+
+<section class="container py-4 my-3">
+    
+    {% if featured_video %}
+    <!-- Featured Video -->
+    <div class="mb-5">
+        <div class="card border-0 shadow-sm rounded-0">
+            <div class="position-relative">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ featured_video.video_url }}" class="d-block text-decoration-none">
+                    <img src="{{ featured_video.thumbnail_url }}" class="img-fluid w-100 object-fit-cover" style="max-height: 500px;" alt="{{ featured_video.title }}">
+                    <!-- Play Overlay -->
+                    <div class="position-absolute top-50 start-50 translate-middle">
+                        <div class="bg-dark bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center border border-2 border-white text-white" style="width: 60px; height: 60px;">
+                            <i class="bi bi-play-fill fs-2 ms-1"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-body px-0 py-3">
+                <h3 class="font-outfit fw-bold text-dark mb-1">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ featured_video.video_url }}" class="text-dark text-decoration-none hover-danger">{{ featured_video.title }}</a>
+                </h3>
+                <div class="d-flex align-items-center text-muted small font-monospace">
+                    <i class="bi bi-person-fill text-danger me-1"></i> Brownells
+                    <span class="mx-2">•</span>
+                    <i class="bi bi-calendar3 me-1"></i> {{ featured_video.date_published|date:"M d, Y" }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Trigger Feed Header -->
+    <div class="d-flex align-items-center mb-4">
+        <h2 class="font-outfit fw-bold mb-0 text-uppercase" style="color: #933311;">Trigger Feed</h2>
+        <hr class="flex-grow-1 ms-3 border-2" style="border-color: #933311; opacity: 1;">
+    </div>
+
+    <!-- Feed Videos -->
+    <div class="row g-4">
+        {% for video in feed_videos %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm rounded-0">
+                <div class="position-relative">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ video.video_url }}" class="d-block text-decoration-none">
+                        <img src="{{ video.thumbnail_url }}" class="card-img-top rounded-0 object-fit-cover" style="height: 200px;" alt="{{ video.title }}">
+                        <!-- Play Overlay -->
+                        <div class="position-absolute top-50 start-50 translate-middle">
+                            <div class="bg-dark bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center border border-2 border-white text-white" style="width: 40px; height: 40px;">
+                                <i class="bi bi-play-fill fs-4 ms-1"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="card-body px-0 py-3 d-flex flex-column justify-content-between">
+                    <h5 class="font-outfit fw-bold text-dark mb-2 lh-sm">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ video.video_url }}" class="text-dark text-decoration-none hover-danger">{{ video.title }}</a>
+                    </h5>
+                    <div class="d-flex align-items-center text-muted small font-monospace mt-2">
+                        <i class="bi bi-person-fill text-danger me-1"></i> Brownells
+                        <span class="mx-2">•</span>
+                        <i class="bi bi-calendar3 me-1"></i> {{ video.date_published|date:"M d, Y" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <p class="text-muted font-monospace">No videos found for this category.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+
+<!-- Video Modal -->
+<div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content bg-dark border-danger border-2">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0 pb-4 px-4">
+        <div class="ratio ratio-16x9">
+          <iframe id="videoIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var videoModal = document.getElementById('videoModal');
+        var videoIframe = document.getElementById('videoIframe');
+        
+        videoModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var videoUrl = button.getAttribute('data-video-url');
+            if(videoUrl) {
+                var sep = videoUrl.indexOf('?') !== -1 ? '&' : '?';
+                videoIframe.src = videoUrl + sep + "autoplay=1";
+            }
+        });
+        
+        videoModal.addEventListener('hide.bs.modal', function () {
+            videoIframe.src = ""; // Stop video when modal closes
+        });
+    });
+</script>
+{% endblock %}

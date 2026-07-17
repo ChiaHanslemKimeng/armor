@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+{% block title %}Secure Checkout | Armor Systems{% endblock %}
+
+{% block content %}
+<div class="container py-5 mb-5 pb-5" style="min-height: calc(100vh - 350px);" x-data="{ step1: true, step2: false, step3: false, step4: false, paymentMethod: 'card', hasFirearms: true }">
+    <div class="row g-5 mb-5">
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0 font-outfit text-dark"><i class="bi bi-shield-lock-fill text-primary me-2"></i> Secure Store Checkout</h2>
+                <span class="badge bg-dark text-warning px-3 py-2 rounded-pill font-monospace">4-STEP SECURE CHECKOUT</span>
+            </div>
+
+            <!-- Checkout Accordion Form -->
+            <form action="/orders/checkout/" method="POST" id="checkoutForm" class="d-flex flex-column gap-3">
+                {% csrf_token %}
+                <input type="hidden" name="payment_method" :value="paymentMethod">
+                
+                <!-- STEP 1: Customer & Billing Information -->
+                <div class="glass-card p-4 border" :class="step1 ? 'border-primary shadow-sm' : ''">
+                    <div class="d-flex justify-content-between align-items-center" @click="step1 = !step1" style="cursor: pointer !important; user-select: none;">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="badge rounded-circle p-2 d-flex align-items-center justify-content-center bg-primary text-white fw-bold" style="width:32px;height:32px;">1</span>
+                            <h5 class="fw-bold mb-0 text-dark font-outfit">Customer &amp; Billing Information</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi fs-5" :class="step1 ? 'bi-chevron-up text-primary' : 'bi-chevron-down text-muted'"></i>
+                        </div>
+                    </div>
+
+                    <div :style="step1 ? 'display: block !important;' : 'display: none !important;'" class="mt-4 pt-3 border-top">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary font-monospace fw-bold">FIRST NAME</label>
+                                <input type="text" name="first_name" class="form-control bg-white border text-dark font-monospace" value="{% if user.is_authenticated %}{{ user.first_name }}{% endif %}" placeholder="John" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary font-monospace fw-bold">LAST NAME</label>
+                                <input type="text" name="last_name" class="form-control bg-white border text-dark font-monospace" value="{% if user.is_authenticated %}{{ user.last_name }}{% endif %}" placeholder="Doe" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary font-monospace fw-bold">EMAIL ADDRESS</label>
+                                <input type="email" name="email" class="form-control bg-white border text-dark font-monospace" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" placeholder="you@example.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-secondary font-monospace fw-bold">PHONE NUMBER</label>
+                                <input type="tel" name="phone" class="form-control bg-white border text-dark font-monospace" placeholder="(555) 123-4567" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small text-secondary font-monospace fw-bold">STREET ADDRESS (BILLING)</label>
+                                <input type="text" name="street" class="form-control bg-white border text-dark font-monospace" placeholder="123 Main Street, Apt 4B" required>
+                            </div>
+                            <div class="col-md-5">
+                                <label class="form-label small text-secondary font-monospace fw-bold">CITY</label>
+                                <input type="text" name="city" class="form-control bg-white border text-dark font-monospace" placeholder="Austin" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small text-secondary font-monospace fw-bold">STATE</label>
+                                <input type="text" name="state" class="form-control bg-white border text-dark font-monospace" placeholder="Texas (TX)" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label small text-secondary font-monospace fw-bold">ZIP CODE</label>
+                                <input type="text" name="postal_code" class="form-control bg-white border text-dark font-monospace" placeholder="73301" required>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="button" @click="step1 = false; step2 = true" class="btn btn-tactical-yellow px-4 py-2 rounded-3 fw-bold font-outfit shadow-sm">Proceed to Shipping <i class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Shipping Destination / Local FFL Dealer -->
+                <div class="glass-card p-4 border" :class="step2 ? 'border-primary shadow-sm' : ''">
+                    <div class="d-flex justify-content-between align-items-center" @click="step2 = !step2" style="cursor: pointer !important; user-select: none;">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="badge rounded-circle p-2 d-flex align-items-center justify-content-center bg-primary text-white fw-bold" style="width:32px;height:32px;">2</span>
+                            <h5 class="fw-bold mb-0 text-dark font-outfit">Shipping &amp; Local FFL Transfer</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi fs-5" :class="step2 ? 'bi-chevron-up text-primary' : 'bi-chevron-down text-muted'"></i>
+                        </div>
+                    </div>
+
+                    <div :style="step2 ? 'display: block !important;' : 'display: none !important;'" class="mt-4 pt-3 border-top">
+                        <div class="p-3 rounded-3 bg-light border mb-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <i class="bi bi-info-circle-fill text-primary fs-4 mt-1"></i>
+                                <div>
+                                    <h6 class="text-dark fw-bold mb-1">Firearms &amp; Suppressor Shipping Policy</h6>
+                                    <p class="small text-secondary mb-0">By federal law, complete firearms, lowers, and NFA suppressors cannot be shipped to your residential address. They must be shipped to a local Federal Firearms Licensed (FFL) gun store near you for background check and transfer. Non-regulated parts, optics, and gear will ship directly to your home.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label small text-secondary font-monospace fw-bold">SELECT YOUR LOCAL FFL GUN STORE (FOR FIREARMS)</label>
+                                <select name="ffl_store" class="form-select bg-white border text-dark font-monospace">
+                                    <option value="ffl1">Texas Tactical &amp; Range (Austin, TX - 2.4 miles away)</option>
+                                    <option value="ffl2">Lone Star Guns &amp; Gear (Round Rock, TX - 5.1 miles away)</option>
+                                    <option value="ffl3">Armory Sports &amp; Outdoors (San Marcos, TX - 12 miles away)</option>
+                                    <option value="custom">-- Search / Enter My Preferred Local FFL Dealer --</option>
+                                    <option value="none">-- No Regulated Firearms in Cart (Ship All to Home) --</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small text-secondary font-monospace fw-bold">OR ENTER FFL DEALER NAME &amp; PHONE (IF NOT LISTED ABOVE)</label>
+                                <input type="text" name="ffl_custom_notes" class="form-control bg-white border text-dark font-monospace" placeholder="e.g. Bob's Gun Shop - (555) 987-6543">
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="button" @click="step2 = false; step3 = true" class="btn btn-tactical-yellow px-4 py-2 rounded-3 fw-bold font-outfit shadow-sm">Proceed to Payment <i class="bi bi-arrow-right ms-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Payment Method -->
+                <div class="glass-card p-4 border" :class="step3 ? 'border-primary shadow-sm' : ''">
+                    <div class="d-flex justify-content-between align-items-center" @click="step3 = !step3" style="cursor: pointer !important; user-select: none;">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="badge rounded-circle p-2 d-flex align-items-center justify-content-center bg-primary text-white fw-bold" style="width:32px;height:32px;">3</span>
+                            <h5 class="fw-bold mb-0 text-dark font-outfit">Payment Method</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi fs-5" :class="step3 ? 'bi-chevron-up text-primary' : 'bi-chevron-down text-muted'"></i>
+                        </div>
+                    </div>
+
+                    <div :style="step3 ? 'display: block !important;' : 'display: none !important;'" class="mt-4 pt-3 border-top">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'card' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'card'">
+                                    <i class="bi bi-credit-card-2-front fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">Credit / Debit card</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">Visa, MC, Amex, Discover</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'etransfer' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'etransfer'">
+                                    <i class="bi bi-envelope-check fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">E Transfer</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">Instant Email / Interac</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'crypto' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'crypto'">
+                                    <i class="bi bi-currency-bitcoin fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">Crypto</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">BTC, ETH, USDT (2% Off)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'cashapp' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'cashapp'">
+                                    <i class="bi bi-phone-vibrate fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">Cashapp</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">$ArmorTacticalPay</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'paypal' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'paypal'">
+                                    <i class="bi bi-paypal fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">PayPal</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">Secure PayPal Checkout</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'bankwire' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'bankwire'">
+                                    <i class="bi bi-bank fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">Bank Transfer</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">Direct ACH / Wire Transfer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div x-show="paymentMethod === 'card'" class="p-4 rounded-4 bg-light border border-secondary border-opacity-25 shadow-sm mb-3">
+                            <h6 class="fw-bold text-dark font-outfit mb-3 d-flex align-items-center gap-2">
+                                <i class="bi bi-shield-lock-fill text-primary"></i> Enter Credit / Debit Card Details
+                            </h6>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label small text-secondary font-monospace fw-bold">NAME ON CARD</label>
+                                    <input type="text" name="card_name" id="ccName" class="form-control bg-white border text-dark font-monospace" placeholder="e.g. John Doe">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-secondary font-monospace fw-bold">CARD NUMBER</label>
+                                    <input type="text" name="card_number" id="ccNumber" class="form-control bg-white border text-dark font-monospace" placeholder="4532 •••• •••• ••••" maxlength="19">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small text-secondary font-monospace fw-bold">EXPIRATION DATE</label>
+                                    <input type="text" name="card_exp" id="ccExp" class="form-control bg-white border text-dark font-monospace" placeholder="MM/YY" maxlength="5">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small text-secondary font-monospace fw-bold">SECURITY CODE (CVV)</label>
+                                    <input type="password" name="card_cvv" id="ccCvv" class="form-control bg-white border text-dark font-monospace" placeholder="123" maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <button type="button" @click="step3 = false; step4 = true" class="btn btn-tactical-yellow px-4 py-2 rounded-3 fw-bold font-outfit shadow-sm">Review &amp; Place Order <i class="bi bi-arrow-right ms-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Review & Submit Order -->
+                <div class="glass-card p-4 border" :class="step4 ? 'border-primary shadow-sm' : ''">
+                    <div class="d-flex justify-content-between align-items-center" @click="step4 = !step4" style="cursor: pointer !important; user-select: none;">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="badge rounded-circle p-2 d-flex align-items-center justify-content-center bg-primary text-white fw-bold" style="width:32px;height:32px;">4</span>
+                            <h5 class="fw-bold mb-0 text-dark font-outfit">Review &amp; Place Order</h5>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi fs-5" :class="step4 ? 'bi-chevron-up text-primary' : 'bi-chevron-down text-muted'"></i>
+                        </div>
+                    </div>
+
+                    <div :style="step4 ? 'display: block !important;' : 'display: none !important;'" class="mt-4 pt-3 border-top">
+                        <div class="p-4 rounded-4 bg-light border mb-4 shadow-sm">
+                            <h6 class="text-dark fw-bold mb-3 d-flex align-items-center gap-2 font-outfit">
+                                <i class="bi bi-patch-check-fill text-primary fs-5"></i> Federal Age &amp; Eligibility Certification
+                            </h6>
+                            <p class="small text-secondary mb-3 lh-base font-monospace">
+                                In compliance with Federal Firearms Laws (18 U.S.C. § 922) and ATF regulations, all purchasers of firearms, serialized receivers, ammunition, and NFA suppressors must verify their legal age and eligibility.
+                            </p>
+                            <div class="d-flex flex-column gap-2 border-top pt-3">
+                                <div class="form-check">
+                                    <input class="form-check-input border-primary" type="checkbox" checked id="ageCertCheck" required style="cursor: pointer; width: 1.1em; height: 1.1em;">
+                                    <label class="form-check-label small text-dark fw-bold cursor-pointer font-inter" for="ageCertCheck" style="user-select: none;">
+                                        I certify under penalty of law that I am at least 21 years of age (or 18+ for standard rifles/shotguns), am a legal U.S. citizen/resident, and am not a prohibited person under federal or state law.
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input border-primary" type="checkbox" checked id="termsCheck" required style="cursor: pointer; width: 1.1em; height: 1.1em;">
+                                    <label class="form-check-label small text-secondary cursor-pointer font-inter" for="termsCheck" style="user-select: none;">
+                                        I agree to the <a href="/terms/" class="text-primary text-decoration-none">Store Terms of Service</a>, FFL Transfer policies, and ITAR compliance guidelines.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-tactical-yellow w-100 py-3 rounded-3 fw-extrabold fs-5 d-flex align-items-center justify-content-center gap-2 shadow-sm font-outfit">
+                            <i class="bi bi-lock-fill"></i> PLACE ORDER NOW • ${{ total|default:"0.00" }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right Column: Order Summary -->
+        <div class="col-lg-4">
+            <div class="glass-card p-4 border" style="margin-bottom: 3rem;">
+                <h5 class="fw-bold mb-4 text-dark font-outfit">Order Summary</h5>
+                <div class="d-flex flex-column gap-3 mb-4">
+                    {% for item in cart_items %}
+                    <div class="d-flex justify-content-between align-items-center small gap-2">
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="rounded-2 overflow-hidden border bg-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 40px; height: 40px;">
+                                {% if item.product.image %}
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-100 h-100 object-fit-contain p-1">
+                                {% else %}
+                                    <i class="bi bi-crosshair text-info small"></i>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <strong class="d-block text-dark">{{ item.product.name }}</strong>
+                                <span class="text-muted font-monospace" style="font-size:0.75rem;">Qty: {{ item.quantity }} • {{ item.product.sku }}</span>
+                            </div>
+                        </div>
+                        <span class="fw-bold font-monospace text-dark text-nowrap">${{ item.item_total }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <hr class="border-secondary mb-3">
+
+                <!-- VIP Promo / Coupon Code Section -->
+                <div class="p-3 mb-4 rounded-3 bg-light border">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="small font-monospace text-dark mb-0 fw-bold"><i class="bi bi-ticket-perforated-fill text-primary me-1"></i> HAVE A COUPON CODE?</label>
+                        <span class="badge bg-secondary font-monospace" style="font-size:0.65rem;">Limit: 1 per order</span>
+                    </div>
+                    {% if applied_coupon %}
+                    <div class="d-flex align-items-center justify-content-between p-2 rounded bg-success bg-opacity-10 border border-success my-2">
+                        <span class="text-success font-monospace small fw-bold"><i class="bi bi-check-circle-fill me-1"></i> {{ applied_coupon }} Applied</span>
+                        <a href="/orders/cart/remove-coupon/" class="btn btn-sm btn-outline-danger py-0 px-2 rounded font-monospace small" title="Remove Coupon"><i class="bi bi-x-circle me-1"></i>Remove</a>
+                    </div>
+                    {% else %}
+                    <div class="input-group input-group-sm mt-2">
+                        <input type="text" class="form-control bg-white text-dark border font-monospace text-uppercase" placeholder="Enter promo code" id="checkoutCouponInput">
+                        <button class="btn btn-tactical-yellow fw-bold px-3 font-outfit" type="button" onclick="applyCouponCode(document.getElementById('checkoutCouponInput').value)">APPLY</button>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-flex justify-content-between small text-secondary mb-2 font-monospace">
+                    <span>Subtotal:</span>
+                    <span class="text-dark fw-bold">${{ subtotal|default:"0.00" }}</span>
+                </div>
+                {% if applied_coupon %}
+                <div class="d-flex justify-content-between align-items-center small text-success mb-2 font-monospace">
+                    <span><i class="bi bi-tag-fill me-1"></i> Coupon ({{ applied_coupon }}):</span>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fw-bold">-${{ coupon_discount }}</span>
+                        <a href="/orders/cart/remove-coupon/" class="btn btn-link text-danger p-0 small text-decoration-none" title="Remove Coupon"><i class="bi bi-trash-fill"></i></a>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="d-flex justify-content-between small text-secondary mb-2 font-monospace">
+                    <span>Shipping &amp; Handling:</span>
+                    <span class="text-success fw-bold">{% if shipping == 0 %}FREE{% else %}${{ shipping|default:"0.00" }}{% endif %}</span>
+                </div>
+                <div class="d-flex justify-content-between small text-secondary mb-3 font-monospace">
+                    <span>Estimated Tax:</span>
+                    <span class="text-dark fw-bold">${{ tax|default:"0.00" }}</span>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-0 pt-3 border-top border-secondary">
+                    <span class="fw-bold text-dark font-outfit fs-5">Total:</span>
+                    <span class="fs-3 fw-bold font-monospace text-primary">${{ total|default:"0.00" }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ccNumber = document.getElementById('ccNumber');
+    if (ccNumber) {
+        ccNumber.addEventListener('input', function(e) {
+            let val = e.target.value.replace(/\D/g, '').substring(0, 16);
+            let formatted = val.replace(/(\d{4})(?=\d)/g, '$1 ');
+            e.target.value = formatted;
+        });
+    }
+
+    const ccExp = document.getElementById('ccExp');
+    if (ccExp) {
+        ccExp.addEventListener('input', function(e) {
+            let val = e.target.value.replace(/\D/g, '').substring(0, 4);
+            if (val.length >= 3) {
+                e.target.value = val.substring(0, 2) + '/' + val.substring(2, 4);
+            } else {
+                e.target.value = val;
+            }
+        });
+    }
+
+    const ccCvv = document.getElementById('ccCvv');
+    if (ccCvv) {
+        ccCvv.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
+        });
+    }
+});
+</script>
+{% endblock %}
+

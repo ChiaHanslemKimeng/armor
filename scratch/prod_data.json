@@ -1,0 +1,226 @@
+{
+  "availableForCredova": false,
+  "credovaSetting": null,
+  "factoryStockNumber": "14714",
+  "upc": "022188904444",
+  "leftBadgeUrl": "",
+  "rightBadgeUrl": "/contentassets/9ab8763b2f8343b097c1f0cbf37166de/madeinusa.svg",
+  "rightBadge": 104,
+  "isFflProduct": true,
+  "fflContactModel": null,
+  "rebateInformation": null,
+  "restriction": {
+    "extraTextToDisplayOnPdp": "<p><strong>FFL Restriction</strong><br />You must be 18 years of age or older to purchase rifles and shotguns, and 21 or older to purchase handguns, receivers, frames, and suppressors. Minimum age requirements may vary by state. Check your state and local laws before ordering. It is your responsibility to fully understand the laws in your area and to ensure that possession of this item would not violate any applicable state or local laws. This product must be delivered to a<strong> <a href=\"/link/2a915b0c8760418fa3e1cdc28469e2b7.aspx\">Federal Firearms License</a> </strong>holder.</p><p><strong><img src=\"/link/45b76636cdca466aa23dfd77209e945e.aspx\" alt=\"Prop 65\" width=\"15\" height=\"12\" />WARNING:</strong> Cancer &amp; Reproductive Harm - <a href=\"https://www.p65warnings.ca.gov\"><strong>www.P65Warnings.ca.gov</strong></a></p>",
+    "restrictionPopupTitle": "Restrictions",
+    "restrictionCtaText": "Restrictions",
+    "restrictions": [
+      {
+        "logoUrl": null,
+        "key": "FFL Required",
+        "value": "Yes"
+      },
+      {
+        "logoUrl": null,
+        "key": "Age restriction",
+        "value": "18 and above"
+      },
+      {
+        "logoUrl": null,
+        "key": "Oversea shipping",
+        "value": "No"
+      },
+      {
+        "logoUrl": null,
+        "key": "Prop 65 restriction",
+        "value": "www.p65warnings.ca.gov"
+      }
+    ]
+  },
+  "specifications": [
+    {
+      "key": "Finish",
+      "value": "Cerakote"
+    },
+    {
+      "key": "Action Type",
+      "value": "Semi-Auto"
+    },
+    {
+      "key": "Barrel Finish",
+      "value": ""
+    },
+    {
+      "key": "Color",
+      "value": "Red/White/Blue"
+    },
+    {
+      "key": "Magazine Capacity",
+      "value": "25"
+    },
+    {
+      "key": "Cartridge",
+      "value": "22 Long Rifle"
+    },
+    {
+      "key": "Barrel Length",
+      "value": "16.50"
+    },
+    {
+      "key": "Magazine Quantity",
+      "value": "1"
+    },
+    {
+      "key": "Material",
+      "value": "Steel"
+    },
+    {
+      "key": "Item Height (Inches)",
+      "value": "33.750"
+    },
+    {
+      "key": "Cartridge Capacity",
+      "value": "25"
+    },
+    {
+      "key": "Stock Style",
+      "value": "Adjustable"
+    },
+    {
+      "key": "Quantity",
+      "value": "1"
+    },
+    {
+      "key": "Magazine Included",
+      "value": "Yes"
+    },
+    {
+      "key": "Front Sight Type",
+      "value": "Folding"
+    },
+    {
+      "key": "Magazine Type",
+      "value": "Detachable"
+    },
+    {
+      "key": "Rear Sight Type",
+      "value": "Folding"
+    },
+    {
+      "key": "Mount Type",
+      "value": "Picatinny Rail"
+    },
+    {
+      "key": "Item Length (Inches)",
+      "value": "8.300"
+    },
+    {
+      "key": "Stock Material",
+      "value": "Polymer"
+    },
+    {
+      "key": "Item Weight (lbs)",
+      "value": "5.000"
+    },
+    {
+      "key": "Item Width (Inches)",
+      "value": "2.000"
+    },
+    {
+      "key": "Make Model Fit",
+      "value": "Smith & Wesson.M&P 15-22"
+    },
+    {
+      "key": "Model Number",
+      "value": ""
+    },
+    {
+      "key": "Muzzle",
+      "value": "Threaded"
+    },
+    {
+      "key": "State Compliance",
+      "value": ""
+    }
+  ],
+  "specificationRestrictionConfig": {
+    "showFullSpecificationLabel": "Show All Specifications",
+    "showLessLabel": "Show less",
+    "descriptionReadMoreLabel": "Read more",
+    "descriptionReadLessLabel": "Read less",
+    "showFullRestrictionLabel": "Show All Restrictions",
+    "productSpecification": "<p>Please select from the options above to see detailed specifications.</p>",
+    "productRestriction": "<p>Please select from the options above to see detailed restrictions.</p>",
+    "specificationLabel": "Specifications",
+    "restrictionLabel": "Restriction"
+  },
+  "offValue": "",
+  "guaranteedForever": {
+    "isGuaranteedForever": false,
+    "description": "<h6><strong>Guaranteed. Forever.&reg;</strong></h6>\n<p>We make purchasing and returning products as simple as possible. If you buy a product from Brownells and decide you don&rsquo;t need it, don&rsquo;t want it, or just don&rsquo;t like it, we&rsquo;ll take it back any time&hellip; with a few exceptions</p>\n<p>Exceptions include:&nbsp;</p>\n<ul>\n<li>Firearms</li>\n<li>Ammunition</li>\n<li>Modified 80% frames &amp; receivers&nbsp;</li>\n<li>Gun powder</li>\n<li>Primers</li>\n<li>Liquids</li>\n<li>Limited Quantity/Hazardous items</li>\n<li>Products that are subject to pending or implemented restrictions due to Federal, State, or Local regulation/legislation</li>\n</ul>\n<p>All other products are Guaranteed. Forever.&reg; you can easily identify these products by the Guaranteed. Forever.&reg; Icon.</p>\n<p><img style=\"max-width: 140px; margin: 10px 0 2px 0;\" src=\"/link/f257bca431e04c7fb7367bff0ad82359.aspx\" alt=\"Guaranteed. Forever.\" /></p>\n<p>Guaranteed. Forever.&reg;&nbsp;<a href=\"/link/bf52da6afe11499681e965819fe91f9b.aspx\"><u><strong>return policy</strong></u></a> applies to the product&rsquo;s original owner along with proof of purchase. Any items returned within 45 days of shipment are entitled to a refund. Any items returned after 45 days of shipment will be issued store credit in the form of a Brownells Gift Card. If a Brownells/Sinclair product was purchased through another retailer as a new product we will require proof of purchase to replace or refund.&nbsp; (Refund will be issued as store credit in the form of a Brownells gift card.) &nbsp;</p>",
+    "badgeUrl": "/globalassets/site-settings/guaranteedforever.png"
+  },
+  "countryOfOrigin": {
+    "isMadeInUsa": true,
+    "description": "<p><strong>Made In The U.S.A.</strong></p>\n<p>Products marked with the Stars and Stripes are proudly made in the U.S.A.</p>\n<p>Many customers have asked us to show which products are made in America, and we&rsquo;ve begun working with our vendors to identify them. This information, however, is not available for all items nor does it imply that foreign merchandise is of lesser quality. We will continue to gather this information to assist our customers in making informed buying decisions, and will keep our website current with the latest information.</p>",
+    "badgeUrl": "/globalassets/site-settings/madeinusa.png"
+  },
+  "formattedProductCurrentPrice": "$509.00",
+  "formattedProductCrossedOutPrice": "",
+  "listingPrice": 509.0,
+  "code": "430117005",
+  "sku": "430117005",
+  "displayName": "M&P 15-22 Sport Flag 22 LR 16.5\" BBL (1)25RD Mag RWB",
+  "minQuantity": 0,
+  "hasSaleCode": true,
+  "inStockQuantity": 28.0,
+  "inventoryQuantity": 28.0,
+  "maxAvailabelQuantity": 28.0,
+  "isShowNotifyMeLink": false,
+  "isOnlineOnly": true,
+  "isPreOrder": false,
+  "isLeastOnePreOrder": false,
+  "isBackOrder": false,
+  "isDiscontinued": false,
+  "similarLinkForDiscontinuedProduct": "",
+  "isLeastOneBackOrder": false,
+  "isLeastOneInStock": false,
+  "isLeastOneOutOfStock": false,
+  "isLeastOneDiscontinued": false,
+  "availableInStockDate": "",
+  "clickToSeePriceEnable": false,
+  "clickToSeePriceText": "Click to see the pricing",
+  "addToCartToSeePriceEnable": false,
+  "addToCartToSeePriceText": "Add to cart to see price",
+  "hasOneVariant": true,
+  "formattedPricePerRound": "",
+  "thumbnailImageUrl": "/globalassets/10013/a1/430117005_10.jpg",
+  "title": "SMITH & WESSON - M&P 15-22 Sport Flag 22 LR 16.5\" BBL (1)25RD Mag RWB",
+  "coupon": null,
+  "couponCode": "",
+  "maxQuantity": null,
+  "isTempPrice": false,
+  "isInStock": true,
+  "isOutOfStock": false,
+  "volumeDiscount": {
+    "volumePriceItems": [],
+    "volumeDiscountSetting": {
+      "textOnPdp": "Quantity Discount Price",
+      "iconOnPdpUrl": "",
+      "popupTitle": "Quantity Discount",
+      "popupQuantityColumnName": "Quantity",
+      "popupPriceColumnName": "Price Per Unit",
+      "popupAmountColumnName": "Total Amount"
+    }
+  },
+  "isSpecial": false,
+  "isDropship": false,
+  "isExternalDropShip": false,
+  "externalDropShipText": "",
+  "sezzleWidget": {
+    "widgetTemplate": "or 4 payments of %%price%% with %%logo%% %%info%%",
+    "ineligibleWidgetTemplate": "%%logo%% Pay in 4 payments on purchases $1-$2,500. %%info%%",
+    "isEligible": true,
+    "hideWidgetWhenIneligible": true
+  },
+  "grossWeight": 6.4
+}

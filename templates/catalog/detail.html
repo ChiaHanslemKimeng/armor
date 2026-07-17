@@ -1,0 +1,536 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.name|default:"Defense Weapon System" }} | Armor Systems{% endblock %}
+
+{% block content %}
+<div class="container py-5" x-data="{ 
+    activeTab: 'desc', 
+    qty: 1, 
+    basePrice: {{ product.price|default:'1099.00' }},
+    priceOffset: 0,
+    selectedVariant: '{{ dynamic_variants.0.name|escapejs }}', 
+    selectedFinish: '{{ dynamic_finishes.0.label|escapejs }}',
+    isZoomOpen: false,
+    zoomImageUrl: '',
+    get currentPrice() {
+        return ((parseFloat(this.basePrice) + parseFloat(this.priceOffset)) * this.qty).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    }
+}">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb small font-monospace">
+            <li class="breadcrumb-item"><a href="/" class="text-primary fw-bold text-decoration-none">Ordnance Hub</a></li>
+            <li class="breadcrumb-item"><a href="/?category={{ product.category.slug|default:'rifles' }}" class="text-primary fw-bold text-decoration-none">{{ product.category.name|default:"Tactical Rifles" }}</a></li>
+            <li class="breadcrumb-item active text-dark fw-extrabold" aria-current="page" style="color: #0f172a !important;">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <!-- SECTION 1: TOP HERO SHOWCASE (Gallery & Purchase Panel) -->
+    <div class="row g-4 mb-5">
+        <!-- Left Column: Swiper Carousel Gallery & Thumbnails (100% White Full-Bleed Grid) -->
+        <div class="col-lg-7">
+            <div class="p-4 border border-secondary rounded-4 shadow-lg h-100 d-flex flex-column justify-content-between bg-white" style="background-color: #ffffff !important;">
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary">
+                        <span class="badge bg-primary text-white font-monospace small px-3 py-2 shadow-sm fw-bold" style="background-color: #2563eb !important; color: #ffffff !important;"><i class="bi bi-camera-reels-fill text-warning me-1"></i> HIGH-DEF ARMORY GALLERY</span>
+                        <span class="font-monospace small text-dark fw-bold">SKU: <span class="text-primary">{{ product.sku }}</span></span>
+                    </div>
+
+                    <!-- Main Swiper Slider (Images fill whole grid box seamlessly on white) -->
+                    <div class="swiper productMainSwiper rounded-4 overflow-hidden border border-secondary mb-3 shadow-sm bg-white d-flex align-items-center justify-content-center" style="height: 440px; background: #ffffff !important;">
+                        <div class="swiper-wrapper">
+                            {% if images %}
+                                {% for img in images %}
+                                <div class="swiper-slide p-0 m-0 h-100 d-flex flex-column overflow-hidden bg-white cursor-pointer" style="background: #ffffff !important; cursor: zoom-in;" onclick="window.openZoom({{ forloop.counter0 }})">
+                                    <div class="flex-grow-1 position-relative w-100 h-100">
+                                        <img src="{{ img.image.url }}" alt="{{ product.name }} - View {{ forloop.counter }}" class="position-absolute top-0 start-0 w-100 h-100 transition-transform" style="object-fit: contain !important; object-position: center; background: #ffffff !important;">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <!-- Fallback slide if no images in DB -->
+                                <div class="swiper-slide bg-white d-flex flex-column align-items-center justify-content-center p-4 text-center position-relative h-100">
+                                    <i class="bi bi-crosshair text-primary display-1 d-block mb-3"></i>
+                                    <h3 class="fw-black text-dark font-outfit mb-2">{{ product.name }}</h3>
+                                    <p class="small text-secondary font-monospace">MIL-SPEC Defense Weapon System</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- Swiper Navigation Arrows -->
+                        <div class="swiper-button-prev text-dark" style="text-shadow: 0 0 10px rgba(255,255,255,0.9);"></div>
+                        <div class="swiper-button-next text-dark" style="text-shadow: 0 0 10px rgba(255,255,255,0.9);"></div>
+                    </div>
+
+                    <!-- Horizontal Swiper Thumbnail Strip (Images fill whole grid box seamlessly on white) -->
+                    <div class="swiper productThumbSwiper" style="height: 80px;">
+                        <div class="swiper-wrapper">
+                            {% if images %}
+                                {% for img in images %}
+                                <div class="swiper-slide cursor-pointer">
+                                    <div class="p-0 rounded-3 text-center border border-secondary bg-white h-100 w-100 hover-glass overflow-hidden d-flex align-items-center justify-content-center" style="background: #ffffff !important;">
+                                        <img src="{{ img.image.url }}" alt="Thumb {{ forloop.counter }}" class="w-100 h-100" style="object-fit: cover !important; width: 100% !important; height: 100% !important; object-position: center; background: #ffffff !important;">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="swiper-slide cursor-pointer">
+                                    <div class="p-2 rounded-3 text-center border border-secondary bg-light h-100 d-flex flex-column align-items-center justify-content-center hover-glass">
+                                        <i class="bi bi-image text-info fs-5"></i>
+                                        <span class="font-monospace fw-bold text-dark d-block" style="font-size: 0.65rem;">MAIN</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gold / Amber Zoom & View Action Bar -->
+                <div class="p-3 bg-light border border-warning rounded-3 mt-3 text-center d-flex justify-content-center align-items-center gap-2 font-monospace fw-bold small text-dark shadow-sm cursor-pointer" style="background-color: #fffbeb !important; border-color: #f59e0b !important; cursor: pointer;" onclick="if(window.mainSwiperInstance) { window.openZoom(window.mainSwiperInstance.activeIndex); } else { window.openZoom(0); }">
+                    <i class="bi bi-zoom-in text-warning fs-5"></i>
+                    <span>INSPECT ALL FACTORY VIEWS &amp; ZOOM • 100% WIDESCREEN HIGH-RES</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Product Title, Quick Specs & Gold Buy Box -->
+        <div class="col-lg-5">
+            <div class="p-4 border border-secondary rounded-4 shadow-lg h-100 d-flex flex-column justify-content-between bg-white" style="background-color: #ffffff !important; color: #0f172a !important;">
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-3 flex-wrap">
+                        <span class="badge bg-success text-white font-monospace px-3 py-2 fw-bold" style="background-color: #16a34a !important; color: #ffffff !important;"><i class="bi bi-check-circle-fill me-1"></i> IN STOCK (ARMORY EAST HUB)</span>
+                        <span class="badge bg-danger text-white font-monospace px-3 py-2 fw-bold shadow-sm" style="background-color: #dc2626 !important; color: #ffffff !important;"><i class="bi bi-flag-fill text-white me-1"></i> MADE IN USA / MIL-SPEC GRADE</span>
+                        <span class="badge bg-secondary text-white font-monospace px-3 py-2">ITAR Regulated</span>
+                    </div>
+                    
+                    <h1 class="fw-black tracking-tight mb-2 font-outfit text-dark fs-2" style="color: #0f172a !important;">{{ product.name }}</h1>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="text-warning">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                        </div>
+                        <span class="text-dark fw-bold font-monospace ms-1">{{ product.rating_average|default:'4.90' }}</span>
+                        <span class="small text-secondary font-monospace">(Verified Factory Technical Spec)</span>
+                    </div>
+
+                    <!-- Quick Specs at a Glance Grid (Stacked cleanly without horizontal overflow) -->
+                    <div class="p-3 bg-light rounded-3 border border-secondary mb-4 overflow-hidden" style="background-color: #f8fafc !important;">
+                        <span class="small fw-black text-uppercase text-dark tracking-wider font-monospace d-block mb-3 border-bottom pb-2"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Quick Factory Specs at a Glance</span>
+                        <div class="row g-3 font-monospace small">
+                            {% for qs in quick_specs %}
+                            <div class="col-12 col-md-6 border-bottom pb-2">
+                                <span class="text-secondary d-block" style="font-size: 0.75rem;">{{ qs.label }}</span>
+                                <strong class="text-dark d-block text-break mt-1" style="font-size: 0.85rem;">{{ qs.value }}</strong>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Price & Gold ADD TO CART Action Panel -->
+                    <div class="p-4 bg-light rounded-4 border border-secondary mb-4 shadow-sm overflow-hidden" style="background-color: #f8fafc !important;">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                            <div>
+                                <span class="small text-secondary font-monospace d-block">ARMORY DIRECT PRICE:</span>
+                                <span class="fs-1 fw-black text-dark font-monospace tracking-tight" style="color: #0f172a !important;">$<span x-text="currentPrice">{{ product.price }}</span></span>
+                            </div>
+                            <span class="badge bg-success font-monospace px-3 py-2 fs-6 text-nowrap">Ready to Ship</span>
+                        </div>
+
+                        <!-- Quantity Selector & Vibrant Gold/Amber Buy Button -->
+                        <form method="POST" action="/orders/cart/add/" hx-post="/orders/cart/add/" class="row g-2 mb-2 flex-nowrap align-items-stretch">
+                            {% csrf_token %}
+                            <input type="hidden" name="sku" value="{{ product.sku }}">
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="hidden" name="qty" :value="qty">
+                            <div class="col-auto" style="width: 125px;">
+                                <div class="d-flex align-items-center justify-content-between border border-secondary rounded-pill px-2 h-100" style="min-height: 52px; background-color: #ffffff !important; flex-wrap: nowrap !important;">
+                                    <button type="button" class="btn btn-link text-dark text-decoration-none fw-black px-1 py-0 fs-5 d-flex align-items-center justify-content-center flex-shrink-0" @click="if(qty > 1) qty--" style="width: 32px; height: 32px; color: #0f172a !important;">-</button>
+                                    <span class="text-center fw-black font-monospace px-1 my-0 d-flex align-items-center justify-content-center user-select-none flex-grow-1" style="color: #0f172a !important; background: transparent !important; font-size: 1.15rem !important;" x-text="qty">1</span>
+                                    <button type="button" class="btn btn-link text-dark text-decoration-none fw-black px-1 py-0 fs-5 d-flex align-items-center justify-content-center flex-shrink-0" @click="qty++" style="width: 32px; height: 32px; color: #0f172a !important;">+</button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-warning w-100 justify-content-center py-3 rounded-pill fs-6 fw-black shadow-sm text-dark d-flex align-items-center gap-2 h-100 text-nowrap" style="background-color: #f59e0b !important; border-color: #d97706 !important; color: #0f172a !important; min-height: 52px; white-space: nowrap !important;">
+                                    <i class="bi bi-cart-fill fs-5"></i> <span>ADD TO CART</span>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="text-center small font-monospace text-secondary pt-1">
+                            <i class="bi bi-shield-check text-success me-1"></i> 100% In-House Ballistic QC • Lifetime Replacement Warranty
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Configuration & Package Selector (No Overflow) -->
+                    <div class="mb-4">
+                        <div class="mb-2">
+                            <span class="small fw-black text-uppercase text-dark tracking-wider font-monospace d-block" style="color: #0f172a !important;">1. SELECT ARMORY CONFIGURATION:</span>
+                            <span class="text-primary small font-monospace fw-bold d-block text-truncate mt-1" x-text="selectedVariant"></span>
+                        </div>
+                        <div class="d-flex flex-column gap-2 mb-4">
+                            {% for var in dynamic_variants %}
+                            <button type="button" @click="selectedVariant = '{{ var.name|escapejs }}'; priceOffset = {{ var.price_offset }}" class="btn text-start p-3 rounded-3 d-flex justify-content-between align-items-center transition-all border overflow-hidden" :style="selectedVariant === '{{ var.name|escapejs }}' ? 'background-color: #2563eb !important; color: #ffffff !important; border-color: #1d4ed8 !important;' : 'background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important;'">
+                                <div class="flex-grow-1 pe-2 overflow-hidden">
+                                    <strong class="d-block font-outfit fs-6 fw-bold text-wrap mb-1 lh-sm">{{ var.name }}</strong>
+                                    <small class="font-monospace opacity-75 d-block text-wrap lh-sm" style="font-size: 0.75rem;">{{ var.description }}</small>
+                                </div>
+                                <span class="badge font-monospace fw-bold fs-6 px-3 py-2 flex-shrink-0 ms-2 text-nowrap shadow-sm" :style="selectedVariant === '{{ var.name|escapejs }}' ? 'background-color: #ffffff !important; color: #2563eb !important;' : 'background-color: #f1f5f9 !important; color: #0f172a !important; border: 1px solid #cbd5e1 !important;'">{% if var.price_offset > 0 %}+${{ var.price_offset|floatformat:2 }}{% else %}${{ product.price }}{% endif %}</span>
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Tactical Finish Selector (Dynamic Scraped Options) -->
+                    <div class="mb-4">
+                        <div class="mb-2">
+                            <span class="small fw-black text-uppercase text-dark tracking-wider font-monospace d-block" style="color: #0f172a !important;">2. SELECT RECEIVER / SYSTEM FINISH:</span>
+                            <span class="text-primary small font-monospace fw-bold d-block text-truncate mt-1" x-text="selectedFinish"></span>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for fin in dynamic_finishes %}
+                            <button type="button" @click="selectedFinish = '{{ fin.label|escapejs }}'" class="btn btn-sm rounded-pill px-3 py-2 font-monospace fw-bold border" :style="selectedFinish === '{{ fin.label|escapejs }}' ? 'background-color: #0f172a !important; color: #ffffff !important; border-color: #334155 !important;' : 'background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important;'">{{ fin.value }}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Verification & FFL Check Box -->
+                <div class="p-3 bg-light border border-secondary rounded-3 mt-3 font-monospace small" style="background-color: #f8fafc !important;">
+                    <div class="d-flex align-items-center gap-2 text-dark fw-bold mb-1">
+                        <i class="bi bi-truck text-primary fs-5"></i>
+                        <span>Delivery &amp; FFL Transfer Check Required</span>
+                    </div>
+                    <p class="text-secondary mb-0" style="font-size: 0.8rem;">Check state &amp; local armory laws before ordering. Authorized FFL dealer locator available during secure checkout.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: SIDE-BY-SIDE SPECIFICATIONS & RESTRICTIONS GRID -->
+    <div class="row g-4 mb-5 align-items-start">
+        <!-- Left Box: Comprehensive Specifications -->
+        <div class="col-lg-7" x-data="{ openSpecs: false }">
+            <div class="p-4 rounded-4 border shadow-sm bg-white" :class="openSpecs ? 'border-primary' : 'border-secondary'" style="background-color: #ffffff !important;">
+                <div class="d-flex justify-content-between align-items-center" @click="openSpecs = !openSpecs" style="cursor: pointer !important; user-select: none;">
+                    <h2 class="fw-black font-outfit text-dark mb-0" style="color: #0f172a !important; font-size: 1.85rem;">Specifications</h2>
+                    <i class="bi fs-5" :class="openSpecs ? 'bi-chevron-up text-primary' : 'bi-chevron-down text-muted'"></i>
+                </div>
+                <div :style="openSpecs ? 'display: block !important;' : 'display: none !important;'" class="mt-4 pt-3 border-top border-light">
+                    <div class="d-flex flex-column gap-2 font-inter small text-dark">
+                        {% for item in spec_items %}
+                        <div class="row align-items-baseline m-0 py-1 border-bottom border-light">
+                            <div class="col-5 text-secondary ps-0" style="font-size: 0.9rem;">{{ item.label }}:</div>
+                            <div class="col-7 fw-black text-dark pe-0" style="color: #0f172a !important; font-size: 0.92rem;">{{ item.value }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Box: Restriction & Compliance Notice -->
+        <div class="col-lg-5" x-data="{ openRest: false }">
+            <div class="p-4 rounded-4 border shadow-sm bg-white" :class="openRest ? 'border-primary' : 'border-secondary'" style="background-color: #ffffff !important;">
+                <div class="d-flex justify-content-between align-items-center" @click="openRest = !openRest" style="cursor: pointer !important; user-select: none;">
+                    <h2 class="fw-black font-outfit text-dark mb-0" style="color: #0f172a !important; font-size: 1.85rem;">Restriction</h2>
+                    <i class="bi fs-5" :class="openRest ? 'bi-chevron-up text-primary' : 'bi-chevron-down text-muted'"></i>
+                </div>
+                <div :style="openRest ? 'display: block !important;' : 'display: none !important;'" class="mt-4 pt-3 border-top border-light">
+                    <div class="d-flex flex-column gap-3 font-inter small text-dark mb-4">
+                        {% for rest in restrictions_list %}
+                        <div class="row align-items-baseline m-0 py-1 border-bottom border-light">
+                            <div class="col-5 text-secondary ps-0" style="font-size: 0.9rem;">{{ rest.label }}:</div>
+                            <div class="col-7 fw-black text-dark pe-0" style="color: #0f172a !important; font-size: 0.92rem;">{{ rest.value }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="pt-2 mt-3">
+                        <a href="/faq/" class="text-decoration-underline text-dark small d-inline-block font-inter fw-medium" style="color: #0f172a !important;">View US State Restrictions</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: DETAILED EXECUTIVE OVERVIEW & HIGHLIGHTS -->
+    <div class="p-5 rounded-4 border border-secondary shadow-lg bg-white mb-5" style="background-color: #ffffff !important;">
+        <div class="d-flex align-items-center gap-3 mb-3 flex-wrap">
+            <span class="badge bg-danger text-white font-monospace px-3 py-2 fw-bold shadow-sm" style="background-color: #dc2626 !important; color: #ffffff !important;"><i class="bi bi-flag-fill text-white me-1"></i> MADE IN USA / MIL-SPEC GRADE</span>
+            <span class="badge bg-warning text-dark font-monospace fw-bold px-3 py-2" style="background-color: #f59e0b !important; color: #0f172a !important;">FACTORY TECHNICAL BREAKDOWN</span>
+        </div>
+
+        <h2 class="fw-black font-outfit text-dark mb-4 fs-3 border-bottom pb-3">What is the {{ product.name }}?</h2>
+
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <p class="lead text-dark font-inter mb-4 lh-base fw-medium" style="color: #1e293b !important; font-size: 1.1rem;">
+                    {% if product.description %}{{ product.description }}{% else %}{{ product.short_description }}{% endif %}
+                </p>
+
+                <!-- Scraped Rich Description if available -->
+                {% if product.rich_description %}
+                    <div class="font-inter text-dark lh-base mb-4">
+                        {{ product.rich_description|safe }}
+                    </div>
+                {% endif %}
+
+                <p class="text-dark font-inter small lh-base mt-3" style="color: #334155 !important;">
+                    Every system is hand-fitted by master gunsmiths at our East Coast armory vault and undergoes a strict 4-stage optical shock and live-fire proofing test before dispatch to ensure sub-MOA reliability right out of the box.
+                </p>
+
+
+            </div>
+
+            <!-- Right Column of Overview: Bulleted Highlights & Box Contents -->
+            <div class="col-lg-5">
+                <div class="p-4 rounded-4 border border-secondary bg-light h-100 shadow-sm" style="background-color: #f8fafc !important;">
+                    <h5 class="fw-bold font-outfit text-dark mb-3 border-bottom pb-2"><i class="bi bi-check2-all text-success me-2"></i>Key Specifications &amp; Features:</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-3 font-inter small text-dark mb-4">
+                        {% for hl in overview_highlights %}
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-check-circle-fill text-success mt-1 flex-shrink-0"></i>
+                            <span class="fw-semibold text-break">{{ hl }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5 class="fw-bold font-outfit text-dark mt-4 mb-3 pt-3 border-top border-secondary"><i class="bi bi-box-seam-fill text-primary me-2"></i>In The Box / Package Contents:</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2 font-monospace small text-dark mb-0">
+                        {% for box_item in in_the_box %}
+                        <li class="p-2 bg-white rounded-3 border border-secondary d-flex align-items-center gap-2 shadow-2xs">
+                            <i class="bi bi-caret-right-fill text-primary flex-shrink-0"></i>
+                            <span class="fw-bold text-break">{{ box_item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: ALTERNATIVE PRODUCTS & SIMILAR TACTICAL SYSTEMS -->
+    <div class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
+            <div>
+                <span class="badge bg-warning text-dark font-monospace fw-bold mb-1"><i class="bi bi-collection-play-fill me-1"></i> ARMORY COMPARISON GRID</span>
+                <h2 class="fw-black font-outfit text-dark mb-0" style="color: #0f172a !important;">Alternative products</h2>
+            </div>
+            <a href="/products/?category={{ product.category.slug|default:'rifles' }}" class="btn btn-outline-dark font-monospace small rounded-pill px-3 py-2 fw-bold">View All Alternatives &gt;</a>
+        </div>
+
+        <div class="row g-4">
+            {% for alt in related_products %}
+            <div class="col-md-6 col-lg-3">
+                <div class="p-3 rounded-4 h-100 d-flex flex-column justify-content-between border border-secondary shadow-sm bg-white hover-glass transition-all" style="background-color: #ffffff !important; color: #0f172a !important;">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge font-monospace small px-2 py-1 fw-bold" style="background-color: #0f172a !important; color: #ffffff !important;">IN STOCK</span>
+                            <span class="text-warning small font-monospace fw-bold"><i class="bi bi-star-fill"></i> 4.9</span>
+                        </div>
+                        <a href="/product/{{ alt.slug }}/" class="text-decoration-none text-reset d-block">
+                            <div class="text-center my-2 rounded-3 border border-secondary d-flex align-items-center justify-content-center overflow-hidden bg-white p-2" style="background: #ffffff !important; height: 180px;">
+                                {% if alt.images.first %}
+                                    <img src="{{ alt.images.first.image.url }}" alt="{{ alt.name }}" class="w-100 h-100" style="object-fit: contain !important; width: 100% !important; height: 100% !important; object-position: center;">
+                                {% else %}
+                                    <i class="bi bi-crosshair text-primary display-4"></i>
+                                {% endif %}
+                            </div>
+                        </a>
+                        <a href="/product/{{ alt.slug }}/" class="text-decoration-none text-dark d-block mt-3">
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-truncate" style="color: #0f172a !important; font-size: 0.95rem;" title="{{ alt.name }}">{{ alt.name }}</h6>
+                        </a>
+                        <p class="small text-secondary font-inter text-truncate mb-2" style="color: #64748b !important; font-size: 0.8rem;" title="{% if alt.short_description %}{{ alt.short_description }}{% else %}{{ alt.description }}{% endif %}">{% if alt.short_description %}{{ alt.short_description }}{% else %}{{ alt.description }}{% endif %}</p>
+                    </div>
+                    <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center mt-2 gap-2 flex-wrap">
+                        <span class="fs-5 fw-black text-dark font-monospace text-nowrap" style="color: #0f172a !important;">${{ alt.price }}</span>
+                        <a href="/product/{{ alt.slug }}/" class="btn btn-sm btn-dark rounded-pill px-3 font-monospace fw-bold text-nowrap d-inline-flex align-items-center gap-1 flex-shrink-0" style="background-color: #0f172a !important; color: #ffffff !important;"><span>VIEW SPEC</span> <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-4 text-muted font-monospace small">
+                No additional alternative items currently active in this category.
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- SECTION 5: RECOMMENDED ADD-ONS & ESSENTIAL ACCESSORIES -->
+    <div class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom border-secondary">
+            <div>
+                <span class="badge bg-danger text-white font-monospace fw-bold mb-1"><i class="bi bi-shield-plus me-1"></i> FREQUENTLY BOUGHT TOGETHER</span>
+                <h2 class="fw-black font-outfit text-dark mb-0" style="color: #0f172a !important;">Add-on</h2>
+            </div>
+            <a href="/products/?category=accessories" class="btn btn-outline-dark font-monospace small rounded-pill px-3 py-2 fw-bold">Shop Accessories &gt;</a>
+        </div>
+
+        <div class="row g-4">
+            {% for acc in recommended_accessories %}
+            <div class="col-md-6 col-lg-3">
+                <div class="p-3 rounded-4 h-100 d-flex flex-column justify-content-between border border-secondary shadow-sm bg-white hover-glass transition-all" style="background-color: #ffffff !important; color: #0f172a !important;">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge font-monospace small px-2 py-1 fw-bold" style="background-color: #b91c1c !important; color: #ffffff !important;">MISSION ESSENTIAL</span>
+                            <span class="text-warning small font-monospace fw-bold"><i class="bi bi-star-fill"></i> 4.9</span>
+                        </div>
+                        <a href="/product/{{ acc.slug }}/" class="text-decoration-none text-reset d-block">
+                            <div class="text-center my-2 rounded-3 border border-secondary d-flex align-items-center justify-content-center overflow-hidden bg-white p-2" style="background: #ffffff !important; height: 180px;">
+                                {% if acc.images.first %}
+                                    <img src="{{ acc.images.first.image.url }}" alt="{{ acc.name }}" class="w-100 h-100" style="object-fit: contain !important; width: 100% !important; height: 100% !important; object-position: center;">
+                                {% else %}
+                                    <i class="bi bi-shield-plus text-primary display-4"></i>
+                                {% endif %}
+                            </div>
+                        </a>
+                        <a href="/product/{{ acc.slug }}/" class="text-decoration-none text-dark d-block mt-3">
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-truncate" style="color: #0f172a !important; font-size: 0.95rem;" title="{{ acc.name }}">{{ acc.name }}</h6>
+                        </a>
+                        <p class="small text-secondary font-inter text-truncate mb-2" style="color: #64748b !important; font-size: 0.8rem;" title="{% if acc.short_description %}{{ acc.short_description }}{% else %}{{ acc.description }}{% endif %}">{% if acc.short_description %}{{ acc.short_description }}{% else %}{{ acc.description }}{% endif %}</p>
+                    </div>
+                    <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center mt-2 gap-2 flex-wrap">
+                        <span class="fs-5 fw-black text-dark font-monospace text-nowrap" style="color: #0f172a !important;">${{ acc.price }}</span>
+                        <a href="/product/{{ acc.slug }}/" class="btn btn-sm btn-dark rounded-pill px-3 font-monospace fw-bold text-nowrap d-inline-flex align-items-center gap-1 flex-shrink-0" style="background-color: #0f172a !important; color: #ffffff !important;"><span>VIEW SPEC</span> <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-4 text-muted font-monospace small">
+                No additional accessory items currently active in our database.
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Vanilla JS Foolproof Swiper Zoom Modal -->
+    <div id="vanilla-zoom-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(15, 23, 42, 0.95); z-index: 10500; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+        <!-- Clickable background to close -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 10501;" onclick="closeZoomModal()"></div>
+        
+        <button type="button" class="btn btn-close btn-close-white shadow-lg" aria-label="Close" onclick="closeZoomModal()" style="position: absolute; top: 20px; right: 20px; background-color: #dc2626; opacity: 1; padding: 15px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; z-index: 10505; filter: none;"></button>
+        
+        <div style="position: relative; z-index: 10502; width: 95vw; height: 90vh; display: flex; align-items: center; justify-content: center;">
+            <div class="swiper fullScreenSwiper w-100 h-100 rounded-3 shadow-lg bg-white" style="background: #ffffff !important;">
+                <div class="swiper-wrapper">
+                    {% if images %}
+                        {% for img in images %}
+                        <div class="swiper-slide p-0 m-0 h-100 bg-white d-flex justify-content-center align-items-center" style="background: #ffffff !important;">
+                            <img src="{{ img.image.url }}" alt="{{ product.name }} - View {{ forloop.counter }}" class="w-100 h-100" style="object-fit: contain !important; max-width: 100%; max-height: 100%; object-position: center; pointer-events: none;">
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="swiper-slide p-0 m-0 w-100 h-100 bg-white d-flex justify-content-center align-items-center" style="background: #ffffff !important;">
+                            <i class="bi bi-crosshair text-secondary" style="font-size: 5rem;"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="swiper-button-prev text-dark fw-bold px-4" style="text-shadow: 0 0 10px rgba(255,255,255,0.9); pointer-events: auto;"></div>
+                <div class="swiper-button-next text-dark fw-bold px-4" style="text-shadow: 0 0 10px rgba(255,255,255,0.9); pointer-events: auto;"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global Vanilla JS functions guaranteed to work regardless of framework states
+        window.openZoom = function(startIndex) {
+            document.getElementById('vanilla-zoom-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            if(window.fullScreenSwiperInstance) {
+                window.fullScreenSwiperInstance.slideTo(startIndex, 0); // Jump to index without animation
+            }
+        };
+        
+        window.closeZoomModal = function() {
+            document.getElementById('vanilla-zoom-modal').style.display = 'none';
+            document.body.style.overflow = ''; // Restore scrolling
+        };
+
+        // Close on Escape key press
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                window.closeZoomModal();
+            }
+        });
+    </script>
+
+</div>
+
+<!-- Swiper Initialization Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof Swiper !== 'undefined') {
+        const thumbSwiper = new Swiper('.productThumbSwiper', {
+            spaceBetween: 10,
+            slidesPerView: 5,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+        
+        const mainSwiper = new Swiper('.productMainSwiper', {
+            spaceBetween: 15,
+            navigation: {
+                nextEl: '.productMainSwiper .swiper-button-next',
+                prevEl: '.productMainSwiper .swiper-button-prev',
+            },
+            thumbs: {
+                swiper: thumbSwiper,
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: true,
+            }
+        });
+        
+        // Expose to window so openZoom can access its index
+        window.mainSwiperInstance = mainSwiper;
+        
+        // Initialize Full-Screen Swiper Gallery
+        window.fullScreenSwiperInstance = new Swiper('.fullScreenSwiper', {
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '.fullScreenSwiper .swiper-button-next',
+                prevEl: '.fullScreenSwiper .swiper-button-prev',
+            },
+            pagination: {
+                el: '.fullScreenSwiper .swiper-pagination',
+                clickable: true,
+            },
+            keyboard: {
+                enabled: true,
+                onlyInViewport: false,
+            },
+        });
+    }
+});
+</script>
+
+<!-- JSON-LD Structured Product Data for Search Engine Optimization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.name }}",
+  "image": [
+    "{% if images.first %}https://armorsystems.com{{ images.first.image.url }}{% else %}https://armorsystems.com{% static 'images/sniper_rifle.png' %}{% endif %}"
+  ],
+  "description": "{{ product.short_description|escapejs }}",
+  "sku": "{{ product.sku }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ product.brand.name|default:'Armor Systems Defense' }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://armorsystems.com/product/{{ product.slug }}/",
+    "priceCurrency": "USD",
+    "price": "{{ product.price }}",
+    "itemCondition": "https://schema.org/NewCondition",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Armor Systems"
+    }
+  }
+}
+</script>
+{% endblock %}

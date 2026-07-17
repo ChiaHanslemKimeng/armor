@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block title %}Shopping Cart | Armor Systems{% endblock %}
+
+{% block content %}
+<div class="container py-5 mb-5 pb-5" style="min-height: calc(100vh - 350px);">
+    <div class="row g-5 mb-5">
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0 font-outfit text-dark"><i class="bi bi-cart-check-fill text-primary me-2"></i> Your Shopping Cart</h2>
+                <span class="badge bg-dark text-warning px-3 py-2 rounded-pill font-monospace">FREE SHIPPING ON ORDERS OVER $99</span>
+            </div>
+
+            <!-- Shipping Policy Banner -->
+            <div class="alert alert-info glass-card border-glass d-flex align-items-center gap-3 py-3 mb-4">
+                <i class="bi bi-info-circle-fill fs-4 text-info"></i>
+                <div class="small">
+                    <strong>Firearms Shipping Notice:</strong> Regulated firearms, uppers, and lowers in your cart will ship directly to your chosen local FFL dealer for background check. Accessories, optics, and gear ship directly to your home!
+                </div>
+            </div>
+
+            {% if cart_items %}
+                <div class="d-flex flex-column gap-3">
+                    {% for item in cart_items %}
+                    <div class="glass-card p-4 border-glass d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-4 overflow-hidden border border-secondary border-opacity-25 bg-white d-flex align-items-center justify-content-center flex-shrink-0" style="width: 80px; height: 80px;">
+                                {% if item.product.image %}
+                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-100 h-100 object-fit-contain p-1">
+                                {% else %}
+                                    <i class="bi bi-crosshair text-info fs-3"></i>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span class="badge bg-primary bg-opacity-10 text-primary small mb-1">IN STOCK</span>
+                                <h6 class="fw-bold mb-1 text-dark font-outfit">{{ item.product.name }}</h6>
+                                <small class="text-secondary font-monospace">SKU: {{ item.product.sku }} • Caliber/Variant: {{ item.product.variant|default:".338 Lapua Mag" }}</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-4">
+                            <form method="POST" action="/orders/cart/update/{{ item.id }}/" class="d-flex align-items-center gap-2">
+                                {% csrf_token %}
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="form-control form-control-sm bg-white text-dark border font-monospace text-center" style="width: 70px;" onchange="this.form.submit()" title="Change quantity">
+                            </form>
+                            <div class="text-md-end">
+                                <span class="fs-5 fw-bold font-monospace text-dark">${{ item.item_total }}</span>
+                            </div>
+                            <form method="POST" action="/orders/cart/remove/{{ item.id }}/" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger border-glass rounded-circle p-2" title="Remove Item">
+                                    <i class="bi bi-trash3-fill"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="glass-card p-5 border text-center my-4">
+                    <i class="bi bi-cart-x text-secondary d-block mb-3" style="font-size: 4rem;"></i>
+                    <h4 class="fw-bold font-outfit text-dark">Your Shopping Cart is Empty</h4>
+                    <p class="text-secondary font-monospace mb-4">You have no tactical firearms, armor plates, or accessories in your cart yet.</p>
+                    <a href="/catalog/" class="btn btn-armor rounded-pill px-5 py-3 fw-bold font-outfit shadow-sm">BROWSE CATALOG</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-4">
+            <div class="glass-card p-4 border" style="margin-bottom: 3rem;">
+                <!-- VIP Promo / Coupon Code Section -->
+                <div class="p-3 mb-4 rounded-3 bg-light border">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <label class="small font-monospace text-dark mb-0 fw-bold"><i class="bi bi-ticket-perforated-fill text-primary me-1"></i> HAVE A COUPON CODE?</label>
+                        <span class="badge bg-secondary font-monospace" style="font-size:0.65rem;">Limit: 1 per order</span>
+                    </div>
+                    {% if applied_coupon %}
+                    <div class="d-flex align-items-center justify-content-between p-2 rounded bg-success bg-opacity-10 border border-success my-2">
+                        <span class="text-success font-monospace small fw-bold"><i class="bi bi-check-circle-fill me-1"></i> {{ applied_coupon }} Applied</span>
+                        <a href="/orders/cart/remove-coupon/" class="btn btn-sm btn-outline-danger py-0 px-2 rounded font-monospace small" title="Remove Coupon"><i class="bi bi-x-circle me-1"></i>Remove</a>
+                    </div>
+                    {% else %}
+                    <div class="input-group input-group-sm mt-2">
+                        <input type="text" class="form-control bg-white text-dark border font-monospace text-uppercase" placeholder="Enter promo code" id="cartCouponInput">
+                        <button class="btn btn-tactical-yellow fw-bold px-3 font-outfit" type="button" onclick="applyCouponCode(document.getElementById('cartCouponInput').value)">APPLY</button>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-flex justify-content-between small text-secondary mb-2 font-monospace">
+                    <span>Subtotal:</span>
+                    <span class="text-dark fw-bold">${{ subtotal|default:"0.00" }}</span>
+                </div>
+                {% if applied_coupon %}
+                <div class="d-flex justify-content-between align-items-center small text-success mb-2 font-monospace">
+                    <span><i class="bi bi-tag-fill me-1"></i> Coupon ({{ applied_coupon }}):</span>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="fw-bold">-${{ coupon_discount }}</span>
+                        <a href="/orders/cart/remove-coupon/" class="btn btn-link text-danger p-0 small text-decoration-none" title="Remove Coupon"><i class="bi bi-trash-fill"></i></a>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="d-flex justify-content-between small text-secondary mb-2 font-monospace">
+                    <span>Shipping &amp; Handling:</span>
+                    <span class="text-success fw-bold">FREE</span>
+                </div>
+                <div class="d-flex justify-content-between small text-secondary mb-3 font-monospace">
+                    <span>Store Processing Fee:</span>
+                    <span class="text-success fw-bold">WAIVED ($0.00)</span>
+                </div>
+                <div class="d-flex justify-content-between small text-secondary mb-4 font-monospace">
+                    <span>Estimated Tax:</span>
+                    <span class="text-dark fw-bold">${{ tax|default:"0.00" }}</span>
+                </div>
+
+                <hr class="border-secondary mb-4">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="fw-bold text-dark font-outfit fs-5">Total Cost:</span>
+                    <span class="fs-3 fw-bold font-monospace text-primary">${{ total|default:"0.00" }}</span>
+                </div>
+
+                {% if cart_items %}
+                <a href="/orders/checkout/" class="btn-tactical-yellow w-100 py-2 rounded-3 fw-bold d-flex align-items-center justify-content-center gap-2 shadow-sm font-outfit" style="font-size: 0.88rem !important; white-space: nowrap !important; text-transform: none !important; text-align: center;">
+                    <i class="bi bi-shield-lock-fill flex-shrink-0"></i> <span>Proceed to Secure Checkout</span>
+                </a>
+                {% else %}
+                <button disabled class="btn btn-secondary w-100 py-2 rounded-3 fw-bold d-flex align-items-center justify-content-center gap-2 opacity-50 font-outfit" style="font-size: 0.88rem !important; white-space: nowrap !important; text-transform: none !important; text-align: center;">
+                    <i class="bi bi-shield-lock-fill flex-shrink-0"></i> <span>Cart is Empty</span>
+                </button>
+                {% endif %}
+
+                <div class="mt-4 p-3 rounded-3 bg-light border small text-secondary text-center font-monospace">
+                    <i class="bi bi-check-circle-fill text-success me-1"></i> Items in your cart are reserved for 30 minutes during checkout.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact Armory Support | Armor Systems{% endblock %}
+
+{% block content %}
+<section class="container py-5 my-4">
+    <div class="row g-5">
+        <div class="col-lg-5">
+            <span class="badge-hud badge-hud-green mb-3"><span class="pulse-dot pulse-dot-green me-1"></span> LIVE ARMORY SUPPORT</span>
+            <h1 class="display-4 fw-black font-outfit mb-3" style="font-weight: 900;">GET IN TOUCH WITH OUR ARMORERS</h1>
+            <p class="lead text-secondary mb-4 lh-base font-inter">
+                Need technical advice on an AR-15 barrel profile, assistance selecting a precision rifle optic, or checking FFL transfer status? Our certified armory technicians are ready to assist.
+            </p>
+
+            <div class="d-flex flex-column gap-4 font-monospace">
+                <div class="glass-card p-4 rounded-3 d-flex align-items-center gap-3">
+                    <div class="glow-icon-box" style="width:50px; height:50px; border-radius:12px;"><i class="bi bi-telephone-fill text-warning fs-4"></i></div>
+                    <div>
+                        <small class="text-muted d-block text-uppercase">Direct Armory Line</small>
+                        <span class="fs-5 fw-bold text-dark">1-800-555-ARMOR (2766)</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4 rounded-3 d-flex align-items-center gap-3">
+                    <div class="glow-icon-box" style="width:50px; height:50px; border-radius:12px;"><i class="bi bi-envelope-check-fill text-info fs-4"></i></div>
+                    <div>
+                        <small class="text-muted d-block text-uppercase">FFL & Transfer Support</small>
+                        <span class="fs-6 fw-bold text-dark">ffl@armor.tactical</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-4 rounded-3 d-flex align-items-center gap-3">
+                    <div class="glow-icon-box" style="width:50px; height:50px; border-radius:12px;"><i class="bi bi-geo-alt-fill text-success fs-4"></i></div>
+                    <div>
+                        <small class="text-muted d-block text-uppercase">Armory Hub Facility</small>
+                        <span class="fs-6 fw-bold text-dark">Ordnance Way, Quantico, VA 22134</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="bg-tactical-navy p-5 rounded-4 shadow-lg border-glass">
+                <h3 class="font-outfit fw-bold text-white mb-4">DISPATCH A MESSAGE TO SUPPORT</h3>
+                <form class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label small font-monospace text-secondary">YOUR NAME</label>
+                        <input type="text" class="form-control" placeholder="John Doe">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small font-monospace text-secondary">EMAIL ADDRESS</label>
+                        <input type="email" class="form-control" placeholder="john@example.com">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small font-monospace text-secondary">PHONE NUMBER</label>
+                        <input type="tel" class="form-control" placeholder="(555) 555-5555">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small font-monospace text-secondary">DEPARTMENT / TOPIC</label>
+                        <select class="form-select">
+                            <option>FFL Transfer & Order Status</option>
+                            <option>Technical Gunsmithing / AR-15 Compatibility</option>
+                            <option>Optics & Night Vision Consultation</option>
+                            <option>Reloading & Ballistics Support</option>
+                            <option>Returns & Warranty Guarantee</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small font-monospace text-secondary">MESSAGE / INQUIRY DETAILS</label>
+                        <textarea class="form-control" rows="5" placeholder="Include your Order ID or specific weapon model details..."></textarea>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="button" class="btn-tactical-yellow w-100 py-3 fs-6" onclick="alert('Message dispatched to Armor Systems support hub! An armorer will contact you shortly.')">
+                            SEND DISPATCH TO ARMORY <i class="bi bi-send-fill ms-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

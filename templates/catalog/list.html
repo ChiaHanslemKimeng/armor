@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tactical Weapons, Ballistic Armor & Ordnance Marketplace | Armor Systems{% endblock %}
+
+{% block content %}
+<!-- Compact Catalog Command Header -->
+<section class="catalog-hero-header py-4 mb-4 border-bottom border-glass" style="background-color: #0f172a !important;">
+    <div class="container py-3">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+            <div>
+                <nav aria-label="breadcrumb" class="mb-2">
+                    <ol class="breadcrumb small font-monospace mb-0">
+                        <li class="breadcrumb-item"><a href="/" class="text-info text-decoration-none hover-glass">Ordnance Hub</a></li>
+                        <li class="breadcrumb-item active text-white fw-bold" aria-current="page">Tactical Catalog</li>
+                    </ol>
+                </nav>
+                <div class="d-flex align-items-center gap-2 mb-1">
+                    <span class="sale-tag-red"><i class="bi bi-fire me-1"></i> ARMORY CATALOG DISPATCH</span>
+                    <span class="badge-hud badge-hud-gold"><i class="bi bi-shield-check me-1"></i> ITAR COMPLIANT</span>
+                </div>
+                <h1 class="display-6 fw-extrabold tracking-tight mb-1 text-white font-outfit" style="font-weight: 800;">
+                    {{ page_title|default:"Defense-Grade Ordnance & Armor Catalog" }}
+                </h1>
+                <p class="small text-secondary mb-0 font-monospace" style="color: #cbd5e1 !important;">
+                    {{ page_description|default:"Filter, configure, and inspect MIL-SPEC sniper systems, ceramic armor plates, thermal optics, and NFA suppressors." }}
+                </p>
+            </div>
+            
+            <div class="d-flex align-items-center gap-2">
+                <a href="/gun-schematics/" class="btn-tactical-yellow py-2 px-4 small">
+                    Gun Schematics &amp; Parts <i class="bi bi-tools ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Catalog Grid & Faceted Filters -->
+<div class="container pb-5">
+    <div class="row g-4">
+        
+        <!-- Faceted Filter Sidebar (Left Column) -->
+        <div class="col-lg-3">
+            <div class="glass-card p-4 border-glass sticky-top" style="top: 90px; z-index: 10;">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-glass">
+                    <h6 class="font-outfit fw-bold text-dark mb-0 text-uppercase tracking-wider">
+                        <i class="bi bi-funnel-fill text-warning me-2" style="color: #d97706 !important;"></i>Store Filters
+                    </h6>
+                    <a href="?" class="small text-secondary text-decoration-none font-monospace hover-glass">Reset</a>
+                </div>
+
+                <form method="get" id="filterForm">
+                    <!-- Search Input -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold">KEYWORDS / SKU</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-dark border-glass text-secondary"><i class="bi bi-search"></i></span>
+                            <input type="text" name="q" class="form-control bg-dark border-glass text-white font-monospace" placeholder="e.g. PSR-338, Level IV..." value="{{ current_query|default:'' }}">
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold d-flex justify-content-between">
+                            <span>CATEGORY</span>
+                            <span class="badge bg-dark border border-glass text-info">{{ sidebar_categories|length|default:"13" }}</span>
+                        </label>
+                        <div class="d-flex flex-column gap-2 font-monospace small" style="max-height: 400px; overflow-y: auto;">
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div>
+                                    <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="" {% if not current_category %}checked{% endif %} onchange="this.form.submit()">
+                                    All Store Products
+                                </div>
+                                <span class="badge bg-dark border border-glass text-info">{{ total_products_count|default:products.paginator.count }}</span>
+                            </label>
+                            {% for cat in sidebar_categories %}
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div>
+                                    <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="{{ cat.slug }}" {% if current_category == cat.slug %}checked{% endif %} onchange="this.form.submit()">
+                                    {{ cat.name }}
+                                </div>
+                                <span class="badge bg-dark border border-glass text-muted">{{ cat.count|default:"0" }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold">MAX PRICE (USD)</label>
+                        <input type="range" class="form-range" min="500" max="15000" step="500" id="priceRange" name="max_price" value="{{ current_max_price|default:15000 }}" oninput="document.getElementById('priceVal').innerText = '$' + Number(this.value).toLocaleString()">
+                        <div class="d-flex justify-content-between small font-monospace text-muted">
+                            <span>$500</span>
+                            <span id="priceVal" class="text-info fw-bold">${{ current_max_price|default:"15,000" }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Compliance & Stock -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold">PROCUREMENT STATUS</label>
+                        <div class="d-flex flex-column gap-2 font-monospace small">
+                            <div class="form-check">
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="inStock" checked>
+                                <label class="form-check-label text-secondary" for="inStock">In Stock (Hub East/West)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="itarCompliant" checked>
+                                <label class="form-check-label text-secondary" for="itarCompliant">ITAR Verified Export Ready</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="agencyDiscount">
+                                <label class="form-check-label text-secondary" for="agencyDiscount">LE / MIL Agency Discount</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Apply Button -->
+                    <button type="submit" class="btn-tactical-yellow w-100 py-2 small">
+                        APPLY FILTERS &gt;
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Product Grid (Right Column) -->
+        <div class="col-lg-9">
+            
+            <!-- Sorting & Results Bar -->
+            <div class="glass-card p-3 mb-4 border-glass d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div class="small font-monospace text-secondary">
+                    Showing <span class="text-white fw-bold">{{ filtered_products_count|default:products.paginator.count }}</span> defense-grade hardware items
+                    {% if current_category %}in <span class="text-info fw-bold">{{ current_category }}</span>{% endif %}
+                </div>
+                
+                <div class="d-flex align-items-center gap-2">
+                    <label class="small font-monospace text-secondary text-nowrap mb-0">Sort By:</label>
+                    <select class="form-select form-select-sm bg-dark border-glass text-white font-monospace" style="width: auto;" onchange="location = this.value;">
+                        <option value="?sort=featured">Featured Systems</option>
+                        <option value="?sort=price_asc">Price: Low to High</option>
+                        <option value="?sort=price_desc">Price: High to Low</option>
+                        <option value="?sort=newest">Newest Dispatch</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row g-4">
+                {% for product in products %}
+                    <div class="col-md-6 col-xl-4">
+                        <div class="p-3 rounded-4 h-100 d-flex flex-column justify-content-between border border-secondary shadow-sm bg-white hover-glass transition-all" style="background-color: #ffffff !important; color: #0f172a !important;">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge font-monospace small px-2 py-1 fw-bold" style="background-color: #0f172a !important; color: #ffffff !important;">IN STOCK</span>
+                                    <span class="text-warning small font-monospace fw-bold"><i class="bi bi-star-fill"></i> {{ product.rating_average|default:"4.9" }}</span>
+                                </div>
+                                
+                                <a href="/product/{{ product.slug }}/" class="text-decoration-none text-reset d-block">
+                                    <div class="text-center my-2 rounded-3 border border-secondary d-flex align-items-center justify-content-center overflow-hidden bg-white p-2" style="background: #ffffff !important; height: 180px;">
+                                        {% if product.images.first %}
+                                            <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-100 h-100" style="object-fit: contain !important; width: 100% !important; height: 100% !important; object-position: center;">
+                                        {% else %}
+                                            <i class="bi bi-crosshair text-primary display-4"></i>
+                                        {% endif %}
+                                    </div>
+                                </a>
+
+                                <a href="/product/{{ product.slug }}/" class="text-decoration-none text-dark d-block mt-3">
+                                    <h6 class="font-outfit fw-bold text-dark mb-1 text-truncate" style="color: #0f172a !important; font-size: 0.95rem;" title="{{ product.name }}">{{ product.name }}</h6>
+                                </a>
+
+                                <p class="small text-secondary font-inter text-truncate mb-2" style="color: #64748b !important; font-size: 0.8rem;" title="{% if product.short_description %}{{ product.short_description }}{% else %}{{ product.description }}{% endif %}">{% if product.short_description %}{{ product.short_description }}{% else %}{{ product.description }}{% endif %}</p>
+                            </div>
+
+                            <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center mt-2 gap-2 flex-wrap">
+                                <span class="fs-5 fw-black text-dark font-monospace text-nowrap" style="color: #0f172a !important;">${{ product.price }}</span>
+                                <a href="/product/{{ product.slug }}/" class="btn btn-sm btn-dark rounded-pill px-3 font-monospace fw-bold text-nowrap d-inline-flex align-items-center gap-1 flex-shrink-0" style="background-color: #0f172a !important; color: #ffffff !important;"><span>VIEW SPEC</span> <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <div class="p-5 bg-white rounded-4 border border-secondary shadow-sm">
+                            <i class="bi bi-shield-x text-muted display-4 d-block mb-3"></i>
+                            <h4 class="fw-bold font-outfit text-dark mb-2">No Matching Products Found</h4>
+                            <p class="text-secondary font-monospace small mb-4">We couldn't find any items matching your current filter selection or search query in our live armory database.</p>
+                            <a href="/products/" class="btn btn-dark rounded-pill px-4 py-2 font-monospace fw-bold">Reset Filters &gt;</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination Controls -->
+            {% if products.has_other_pages %}
+            <div class="mt-5 d-flex justify-content-center">
+                <nav aria-label="Catalog pagination">
+                    <ul class="pagination pagination-sm font-monospace border-glass">
+                        {% if products.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link bg-dark text-info border-secondary hover-glass" href="?page={{ products.previous_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if selected_sub %}&sub={{ selected_sub }}{% endif %}{% if current_query %}&q={{ current_query }}{% endif %}">
+                                    <i class="bi bi-chevron-left"></i> PREV
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link bg-dark text-secondary border-secondary"><i class="bi bi-chevron-left"></i> PREV</span>
+                            </li>
+                        {% endif %}
+
+                        {% for i in products.paginator.page_range %}
+                            {% if products.number == i %}
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link bg-info text-dark fw-bold border-info">{{ i }}</span>
+                                </li>
+                            {% elif i > products.number|add:'-3' and i < products.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link bg-dark text-white border-secondary hover-glass" href="?page={{ i }}{% if current_category %}&category={{ current_category }}{% endif %}{% if selected_sub %}&sub={{ selected_sub }}{% endif %}{% if current_query %}&q={{ current_query }}{% endif %}">{{ i }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if products.has_next %}
+                            <li class="page-item">
+                                <a class="page-link bg-dark text-info border-secondary hover-glass" href="?page={{ products.next_page_number }}{% if current_category %}&category={{ current_category }}{% endif %}{% if selected_sub %}&sub={{ selected_sub }}{% endif %}{% if current_query %}&q={{ current_query }}{% endif %}">
+                                    NEXT <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <span class="page-link bg-dark text-secondary border-secondary">NEXT <i class="bi bi-chevron-right"></i></span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

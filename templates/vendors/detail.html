@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ vendor.name }} Brand Catalog | Armor Systems{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="glass-card p-5 mb-5 border-glass position-relative overflow-hidden">
+        <div class="row align-items-center g-4">
+            <div class="col-md-8">
+                <div class="d-flex align-items-center gap-2 mb-2 font-monospace">
+                    <span class="badge bg-success bg-opacity-10 text-success"><i class="bi bi-patch-check-fill me-1"></i> Authorized Manufacturer Dealer</span>
+                    <span class="badge bg-secondary bg-opacity-25 text-white">Full Factory Warranty</span>
+                </div>
+                <h1 class="fw-bold tracking-tight mb-2 text-white font-outfit">{{ vendor.name }}</h1>
+                <p class="text-secondary lead mb-4 font-monospace">{{ vendor.description }}</p>
+                <div class="d-flex flex-wrap gap-4 small text-muted font-monospace">
+                    <span><i class="bi bi-star-fill text-warning"></i> <strong class="text-reset">{{ vendor.rating_average }}</strong> Brand Rating</span>
+                    <span><i class="bi bi-box-seam text-info"></i> In Stock &amp; Ready to Ship</span>
+                    <span><i class="bi bi-shield-check text-success"></i> 100% Guaranteed Authentic</span>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="/catalog/" class="btn-tactical-yellow px-4 py-3 rounded-3 fw-bold d-inline-block">
+                    <i class="bi bi-grid-fill me-2"></i> View All Store Products
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="fw-bold mb-4 text-white font-outfit">Brand Catalog (<span class="text-gradient">{{ products|length|default:"3 Active" }} Items</span>)</h3>
+    <div class="row g-4">
+        <!-- We will render products dynamically or show sample brand items -->
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="ratio ratio-16x9 rounded-4 bg-dark bg-opacity-50 mb-3 d-flex align-items-center justify-content-center overflow-hidden position-relative">
+                        <i class="bi bi-shield-shaded text-success" style="font-size: 4rem;"></i>
+                        <span class="position-absolute top-0 end-0 m-3 badge bg-dark bg-opacity-75 text-warning font-monospace">IN STOCK (45 PAIRS)</span>
+                    </div>
+                    <span class="small text-muted text-uppercase tracking-widest font-monospace">Ballistic Armor Plates</span>
+                    <h5 class="fw-bold mt-1 mb-2 text-white font-outfit">Aegis Level IV Standalone SAPI Plates</h5>
+                    <p class="small text-secondary mb-3 font-monospace">Multi-curve ceramic composite plates engineered to defeat .30-06 M2 Armor Piercing rifle threats.</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-top border-glass pt-3 font-monospace">
+                    <span class="fs-5 fw-bold" style="color: #ffb800;">$1,250.00</span>
+                    <a href="/catalog/1/" class="btn-tactical-yellow rounded-3 px-3 py-1 small fw-bold">View Specs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

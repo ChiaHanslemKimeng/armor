@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About Us | Armor Systems Personal Armory{% endblock %}
+
+{% block content %}
+<!-- 1. HERO MISSION & HERITAGE SECTION -->
+<section class="container py-5 my-4">
+    <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+            <span class="badge-hud mb-3" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1;"><i class="bi bi-shield-check me-1"></i> OUR MISSION &amp; HERITAGE</span>
+            <h1 class="display-4 fw-black font-outfit mb-4 text-dark" style="font-weight: 900; line-height: 1.1;">
+                AMERICA'S PREMIER <br><span style="color: #2563eb;">PERSONAL ARMORY</span>
+            </h1>
+            <p class="lead text-secondary mb-4 lh-base font-inter">
+                Armor Systems was founded with a singular, uncompromising vision: to provide serious shooters, builders, and precision marksmen with an elite personal store experience. Unlike chaotic marketplaces where unverified third-party vendors list questionable parts, every single rifle, component, schematic, and optic in our catalog is directly sourced, inspected, and backed by our in-house armory technicians.
+            </p>
+            <div class="d-flex flex-column gap-3 mb-5 font-monospace small">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="glow-icon-box" style="width:40px; height:40px; border-radius:8px; background: #f1f5f9; border: 1px solid #cbd5e1;"><i class="bi bi-check2-circle text-primary fs-5"></i></div>
+                    <span class="text-dark fw-bold">100% IN-HOUSE INVENTORY &amp; QUALITY INSPECTION</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="glow-icon-box" style="width:40px; height:40px; border-radius:8px; background: #f1f5f9; border: 1px solid #cbd5e1;"><i class="bi bi-crosshair text-primary fs-5"></i></div>
+                    <span class="text-dark fw-bold">OVER 50,000 FIREARM PARTS, SCHEMATICS &amp; ACCESSORIES</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="glow-icon-box" style="width:40px; height:40px; border-radius:8px; background: #f1f5f9; border: 1px solid #cbd5e1;"><i class="bi bi-shield-lock-fill text-primary fs-5"></i></div>
+                    <span class="text-dark fw-bold">FAST FFL TRANSFER SHIPPING &amp; DIRECT HOME DELIVERY</span>
+                </div>
+            </div>
+            <a href="/products/?category=guns" class="btn-armor px-5 py-3 fs-6">EXPLORE OUR CATALOG &gt;</a>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-5 rounded-4 shadow-lg position-relative overflow-hidden" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
+                <div class="z-1 position-relative">
+                    <h3 class="font-outfit fw-black text-white mb-3" style="color: #ffffff !important;">THE PERSONAL STORE DIFFERENCE</h3>
+                    <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.7;">
+                        We eliminated the marketplace vendor model so you never have to worry about counterfeit optics, out-of-spec AR-15 bolts, or delayed dropshipping. When you order from Armor Systems, it ships directly from our secure climate-controlled armory hub in Quantico, Virginia.
+                    </p>
+                    <hr class="my-4" style="border-color: #334155;">
+                    <div class="row g-4 text-center">
+                        <div class="col-6">
+                            <span class="display-6 font-monospace fw-bold text-white" style="color: #ffffff !important;">50K+</span>
+                            <small class="d-block font-monospace text-uppercase mt-1" style="color: #94a3b8 !important;">Parts in Stock</small>
+                        </div>
+                        <div class="col-6">
+                            <span class="display-6 font-monospace fw-bold" style="color: #38bdf8 !important;">99.8%</span>
+                            <small class="d-block font-monospace text-uppercase mt-1" style="color: #94a3b8 !important;">Same-Day Dispatch</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. FOUR PILLARS OF ENGINEERING & RELIABILITY -->
+<section class="container py-5 my-4">
+    <div class="text-center mb-5 max-w-2xl mx-auto">
+        <span class="badge-hud mb-2" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1;"><i class="bi bi-award-fill me-1"></i> THE ARMOR STANDARD</span>
+        <h2 class="display-6 fw-black font-outfit text-dark mb-3" style="font-weight: 900;">Four Pillars of Engineering &amp; Reliability</h2>
+        <p class="text-secondary font-inter">Every product that leaves our facility must pass rigorous mechanical, optical, and ballistic verification.</p>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="glow-icon-box mb-4" style="width:50px; height:50px; border-radius:12px; background: #0f172a; color: #ffffff;"><i class="bi bi-shield-check fs-4"></i></div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2">100% In-House QC</h5>
+                    <p class="small text-secondary font-inter mb-0" style="line-height: 1.6;">We never dropship from third parties. Each bolt carrier group, barrel, and receiver is headspace-checked and magnetically particle inspected.</p>
+                </div>
+                <div class="mt-4 pt-3 border-top border-light">
+                    <span class="small font-monospace fw-bold text-primary">MIL-SPEC VERIFIED &gt;</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="glow-icon-box mb-4" style="width:50px; height:50px; border-radius:12px; background: #0f172a; color: #ffffff;"><i class="bi bi-lightning-charge-fill fs-4"></i></div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2">Direct Armory Dispatch</h5>
+                    <p class="small text-secondary font-inter mb-0" style="line-height: 1.6;">Orders placed by 14:00 EST ship out the exact same day from our automated Quantico fulfillment warehouse with full tracking.</p>
+                </div>
+                <div class="mt-4 pt-3 border-top border-light">
+                    <span class="small font-monospace fw-bold text-primary">SAME-DAY SHIPPING &gt;</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="glow-icon-box mb-4" style="width:50px; height:50px; border-radius:12px; background: #0f172a; color: #ffffff;"><i class="bi bi-file-earmark-lock2-fill fs-4"></i></div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2">NFA &amp; FFL Compliance</h5>
+                    <p class="small text-secondary font-inter mb-0" style="line-height: 1.6;">Seamless digital Form 3 and Form 4 e-filing for suppressors, SBRs, and serialized receivers. Our compliance specialists handle all paperwork.</p>
+                </div>
+                <div class="mt-4 pt-3 border-top border-light">
+                    <span class="small font-monospace fw-bold text-primary">E-FILE SUPPORT &gt;</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="glow-icon-box mb-4" style="width:50px; height:50px; border-radius:12px; background: #0f172a; color: #ffffff;"><i class="bi bi-patch-check-fill fs-4"></i></div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2">Lifetime Replacement</h5>
+                    <p class="small text-secondary font-inter mb-0" style="line-height: 1.6;">If any mechanical component fails under normal operational use, we replace it immediately with zero hassle or hidden fees.</p>
+                </div>
+                <div class="mt-4 pt-3 border-top border-light">
+                    <span class="small font-monospace fw-bold text-primary">LIFETIME WARRANTY &gt;</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. QUALITY TESTING & CERTIFICATION PROTOCOL -->
+<section class="container py-5 my-4">
+    <div class="p-5 rounded-4 shadow-lg" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5">
+                <span class="badge-hud mb-3" style="background: #334155; color: #f8fafc; border: 1px solid #475569;"><i class="bi bi-tools me-1"></i> RIGOROUS PROTOCOLS</span>
+                <h2 class="display-6 fw-black font-outfit text-white mb-3" style="color: #ffffff !important; font-weight: 900;">Our 4-Stage Quality &amp; Ballistic Testing</h2>
+                <p class="font-inter mb-4" style="color: #cbd5e1 !important; line-height: 1.7;">
+                    Before any firearm, optic, or Level IV ballistic armor plate enters our active inventory, it undergoes a multi-stage technical audit by certified armorers.
+                </p>
+                <a href="/gun-schematics/" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">View Technical Schematics &gt;</a>
+            </div>
+            <div class="col-lg-7">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3" style="background: #1e293b; border: 1px solid #334155;">
+                            <span class="font-monospace fw-bold text-primary d-block mb-1">STAGE 01</span>
+                            <h6 class="font-outfit fw-bold text-white mb-2" style="color: #ffffff !important;">Material &amp; Tolerance Check</h6>
+                            <p class="small mb-0" style="color: #cbd5e1 !important;">Laser interferometry and ultrasonic scanning verify 7075-T6 aluminum forging density and steel hardness.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3" style="background: #1e293b; border: 1px solid #334155;">
+                            <span class="font-monospace fw-bold text-primary d-block mb-1">STAGE 02</span>
+                            <h6 class="font-outfit fw-bold text-white mb-2" style="color: #ffffff !important;">Optical &amp; Recoil Shock Audit</h6>
+                            <p class="small mb-0" style="color: #cbd5e1 !important;">All red dots, LPVOs, and thermal night vision scopes are tested on 1,000-G recoil simulation rigs for zero retention.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3" style="background: #1e293b; border: 1px solid #334155;">
+                            <span class="font-monospace fw-bold text-primary d-block mb-1">STAGE 03</span>
+                            <h6 class="font-outfit fw-bold text-white mb-2" style="color: #ffffff !important;">Ballistic Plate V-50 Verification</h6>
+                            <p class="small mb-0" style="color: #cbd5e1 !important;">Ceramic and UHMWPE body armor batches undergo independent NIJ Level IV multi-hit penetration testing.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3" style="background: #1e293b; border: 1px solid #334155;">
+                            <span class="font-monospace fw-bold text-primary d-block mb-1">STAGE 04</span>
+                            <h6 class="font-outfit fw-bold text-white mb-2" style="color: #ffffff !important;">Climate-Controlled Vault Storage</h6>
+                            <p class="small mb-0" style="color: #cbd5e1 !important;">Components are sealed in nitrogen-purged vapor barrier packaging inside our 45% humidity regulated armory.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. PRECISION MANUFACTURING & ENGINEERING -->
+<section class="container py-5 my-4">
+    <div class="row g-5 align-items-center">
+        <div class="col-lg-6 order-lg-2">
+            <span class="badge-hud mb-3" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1;"><i class="bi bi-gear-fill me-1"></i> ADVANCED MACHINING</span>
+            <h2 class="display-6 fw-black font-outfit text-dark mb-4" style="font-weight: 900; line-height: 1.1;">
+                PRECISION MANUFACTURING
+            </h2>
+            <p class="lead text-secondary mb-4 lh-base font-inter">
+                Every component we offer begins its life on the floor of our state-of-the-art CNC facility. We utilize laser-guided precision milling to ensure that tolerances are kept within 0.0001 inches, providing you with parts that are engineered to outlast the competition under the harshest operational conditions.
+            </p>
+            <ul class="list-unstyled d-flex flex-column gap-3 mb-0 font-monospace small">
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Aerospace-Grade 7075-T6 Aluminum</li>
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Strict MIL-SPEC Tolerances</li>
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Magnetic Particle Inspected (MPI)</li>
+            </ul>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <img src="{% static 'img/cnc_machining.png' %}" class="img-fluid rounded-4 shadow-lg border" style="border-color: #cbd5e1;" alt="CNC Machining">
+        </div>
+    </div>
+</section>
+
+<!-- 5. GLOBAL TACTICAL LOGISTICS -->
+<section class="container py-5 my-4">
+    <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+            <span class="badge-hud mb-3" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1;"><i class="bi bi-globe me-1"></i> LOGISTICS & SUPPLY</span>
+            <h2 class="display-6 fw-black font-outfit text-dark mb-4" style="font-weight: 900; line-height: 1.1;">
+                GLOBAL TACTICAL LOGISTICS
+            </h2>
+            <p class="lead text-secondary mb-4 lh-base font-inter">
+                Our fulfillment operations are housed in a climate-controlled, highly secure tactical warehouse. By controlling our own supply chain and utilizing armored logistics transport when necessary, we guarantee that your gear arrives in pristine condition, securely, and exactly when you need it.
+            </p>
+            <ul class="list-unstyled d-flex flex-column gap-3 mb-0 font-monospace small">
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> 50,000+ Verified Parts In Stock</li>
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Automated Fulfillment Tracking</li>
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i> Climate-Controlled Storage Vaults</li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <img src="{% static 'img/tactical_warehouse.png' %}" class="img-fluid rounded-4 shadow-lg border" style="border-color: #cbd5e1;" alt="Tactical Warehouse">
+        </div>
+    </div>
+</section>
+
+<!-- 6. BOTTOM CALL TO ACTION -->
+<section class="container pb-5 mb-5">
+    <div class="p-5 rounded-4 text-center shadow-lg" style="background: #0f172a; border: 1px solid #334155;">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="display-6 fw-black font-outfit text-white mb-3" style="color: #ffffff !important; font-weight: 900;">Ready to Upgrade Your Tactical Loadout?</h2>
+            <p class="font-inter mb-4" style="color: #cbd5e1 !important; font-size: 1.1rem;">
+                Browse over 50,000 premium firearms, reloading presses, optics, and armor plates in stock today.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="/products/?category=guns" class="btn btn-light px-5 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">SHOP ALL CATEGORIES &gt;</a>
+                <a href="/trigger-times/" class="btn btn-outline-light px-5 py-3 fw-bold rounded-pill" style="color: #ffffff !important; border-color: rgba(255,255,255,0.3);">View Trigger Times Guides</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

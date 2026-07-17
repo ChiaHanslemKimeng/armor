@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}Our Brands & Manufacturers | Armor Systems{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center max-w-2xl mx-auto mb-5">
+        <span class="badge bg-info bg-opacity-25 text-info px-3 py-2 rounded-pill mb-3 font-monospace">OFFICIAL PARTNERS</span>
+        <h1 class="fw-bold tracking-tight mb-3 font-outfit text-white">Our Partner <span class="text-gradient">Brands &amp; Manufacturers</span></h1>
+        <p class="text-secondary pe-lg-5 ps-lg-5 font-monospace">We partner with the world's premier firearms, optics, and ballistic armor manufacturers to bring you top-tier tactical gear and weapons systems.</p>
+    </div>
+
+    <div class="row g-4">
+        {% if vendors %}
+            {% for vendor in vendors %}
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="p-3 rounded-4 text-white fw-bold d-flex align-items-center justify-content-center" style="background: var(--accent-gradient); width: 56px; height: 56px;">
+                                <i class="bi bi-shield-check fs-4"></i>
+                            </div>
+                            {% if vendor.is_verified %}
+                            <span class="badge bg-success bg-opacity-10 text-success d-flex align-items-center gap-1 font-monospace">
+                                <i class="bi bi-patch-check-fill"></i> Authorized Dealer
+                            </span>
+                            {% endif %}
+                        </div>
+                        <h5 class="fw-bold mb-1 text-white font-outfit">{{ vendor.name }}</h5>
+                        <div class="d-flex align-items-center gap-1 text-warning small mb-3 font-monospace">
+                            <i class="bi bi-star-fill"></i>
+                            <span class="fw-bold text-reset">{{ vendor.rating_average }}</span>
+                            <span class="text-muted">(Official Partner)</span>
+                        </div>
+                        <p class="small text-secondary mb-4 font-monospace">{{ vendor.description|default:"Premier manufacturer of tactical precision weapon systems and ballistic armor solutions." }}</p>
+                    </div>
+                    <div class="border-top border-glass pt-3 d-flex justify-content-between align-items-center font-monospace">
+                        <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i> Factory Warranty</span>
+                        <a href="/vendors/{{ vendor.slug }}/" class="btn-tactical-yellow rounded-3 px-3 py-1 small fw-bold">
+                            View Products <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <!-- Sample hardcoded brands when database empty -->
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="p-3 rounded-4 text-white fw-bold d-flex align-items-center justify-content-center" style="background: var(--accent-gradient); width: 56px; height: 56px;">
+                                <i class="bi bi-crosshair fs-4"></i>
+                            </div>
+                            <span class="badge bg-success bg-opacity-10 text-success font-monospace"><i class="bi bi-patch-check-fill me-1"></i> Authorized Dealer</span>
+                        </div>
+                        <h5 class="fw-bold mb-1 text-white font-outfit">Armor Tactical Ordnance</h5>
+                        <div class="d-flex align-items-center gap-1 text-warning small mb-3 font-monospace">
+                            <i class="bi bi-star-fill"></i> <span class="fw-bold text-reset">4.99</span> <span class="text-muted">(120+ Products)</span>
+                        </div>
+                        <p class="small text-secondary mb-4 font-monospace">Leading American designers of precision sniper systems, fluted stainless barrels, and custom match-grade action assemblies.</p>
+                    </div>
+                    <div class="border-top border-glass pt-3 d-flex justify-content-between align-items-center font-monospace">
+                        <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i> Lifetime Warranty</span>
+                        <a href="/?brand=armor-tactical" class="btn-tactical-yellow rounded-3 px-3 py-1 small fw-bold">Shop Brand <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="p-3 rounded-4 text-white fw-bold d-flex align-items-center justify-content-center" style="background: var(--gold-gradient); width: 56px; height: 56px;">
+                                <i class="bi bi-shield-shaded fs-4"></i>
+                            </div>
+                            <span class="badge bg-success bg-opacity-10 text-success font-monospace"><i class="bi bi-patch-check-fill me-1"></i> Authorized Dealer</span>
+                        </div>
+                        <h5 class="fw-bold mb-1 text-white font-outfit">Aegis Armor Dynamics</h5>
+                        <div class="d-flex align-items-center gap-1 text-warning small mb-3 font-monospace">
+                            <i class="bi bi-star-fill"></i> <span class="fw-bold text-reset">4.96</span> <span class="text-muted">(85+ Products)</span>
+                        </div>
+                        <p class="small text-secondary mb-4 font-monospace">Defense-grade ballistic body armor, Level IV standalone ceramic SAPI plates, and lightweight plate carriers engineered for survival.</p>
+                    </div>
+                    <div class="border-top border-glass pt-3 d-flex justify-content-between align-items-center font-monospace">
+                        <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i> NIJ Certified</span>
+                        <a href="/?brand=aegis-armor" class="btn-tactical-yellow rounded-3 px-3 py-1 small fw-bold">Shop Brand <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="p-3 rounded-4 text-white fw-bold d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg,#10b981,#059669); width: 56px; height: 56px;">
+                                <i class="bi bi-eye-fill fs-4"></i>
+                            </div>
+                            <span class="badge bg-success bg-opacity-10 text-success font-monospace"><i class="bi bi-patch-check-fill me-1"></i> Authorized Dealer</span>
+                        </div>
+                        <h5 class="fw-bold mb-1 text-white font-outfit">Specter Electro-Optics</h5>
+                        <div class="d-flex align-items-center gap-1 text-warning small mb-3 font-monospace">
+                            <i class="bi bi-star-fill"></i> <span class="fw-bold text-reset">4.95</span> <span class="text-muted">(60+ Products)</span>
+                        </div>
+                        <p class="small text-secondary mb-4 font-monospace">High-definition thermal fusion night vision binoculars, LPVO rifle scopes, and red dot sights built for extreme field conditions.</p>
+                    </div>
+                    <div class="border-top border-glass pt-3 d-flex justify-content-between align-items-center font-monospace">
+                        <span class="small text-success"><i class="bi bi-check-circle-fill me-1"></i> MIL-SPEC Tested</span>
+                        <a href="/?brand=specter-optics" class="btn-tactical-yellow rounded-3 px-3 py-1 small fw-bold">Shop Brand <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

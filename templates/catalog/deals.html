@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}VIP Flash Sales & Tactical Deals | Armor Systems{% endblock %}
+
+{% block content %}
+<!-- Deals Hero Header -->
+<section class="container py-4 my-2">
+    <div class="bg-tactical-navy p-5 rounded-4 shadow-lg mb-4 border-glass position-relative overflow-hidden">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-8 z-1">
+                <span class="sale-tag-red mb-3"><i class="bi bi-lightning-charge-fill me-1"></i> VIP CLEARANCE DISPATCH</span>
+                <h1 class="display-4 fw-black font-outfit text-white mb-2" style="font-weight: 900;">ARMORY FLASH SALES</h1>
+                <p class="lead text-secondary font-inter mb-0">Limited-time personal store discounts on complete AR-15 uppers, ceramic body armor, match ammunition, and night vision optics.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end z-1">
+                <div class="glass-card p-3 rounded-3 d-inline-block text-center border-glass">
+                    <small class="text-secondary font-monospace d-block text-uppercase">Flash Sale Ends In:</small>
+                    <span class="fs-3 font-monospace fw-bold text-warning">04 : 18 : 32</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Main Catalog Grid & Faceted Filters -->
+<div class="container pb-5">
+    <div class="row g-4">
+        
+        <!-- Faceted Filter Sidebar (Left Column) -->
+        <div class="col-lg-3">
+            <div class="glass-card p-4 border-glass sticky-top" style="top: 90px; z-index: 10;">
+                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom border-glass">
+                    <h6 class="font-outfit fw-bold text-dark mb-0 text-uppercase tracking-wider">
+                        <i class="bi bi-funnel-fill text-warning me-2" style="color: #d97706 !important;"></i>Store Filters
+                    </h6>
+                    <a href="?" class="small text-secondary text-decoration-none font-monospace hover-glass">Reset</a>
+                </div>
+
+                <form method="get" id="filterForm">
+                    <!-- Search Input -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold">KEYWORDS / SKU</label>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-dark border-glass text-secondary"><i class="bi bi-search"></i></span>
+                            <input type="text" name="q" class="form-control bg-dark border-glass text-white font-monospace" placeholder="e.g. PSR-338, Level IV..." value="{{ current_query|default:'' }}">
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold d-flex justify-content-between">
+                            <span>CATEGORY</span>
+                            <span class="badge bg-dark border border-glass text-info">{{ categories.count|default:"15" }}</span>
+                        </label>
+                        <div class="d-flex flex-column gap-2 font-monospace small" style="max-height: 400px; overflow-y: auto;">
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div>
+                                    <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="" {% if not current_category %}checked{% endif %} onchange="this.form.submit()">
+                                    All Store Products
+                                </div>
+                                <span class="badge bg-dark border border-glass text-info">{{ total_products_count|default:products.paginator.count }}</span>
+                            </label>
+                            {% for cat in categories %}
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div>
+                                    <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="{{ cat.slug }}" {% if current_category == cat.slug %}checked{% endif %} onchange="this.form.submit()">
+                                    {{ cat.name }}
+                                </div>
+                                <span class="badge bg-dark border border-glass text-muted">{{ cat.active_product_count|default:"0" }}</span>
+                            </label>
+                            {% empty %}
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="guns" {% if current_category == 'guns' %}checked{% endif %} onchange="this.form.submit()"> Guns</div>
+                                <span class="badge bg-dark border border-glass text-muted">42</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="ar-15" {% if current_category == 'ar-15' %}checked{% endif %} onchange="this.form.submit()"> AR-15</div>
+                                <span class="badge bg-dark border border-glass text-muted">58</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="gun-parts" {% if current_category == 'gun-parts' %}checked{% endif %} onchange="this.form.submit()"> Gun Parts</div>
+                                <span class="badge bg-dark border border-glass text-muted">120+</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="magazines" {% if current_category == 'magazines' %}checked{% endif %} onchange="this.form.submit()"> Magazines</div>
+                                <span class="badge bg-dark border border-glass text-muted">35</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="ammunition" {% if current_category == 'ammunition' %}checked{% endif %} onchange="this.form.submit()"> Ammunition</div>
+                                <span class="badge bg-dark border border-glass text-muted">64</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="reloading" {% if current_category == 'reloading' %}checked{% endif %} onchange="this.form.submit()"> Reloading</div>
+                                <span class="badge bg-dark border border-glass text-muted">48</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="tools-cleaning" {% if current_category == 'tools-cleaning' %}checked{% endif %} onchange="this.form.submit()"> Tools &amp; Cleaning</div>
+                                <span class="badge bg-dark border border-glass text-muted">30</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="optics" {% if current_category == 'optics' %}checked{% endif %} onchange="this.form.submit()"> Optics</div>
+                                <span class="badge bg-dark border border-glass text-muted">22</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="gear" {% if current_category == 'gear' %}checked{% endif %} onchange="this.form.submit()"> Gear</div>
+                                <span class="badge bg-dark border border-glass text-muted">50</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="deals" {% if current_category == 'deals' %}checked{% endif %} onchange="this.form.submit()"> Deals</div>
+                                <span class="badge bg-dark border border-glass text-muted">18</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="brands" {% if current_category == 'brands' %}checked{% endif %} onchange="this.form.submit()"> Brands</div>
+                                <span class="badge bg-dark border border-glass text-muted">12</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="trigger-times" {% if current_category == 'trigger-times' %}checked{% endif %} onchange="this.form.submit()"> Trigger Times</div>
+                                <span class="badge bg-dark border border-glass text-muted">40</span>
+                            </label>
+                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                <div><input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="resources" {% if current_category == 'resources' %}checked{% endif %} onchange="this.form.submit()"> Resources</div>
+                                <span class="badge bg-dark border border-glass text-muted">4</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold">MAX PRICE (USD)</label>
+                        <input type="range" class="form-range" min="500" max="15000" step="500" id="priceRange" name="max_price" value="{{ current_max_price|default:15000 }}" oninput="document.getElementById('priceVal').innerText = '$' + Number(this.value).toLocaleString()">
+                        <div class="d-flex justify-content-between small font-monospace text-muted">
+                            <span>$500</span>
+                            <span id="priceVal" class="text-info fw-bold">${{ current_max_price|default:"15,000" }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Compliance & Stock -->
+                    <div class="mb-4">
+                        <label class="form-label small font-monospace text-secondary fw-bold">PROCUREMENT STATUS</label>
+                        <div class="d-flex flex-column gap-2 font-monospace small">
+                            <div class="form-check">
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="inStock" checked>
+                                <label class="form-check-label text-secondary" for="inStock">In Stock (Hub East/West)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="itarCompliant" checked>
+                                <label class="form-check-label text-secondary" for="itarCompliant">ITAR Verified Export Ready</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="agencyDiscount">
+                                <label class="form-check-label text-secondary" for="agencyDiscount">LE / MIL Agency Discount</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Apply Button -->
+                    <button type="submit" class="btn-tactical-yellow w-100 py-2 small">
+                        APPLY FILTERS &gt;
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Product Grid (Right Column) -->
+        <div class="col-lg-9">
+            
+            <!-- Sorting & Results Bar -->
+            <div class="glass-card p-3 mb-4 border-glass d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div class="small font-monospace text-secondary">
+                    Showing <span class="text-white fw-bold">{{ filtered_products_count|default:products.paginator.count }}</span> defense-grade hardware items
+                    {% if current_category %}in <span class="text-info fw-bold">{{ current_category }}</span>{% endif %}
+                </div>
+                
+                <div class="d-flex align-items-center gap-2">
+                    <label class="small font-monospace text-secondary text-nowrap mb-0">Sort By:</label>
+                    <select class="form-select form-select-sm bg-dark border-glass text-white font-monospace" style="width: auto;" onchange="location = this.value;">
+                        <option value="?sort=featured">Featured Systems</option>
+                        <option value="?sort=price_asc">Price: Low to High</option>
+                        <option value="?sort=price_desc">Price: High to Low</option>
+                        <option value="?sort=newest">Newest Dispatch</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row g-4">
+                {% for product in products %}
+                    <div class="col-md-6 col-xl-4">
+                        <div class="p-3 rounded-4 h-100 d-flex flex-column justify-content-between border border-secondary shadow-sm bg-white hover-glass transition-all" style="background-color: #ffffff !important; color: #0f172a !important;">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge font-monospace small px-2 py-1 fw-bold" style="background-color: #0f172a !important; color: #ffffff !important;">IN STOCK</span>
+                                    <span class="text-warning small font-monospace fw-bold"><i class="bi bi-star-fill"></i> {{ product.rating_average|default:"4.9" }}</span>
+                                </div>
+                                
+                                <a href="/product/{{ product.slug }}/" class="text-decoration-none text-reset d-block">
+                                    <div class="text-center my-2 rounded-3 border border-secondary d-flex align-items-center justify-content-center overflow-hidden bg-white p-2" style="background: #ffffff !important; height: 180px;">
+                                        {% if product.images.first %}
+                                            <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-100 h-100" style="object-fit: contain !important; width: 100% !important; height: 100% !important; object-position: center;">
+                                        {% else %}
+                                            <i class="bi bi-crosshair text-primary display-4"></i>
+                                        {% endif %}
+                                    </div>
+                                </a>
+
+                                <a href="/product/{{ product.slug }}/" class="text-decoration-none text-dark d-block mt-3">
+                                    <h6 class="font-outfit fw-bold text-dark mb-1 text-truncate" style="color: #0f172a !important; font-size: 0.95rem;" title="{{ product.name }}">{{ product.name }}</h6>
+                                </a>
+
+                                <p class="small text-secondary font-inter text-truncate mb-2" style="color: #64748b !important; font-size: 0.8rem;" title="{% if product.short_description %}{{ product.short_description }}{% else %}{{ product.description }}{% endif %}">{% if product.short_description %}{{ product.short_description }}{% else %}{{ product.description }}{% endif %}</p>
+                            </div>
+
+                            <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center mt-2 gap-2 flex-wrap">
+                                <span class="fs-5 fw-black text-dark font-monospace text-nowrap" style="color: #0f172a !important;">${{ product.price }}</span>
+                                <a href="/product/{{ product.slug }}/" class="btn btn-sm btn-dark rounded-pill px-3 font-monospace fw-bold text-nowrap d-inline-flex align-items-center gap-1 flex-shrink-0" style="background-color: #0f172a !important; color: #ffffff !important;"><span>VIEW SPEC</span> <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <div class="p-5 bg-white rounded-4 border border-secondary shadow-sm">
+                            <i class="bi bi-shield-x text-muted display-4 d-block mb-3"></i>
+                            <h4 class="fw-bold font-outfit text-dark mb-2">No Matching Products Found</h4>
+                            <p class="text-secondary font-monospace small mb-4">We couldn't find any items matching your current filter selection or search query in our live armory database.</p>
+                            <a href="/products/" class="btn btn-dark rounded-pill px-4 py-2 font-monospace fw-bold">Reset Filters &gt;</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

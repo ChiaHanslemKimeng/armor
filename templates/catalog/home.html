@@ -1,0 +1,1043 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Armor Systems | Premier Personal Firearms, Gun Parts & Reloading Armory{% endblock %}
+
+{% block content %}
+<!-- 1. HERO SWIPER BANNER SECTION (Swiper Images with Text) -->
+<section class="mb-4">
+    <div class="swiper hero-swiper shadow-lg">
+        <div class="swiper-wrapper">
+            
+            <!-- Slide 1: Tactical Sniper System -->
+            <div class="swiper-slide" style="background-image: url('{% static 'images/sniper_rifle.png' %}');">
+                <div class="hero-slide-overlay"></div>
+                <div class="container position-relative z-2 py-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                                <span class="sale-tag-red"><i class="bi bi-fire me-1"></i> VIP FLASH SALE</span>
+                                <span class="badge-hud badge-hud-gold"><i class="bi bi-shield-check me-1"></i> 100% GUARANTEED</span>
+                                <span class="badge-hud badge-hud-green"><span class="pulse-dot pulse-dot-green me-1"></span> READY TO SHIP</span>
+                            </div>
+                            <h1 class="display-3 fw-black tracking-tight mb-3 text-white font-outfit" style="font-weight: 900; line-height: 1.05; text-shadow: 0 4px 25px rgba(0,0,0,1); color: #ffffff !important;">
+                                PRECISION RIFLES &amp; <br><span style="color: #f59e0b; text-shadow: 0 4px 25px rgba(0,0,0,1);">TACTICAL SYSTEMS.</span>
+                            </h1>
+                            <h4 class="text-white font-outfit fw-bold text-uppercase tracking-wider mb-4" style="color: #f1f5f9 !important; text-shadow: 0 2px 15px rgba(0,0,0,1);">
+                                AMERICA'S PREMIER PERSONAL FIREARMS &amp; PARTS ARMORY
+                            </h4>
+                            <p class="lead text-white mb-4 pe-lg-5 lh-base font-inter fw-medium" style="color: #ffffff !important; text-shadow: 0 2px 15px rgba(0,0,0,1); font-size: 1.2rem; max-width: 680px;">
+                                Over 50,000 custom firearms, AR-15 build kits, gunsmithing schematics, reloading supplies, and match grade ammunition in stock.
+                            </p>
+                            <div class="d-flex flex-wrap gap-3 align-items-center">
+                                <a href="/products/?category=guns" class="btn-tactical-yellow fs-6 shadow-lg">
+                                    SHOP ALL GUNS <i class="bi bi-caret-right-fill ms-1"></i>
+                                </a>
+                                <a href="/gun-schematics/" class="btn btn-outline-secondary border-glass px-4 py-3 rounded-3 fs-6 text-white hover-glass font-monospace" style="background: rgba(15,23,42,0.8); color: #ffffff !important;">
+                                    Gun Schematics <i class="bi bi-tools ms-1 text-warning"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Ballistic Armor & Tactical Gear -->
+            <div class="swiper-slide" style="background-image: url('{% static 'images/armor_plate.png' %}');">
+                <div class="hero-slide-overlay"></div>
+                <div class="container position-relative z-2 py-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                                <span class="sale-tag-red"><i class="bi bi-shield-shaded me-1"></i> BULLETPROOF DEFENSE</span>
+                                <span class="badge-hud badge-hud-cyan"><i class="bi bi-check2-circle me-1"></i> LEVEL IV RATED</span>
+                            </div>
+                            <h1 class="display-3 fw-black tracking-tight mb-3 text-white font-outfit" style="font-weight: 900; line-height: 1.05; text-shadow: 0 4px 25px rgba(0,0,0,1); color: #ffffff !important;">
+                                STANDALONE CERAMIC <br><span style="color: #f59e0b; text-shadow: 0 4px 25px rgba(0,0,0,1);">BALLISTIC ARMOR.</span>
+                            </h1>
+                            <h4 class="text-white font-outfit fw-bold text-uppercase tracking-wider mb-4" style="color: #f1f5f9 !important; text-shadow: 0 2px 15px rgba(0,0,0,1);">
+                                ENGINEERED FOR MAXIMUM MULTI-HIT THREAT PROTECTION
+                            </h4>
+                            <p class="lead text-white mb-4 pe-lg-5 lh-base font-inter fw-medium" style="color: #ffffff !important; text-shadow: 0 2px 15px rgba(0,0,0,1); font-size: 1.2rem; max-width: 680px;">
+                                Silicon carbide &amp; UHMWPE composite armor plates, Mil-Spec laser-cut carriers, and modular tactical storage built for extreme durability.
+                            </p>
+                            <div class="d-flex flex-wrap gap-3 align-items-center">
+                                <a href="/products/?category=gear" class="btn-tactical-yellow fs-6 shadow-lg">
+                                    SHOP ARMOR &amp; GEAR <i class="bi bi-caret-right-fill ms-1"></i>
+                                </a>
+                                <a href="/deals/" class="btn btn-outline-warning border-glass px-4 py-3 rounded-3 fs-6 text-warning hover-glass font-monospace" style="background: rgba(15,23,42,0.8); color: #f59e0b !important;">
+                                    View Flash Deals <i class="bi bi-fire ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Night Vision, Thermal & Optics -->
+            <div class="swiper-slide" style="background-image: url('{% static 'images/night_vision.png' %}');">
+                <div class="hero-slide-overlay"></div>
+                <div class="container position-relative z-2 py-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                                <span class="badge-hud badge-hud-gold"><i class="bi bi-eye-fill me-1"></i> ELECTRO-OPTICS</span>
+                                <span class="badge-hud badge-hud-green"><span class="pulse-dot pulse-dot-green me-1"></span> GEN 3+ THERMAL</span>
+                            </div>
+                            <h1 class="display-3 fw-black tracking-tight mb-3 text-white font-outfit" style="font-weight: 900; line-height: 1.05; text-shadow: 0 4px 25px rgba(0,0,0,1); color: #ffffff !important;">
+                                OWN THE NIGHT &amp; <br><span style="color: #f59e0b; text-shadow: 0 4px 25px rgba(0,0,0,1);">TACTICAL ADVANTAGE.</span>
+                            </h1>
+                            <h4 class="text-white font-outfit fw-bold text-uppercase tracking-wider mb-4" style="color: #f1f5f9 !important; text-shadow: 0 2px 15px rgba(0,0,0,1);">
+                                PRECISION RIFLESCOPES, RED DOTS &amp; THERMAL FUSION NVGS
+                            </h4>
+                            <p class="lead text-white mb-4 pe-lg-5 lh-base font-inter fw-medium" style="color: #ffffff !important; text-shadow: 0 2px 15px rgba(0,0,0,1); font-size: 1.2rem; max-width: 680px;">
+                                Dominate any target environment with dual-tube night vision goggles, first focal plane LPVOs, holographic sights, and laser rangefinders.
+                            </p>
+                            <div class="d-flex flex-wrap gap-3 align-items-center">
+                                <a href="/products/?category=optics" class="btn-tactical-yellow fs-6 shadow-lg">
+                                    SHOP OPTICS &amp; NV <i class="bi bi-caret-right-fill ms-1"></i>
+                                </a>
+                                <a href="/products/?category=brands" class="btn btn-outline-secondary border-glass px-4 py-3 rounded-3 fs-6 text-white hover-glass font-monospace" style="background: rgba(15,23,42,0.8); color: #ffffff !important;">
+                                    Top Brands <i class="bi bi-patch-check ms-1 text-info"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Swiper Pagination Controls -->
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+
+<!-- 1.5. ABOUT US SECTION (BELOW HERO) -->
+<section class="container py-4 mb-5">
+    <div class="p-5 rounded-4 shadow-lg border" style="background: #0f172a; border-color: #334155 !important; color: #ffffff;">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <span class="badge-hud mb-3" style="background: #2563eb; color: #ffffff; border: 1px solid #1d4ed8;"><i class="bi bi-shield-fill-check me-1"></i> ABOUT ARMOR SYSTEMS</span>
+                <h2 class="display-6 fw-black text-white font-outfit mb-3" style="font-weight: 900;">Defending Freedom With Precision Engineering</h2>
+                <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.7;">
+                    Founded by military armorers and competitive precision shooters, Armor Systems was built on a singular philosophy: never compromise on weapon reliability. We curate and inspect every firearm, match suppressor, and ceramic armor system before it enters our climate-controlled Quantico vault.
+                </p>
+                <div class="row g-3 pt-2 mb-4">
+                    <div class="col-6">
+                        <div class="p-3 rounded-3 border" style="background: #1e293b; border-color: #475569 !important;">
+                            <h4 class="fw-bold font-monospace mb-1" style="color: #f59e0b;">50,000+</h4>
+                            <small class="text-light font-outfit d-block">Verified Armorers &amp; Shooters Served</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 rounded-3 border" style="background: #1e293b; border-color: #475569 !important;">
+                            <h4 class="fw-bold font-monospace mb-1" style="color: #3b82f6;">100% MIL-SPEC</h4>
+                            <small class="text-light font-outfit d-block">Rigorous QC &amp; Headspace Inspection</small>
+                        </div>
+                    </div>
+                </div>
+                <a href="/about/" class="btn rounded-pill px-4 py-3 font-monospace fw-bold shadow-sm transition-all" style="background: #2563eb; border: 1px solid #1d4ed8; color: #ffffff !important;">READ OUR FULL STORY &gt;</a>
+            </div>
+            <div class="col-lg-6">
+                <!-- Editable About Us Image -->
+                <div class="rounded-4 overflow-hidden border shadow-lg position-relative" style="height: 380px; border-color: #475569 !important; background: #1e293b;">
+                    <img src="{% static 'images/scopes-and-accessories.avif' %}" alt="Armor Systems Armory" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                    <div class="position-absolute bottom-0 start-0 w-100 p-4" style="background: linear-gradient(to top, rgba(15,23,42,0.95), transparent);">
+                        <span class="badge font-monospace mb-1" style="background: #f59e0b; color: #0f172a;">QUANTICO, VIRGINIA</span>
+                        <h5 class="text-white font-outfit fw-bold mb-0">Master Armory &amp; Vault Facility</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. STACKED HORIZONTAL PROMO BANNERS -->
+<section class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="bg-tactical-navy p-4 d-flex align-items-center justify-content-between h-100 position-relative overflow-hidden shadow-lg">
+                <div class="z-1 pe-3">
+                    <span class="sale-tag-red mb-2">AR-15 BUILDERS SPECIAL</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900;">COMPLETE AR-15 BUILD KITS &amp; UPPERS</h3>
+                    <p class="small text-secondary font-monospace mb-3">Mil-Spec forged 7075-T6 upper receivers, bolt carrier groups, barrels, and custom triggers.</p>
+                    <a href="/products/?category=ar-15" class="btn-tactical-yellow py-2 px-4 small">SHOP AR-15 PARTS &gt;</a>
+                </div>
+                <div class="d-none d-xl-flex align-items-center justify-content-center z-0" style="width: 140px; height: 140px; opacity: 0.85;">
+                    <img src="{% static 'images/armor_plate.png' %}" alt="AR-15 Parts" class="img-fluid rounded-3 border border-glass" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="bg-tactical-olive p-4 d-flex align-items-center justify-content-between h-100 position-relative overflow-hidden shadow-lg">
+                <div class="z-1 pe-3">
+                    <span class="badge-hud badge-hud-gold mb-2" style="background: #ffb800 !important; color: #000 !important;">RELOADING HQ</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900;">PRECISION RELOADING DIES &amp; PRESSES</h3>
+                    <p class="small text-secondary font-monospace mb-3">Everything you need for match-grade handloading: presses, dies, brass, bullets, and powder scales.</p>
+                    <a href="/products/?category=reloading" class="btn-tactical-yellow py-2 px-4 small">SHOP RELOADING &gt;</a>
+                </div>
+                <div class="d-none d-xl-flex align-items-center justify-content-center z-0" style="width: 140px; height: 140px; opacity: 0.85;">
+                    <img src="{% static 'images/night_vision.png' %}" alt="Reloading Supplies" class="img-fluid rounded-3 border border-glass" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. POPULAR STORE CATEGORIES SWIPER -->
+<section class="container py-4 mb-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+        <div>
+            <span class="badge-hud mb-2" style="background: #2563eb; color: #ffffff; border: 1px solid #1d4ed8;"><i class="bi bi-grid-fill me-1"></i> ARMORY DEPARTMENTS</span>
+            <h2 class="display-6 fw-black text-dark font-outfit mb-0" style="font-weight: 900;">Popular Store Categories</h2>
+        </div>
+        <div class="d-flex gap-2 mt-2 mt-md-0">
+            <button class="btn btn-outline-dark rounded-circle cat-prev" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-left"></i></button>
+            <button class="btn btn-outline-dark rounded-circle cat-next" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="swiper categoriesSwiper px-1 py-3">
+        <div class="swiper-wrapper">
+            <!-- 1. Rifle Parts -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=rifle-parts" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/rifle_parts.avif' %}" alt="Rifle Parts" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-gear-wide-connected position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Rifle Parts</h6>
+                            <small class="text-secondary font-monospace">Barrels, BCGs, Uppers</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 2. General Gunsmith Tools -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=tools" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/gunsmith-tools.avif' %}" alt="Gunsmith Tools" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-tools position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">General Gunsmith Tools</h6>
+                            <small class="text-secondary font-monospace">Wrenches, Vises, Punches</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 3. Reloading Components -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=reloading" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/reloading-components.avif' %}" alt="Reloading Components" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-cone-striped position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Reloading Components</h6>
+                            <small class="text-secondary font-monospace">Brass, Bullets, Dies</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 4. Handgun Parts -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=handgun-parts" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/handgun-parts.avif' %}" alt="Handgun Parts" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-shield-shaded position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Handgun Parts</h6>
+                            <small class="text-secondary font-monospace">Slides, Barrels, Triggers</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 5. Ammunition -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=ammunition" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/ammo.avif' %}" alt="Ammunition" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-box-seam-fill position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Ammunition</h6>
+                            <small class="text-secondary font-monospace">Match Grade &amp; Defense</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 6. Guns -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=guns" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/guns.avif' %}" alt="Guns" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-crosshair position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Guns</h6>
+                            <small class="text-secondary font-monospace">Rifles, Pistols, Shotguns</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 7. Scopes & Accessories -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=scopes" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/scopes-and-accessories.avif' %}" alt="Scopes & Accessories" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-eye-fill position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Scopes &amp; Accessories</h6>
+                            <small class="text-secondary font-monospace">LPVOs, Precision Optics</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 8. Red Dot Sights & Magnifiers -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=red-dots" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/red-dots.avif' %}" alt="Red Dot Sights" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-bullseye position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Red Dot Sights &amp; Magnifiers</h6>
+                            <small class="text-secondary font-monospace">Reflex, Holographic, 3x</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 9. Rifle Magazines -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=magazines" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/rifle-mags.avif' %}" alt="Rifle Magazines" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-layers-fill position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Rifle Magazines</h6>
+                            <small class="text-secondary font-monospace">PMAGs, Drums, Steel</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 10. Suppressors -->
+            <div class="swiper-slide" style="height: auto;">
+                <a href="/products/?category=suppressors" class="text-decoration-none d-block h-100">
+                    <div class="glass-card p-3 text-center h-100 feature-card d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="min-height: 280px; background: #ffffff !important; border-color: #cbd5e1 !important;">
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 140px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/suppressors.avif' %}" alt="Suppressors" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <i class="bi bi-volume-mute-fill position-absolute text-white" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                        </div>
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-uppercase tracking-wider">Suppressors</h6>
+                            <small class="text-secondary font-monospace">Silencers, Muzzle Devices</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. FEATURED ARMORY STOCK & NEW ARRIVALS SWIPER -->
+<section class="container py-4 mb-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+        <div>
+            <span class="badge-hud mb-2" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1;"><i class="bi bi-lightning-charge-fill me-1"></i> LIVE ARMORY STOCK</span>
+            <h2 class="display-6 fw-black text-dark font-outfit mb-0" style="font-weight: 900;">Featured Weapons &amp; Components</h2>
+        </div>
+        <div class="d-flex gap-2 mt-2 mt-md-0">
+            <button class="btn btn-outline-dark rounded-circle feat-prev" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-left"></i></button>
+            <button class="btn btn-outline-dark rounded-circle feat-next" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="swiper featuredSwiper px-1 py-3">
+        <div class="swiper-wrapper">
+            {% for product in featured_products %}
+            <div class="swiper-slide" style="height: auto;">
+                <div class="p-3 rounded-4 h-100 d-flex flex-column justify-content-between border border-secondary shadow-sm bg-white hover-glass transition-all" style="background-color: #ffffff !important; color: #0f172a !important;">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge font-monospace small px-2 py-1 fw-bold" style="background-color: #0f172a !important; color: #ffffff !important;">IN STOCK</span>
+                            <span class="text-warning small font-monospace fw-bold"><i class="bi bi-star-fill"></i> {{ product.rating_average|default:"4.9" }}</span>
+                        </div>
+                        
+                        <a href="/product/{{ product.slug }}/" class="text-decoration-none text-reset d-block">
+                            <div class="text-center my-2 rounded-3 border border-secondary d-flex align-items-center justify-content-center overflow-hidden bg-white p-2" style="background: #ffffff !important; height: 180px;">
+                                {% if product.images.first %}
+                                    <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="w-100 h-100" style="object-fit: contain !important; width: 100% !important; height: 100% !important; object-position: center;">
+                                {% else %}
+                                    <i class="bi bi-crosshair text-primary display-4"></i>
+                                {% endif %}
+                            </div>
+                        </a>
+
+                        <a href="/product/{{ product.slug }}/" class="text-decoration-none text-dark d-block mt-3">
+                            <h6 class="font-outfit fw-bold text-dark mb-1 text-truncate" style="color: #0f172a !important; font-size: 0.95rem;" title="{{ product.name }}">{{ product.name }}</h6>
+                        </a>
+
+                        <p class="small text-secondary font-inter text-truncate mb-2" style="color: #64748b !important; font-size: 0.8rem;" title="{% if product.short_description %}{{ product.short_description }}{% else %}{{ product.description }}{% endif %}">{% if product.short_description %}{{ product.short_description }}{% else %}{{ product.description }}{% endif %}</p>
+                    </div>
+
+                    <div class="pt-3 border-top border-secondary d-flex justify-content-between align-items-center mt-2 gap-2 flex-wrap">
+                        <span class="fs-5 fw-black text-dark font-monospace text-nowrap" style="color: #0f172a !important;">${{ product.price }}</span>
+                        <a href="/product/{{ product.slug }}/" class="btn btn-sm btn-dark rounded-pill px-3 font-monospace fw-bold text-nowrap d-inline-flex align-items-center gap-1 flex-shrink-0" style="background-color: #0f172a !important; color: #ffffff !important;"><span>VIEW SPEC</span> <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5 text-muted font-monospace">No featured items currently listed.</div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 6. SHOP OUR TOP BRANDS SWIPER -->
+<section class="container py-4 mb-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+        <div>
+            <span class="badge-hud mb-2" style="background: #0f172a; color: #f59e0b; border: 1px solid #334155;"><i class="bi bi-patch-check-fill me-1"></i> AUTHORIZED DEALER</span>
+            <h3 class="font-outfit fw-black text-dark mb-1" style="font-weight: 900;">Shop Our Top Brands</h3>
+            <p class="small text-secondary font-monospace mb-0">America's premier defense, optics, and reloading manufacturers.</p>
+        </div>
+        <div class="d-flex gap-2 mt-2 mt-md-0">
+            <button class="btn btn-outline-dark rounded-circle brand-prev" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-left"></i></button>
+            <button class="btn btn-outline-dark rounded-circle brand-next" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="swiper brandsSwiper px-1 py-3">
+        <div class="swiper-wrapper">
+            <!-- 1. Brownells -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=brownells" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/brownells-ram.avif' %}" alt="Brownells" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #334155; color: #f8fafc; font-size: 0.65rem;">RELOADING</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">BROWNELLS</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 2. Magpul -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=magpul" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/magpul.avif' %}" alt="Magpul" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #334155; color: #f8fafc; font-size: 0.65rem;">MAGAZINES</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">MAGPUL</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 3. Geissele -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=geissele" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/geissele.avif' %}" alt="Geissele" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #2563eb; color: #ffffff; font-size: 0.65rem;">TRIGGERS</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #f59e0b !important; font-size: 1rem;">GEISSELE</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 4. Daniel Defense -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=daniel-defense" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/daniel-defense.avif' %}" alt="Daniel Defense" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #10b981; color: #ffffff; font-size: 0.65rem;">RIFLES</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 0.95rem;">DANIEL DEF.</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 5. Colt -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=colt" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/colt.avif' %}" alt="Colt" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #3b82f6; color: #ffffff; font-size: 0.65rem;">LEGENDARY</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">COLT</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 6. Hornady -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=hornady" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/hornady.avif' %}" alt="Hornady" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #334155; color: #f8fafc; font-size: 0.65rem;">AMMUNITION</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">HORNADY</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 7. Midwest -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=midwest" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/midwest-industies-2.avif' %}" alt="Midwest" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #64748b; color: #ffffff; font-size: 0.65rem;">RAILS</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 0.95rem;">MIDWEST IND.</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 8. Sig Sauer -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=sig-sauer" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/sig-sauer.avif' %}" alt="Sig Sauer" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #1e293b; color: #f59e0b; border: 1px solid #475569; font-size: 0.65rem;">DEFENSE</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #f59e0b !important; font-size: 1rem;">SIG SAUER</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 9. SCT Manufacturing -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=sct-manufacturing" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/sctmfg.avif' %}" alt="SCT Mfg" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #2563eb; color: #ffffff; font-size: 0.65rem;">FRAMES</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">SCT MFG</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 10. MDT -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=mdt" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/mdt.avif' %}" alt="MDT" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #10b981; color: #ffffff; font-size: 0.65rem;">CHASSIS</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">MDT</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 11. BCM -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=bcm" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/bcm.avif' %}" alt="BCM" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #334155; color: #f8fafc; font-size: 0.65rem;">PRO GRADE</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">BCM</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 12. Howa / Hawa -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=hawa" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-white position-relative d-flex align-items-center justify-content-center p-3" style="height: 140px; border-bottom: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/howa.avif' %}" alt="Howa" class="img-fluid object-fit-contain w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #3b82f6; color: #ffffff; font-size: 0.65rem;">ACTIONS</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 0.95rem;">HAWA / HOWA</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 13. Radian -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=radian" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-dark position-relative" style="height: 140px; border-bottom: 1px solid #334155;">
+                            <img src="{% static 'images/radian-weapons.avif' %}" alt="Radian" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #334155; color: #f8fafc; font-size: 0.65rem;">AMBI SYSTEMS</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #ffffff !important; font-size: 1rem;">RADIAN</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 14. Sinclair -->
+            <div class="swiper-slide">
+                <a href="/products/?brand=sinclair" class="text-decoration-none">
+                    <div class="rounded-4 border text-center d-flex flex-column justify-content-between overflow-hidden shadow-sm transition-all hover-glass" style="height: 230px; background: #0f172a !important; border-color: #334155 !important;">
+                        <div class="w-100 bg-dark position-relative" style="height: 140px; border-bottom: 1px solid #334155;">
+                            <img src="{% static 'images/sinclair.avif' %}" alt="Sinclair" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-3 d-flex flex-column justify-content-center flex-grow-1">
+                            <div class="badge font-monospace mx-auto mb-1" style="background: #2563eb; color: #ffffff; font-size: 0.65rem;">BENCHREST</div>
+                            <h6 class="font-outfit fw-black mb-0 tracking-wider" style="color: #f59e0b !important; font-size: 1rem;">SINCLAIR</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. TACTICAL DEALS & SPECIALTY BLOCKS -->
+<section class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="p-5 rounded-4 d-flex flex-column justify-content-between h-100 shadow-lg" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
+                <div>
+                    <span class="badge-hud mb-3" style="background: #334155; color: #f8fafc; border: 1px solid #475569;">BULLETPROOF DEAL</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900; color: #ffffff !important;">LEVEL IV CERAMIC ARMOR BUNDLE</h3>
+                    <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.6;">Get a pair of Level IV standalone ceramic plates plus a Mil-Spec laser-cut plate carrier. Rated for multi-hit armor piercing protection.</p>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <span class="fs-2 fw-bold font-monospace" style="color: #ffffff;">$1,150.00</span>
+                        <span class="text-muted text-decoration-line-through font-monospace fs-5" style="color: #94a3b8 !important;">$1,450.00</span>
+                    </div>
+                    <a href="/product/level-iv-ceramic-armor/" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">CLAIM DEAL NOW &gt;</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="p-5 rounded-4 d-flex flex-column justify-content-between h-100 shadow-lg" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
+                <div>
+                    <span class="badge-hud mb-3" style="background: #334155; color: #f8fafc; border: 1px solid #475569;">NFA QUICK DISPATCH</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900; color: #ffffff !important;">TITANIUM QD SUPPRESSORS</h3>
+                    <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.6;">3D-printed Grade 5 Titanium silencers with monolithic baffle core. Zero point-of-impact shift guarantee. Fast e-file Form 3 transfer.</p>
+                </div>
+                <div>
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <span class="fs-2 fw-bold font-monospace" style="color: #ffffff;">$1,850.00</span>
+                        <span class="badge bg-success font-monospace">IN STOCK</span>
+                    </div>
+                    <a href="/product/titanium-suppressor/" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">SHOP SILENCERS &gt;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 8. WHY CHOOSE ARMOR SYSTEMS (VALUE PROPOSITION BAR) -->
+<section class="container mb-5 py-4">
+    <div class="p-5 rounded-4 shadow-sm" style="background: #ffffff; border: 1px solid #cbd5e1;">
+        <div class="row g-4 text-center">
+            <div class="col-sm-6 col-lg-3 border-end-lg border-light">
+                <i class="bi bi-box-seam text-primary fs-1 mb-2 d-block"></i>
+                <h6 class="font-outfit fw-bold text-dark mb-1">100% In-Stock Guarantee</h6>
+                <p class="small text-secondary mb-0">Every listed item is physically sitting in our Quantico armory ready for dispatch.</p>
+            </div>
+            <div class="col-sm-6 col-lg-3 border-end-lg border-light">
+                <i class="bi bi-shield-check text-primary fs-1 mb-2 d-block"></i>
+                <h6 class="font-outfit fw-bold text-dark mb-1">Armorer QC Inspected</h6>
+                <p class="small text-secondary mb-0">Every bolt, barrel, and optic undergoes headspace and optical zero retention checks.</p>
+            </div>
+            <div class="col-sm-6 col-lg-3 border-end-lg border-light">
+                <i class="bi bi-file-earmark-check text-primary fs-1 mb-2 d-block"></i>
+                <h6 class="font-outfit fw-bold text-dark mb-1">Seamless FFL &amp; e-File</h6>
+                <p class="small text-secondary mb-0">We handle digital Form 3 &amp; Form 4 NFA transfers and FFL network shipping.</p>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <i class="bi bi-arrow-repeat text-primary fs-1 mb-2 d-block"></i>
+                <h6 class="font-outfit fw-bold text-dark mb-1">Lifetime Guarantee</h6>
+                <p class="small text-secondary mb-0">If any component fails under normal operational use, we replace it immediately.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 8.8. VERIFIED ARMORY TESTIMONIALS SWIPER -->
+<section class="container py-4 mb-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+        <div>
+            <span class="badge-hud mb-2" style="background: #0f172a; color: #f59e0b; border: 1px solid #334155;"><i class="bi bi-star-fill me-1"></i> CUSTOMER REVIEWS</span>
+            <h2 class="display-6 fw-black text-dark font-outfit mb-0" style="font-weight: 900;">Verified Armory Testimonials</h2>
+        </div>
+        <div class="d-flex gap-2 mt-2 mt-md-0 align-items-center">
+            <a href="/reviews/" class="btn-armor py-2 px-3 small me-2">VIEW ALL REVIEWS &gt;</a>
+            <button class="btn btn-outline-dark rounded-circle test-prev" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-left"></i></button>
+            <button class="btn btn-outline-dark rounded-circle test-next" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="swiper testimonialsSwiper px-1 py-3">
+        <div class="swiper-wrapper">
+            <!-- Testimonial 1 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="text-warning mb-3 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="font-inter text-dark mb-4 fst-italic" style="line-height: 1.6;">"Ordered the Geissele Super Duty upper and Level IV ceramic plates. Packaging was rock solid and shipping to my FFL was lightning fast. Best tactical dealer in the country."</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3 border-top border-light">
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-0">SGT. MARCUS V.</h6>
+                            <small class="text-secondary font-monospace">LEO Tactical Officer</small>
+                        </div>
+                        <span class="badge bg-success font-monospace">VERIFIED BUYER</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="text-warning mb-3 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="font-inter text-dark mb-4 fst-italic" style="line-height: 1.6;">"The customer service team helped me select the perfect LPVO reticle for my 6.5 Creedmoor match rifle. Flawless zero retention and sub-MOA hits out to 1,000 yards!"</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3 border-top border-light">
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-0">DAVID K.</h6>
+                            <small class="text-secondary font-monospace">PRS Competitive Shooter</small>
+                        </div>
+                        <span class="badge bg-success font-monospace">VERIFIED BUYER</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="text-warning mb-3 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="font-inter text-dark mb-4 fst-italic" style="line-height: 1.6;">"Armor Systems handled my e-file Form 3 suppressor dispatch smoothly. Their QC inspection report gave me total confidence. Highly recommended for NFA items."</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3 border-top border-light">
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-0">JAMES R.</h6>
+                            <small class="text-secondary font-monospace">Class 3 NFA Collector</small>
+                        </div>
+                        <span class="badge bg-success font-monospace">VERIFIED BUYER</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="text-warning mb-3 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="font-inter text-dark mb-4 fst-italic" style="line-height: 1.6;">"The Hornady match ammo bundle and Magpul PMAGs arrived in 2 days. Pricing is unbeatable especially when using their VIP promo coupons!"</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3 border-top border-light">
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-0">ELENA T.</h6>
+                            <small class="text-secondary font-monospace">Firearms Instructor</small>
+                        </div>
+                        <span class="badge bg-success font-monospace">VERIFIED BUYER</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="text-warning mb-3 fs-5"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                        <p class="font-inter text-dark mb-4 fst-italic" style="line-height: 1.6;">"As a master armorer, I appreciate their attention to detail. Every bolt carrier group and barrel nut torque spec is checked before dispatch. True professionals."</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between pt-3 border-top border-light">
+                        <div>
+                            <h6 class="font-outfit fw-bold text-dark mb-0">CHIEF BILLY M.</h6>
+                            <small class="text-secondary font-monospace">Department Armorer</small>
+                        </div>
+                        <span class="badge bg-success font-monospace">VERIFIED BUYER</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 9. TRIGGER TIMES RESOURCES & SCHEMATICS SWIPER -->
+<section class="container mb-5 py-2">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+        <div>
+            <span class="badge-hud mb-2" style="background: #e2e8f0; color: #0f172a; border: 1px solid #cbd5e1;"><i class="bi bi-book-half me-1"></i> ARMORY KNOWLEDGE BASE</span>
+            <h2 class="display-6 fw-black text-dark font-outfit mb-0" style="font-weight: 900;">Trigger Times &amp; Gunsmithing Guides</h2>
+        </div>
+        <div class="d-flex gap-2 mt-2 mt-md-0 align-items-center">
+            <a href="/trigger-times/" class="btn-armor py-2 px-3 small me-2">ALL GUIDES &gt;</a>
+            <button class="btn btn-outline-dark rounded-circle guide-prev" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-left"></i></button>
+            <button class="btn btn-outline-dark rounded-circle guide-next" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <div class="swiper guidesSwiper px-1 py-3">
+        <div class="swiper-wrapper">
+            <!-- Guide 1 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/sniper_rifle.png' %}" alt="AR-15 Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">AR-15 BUILD GUIDE</span>
+                        </div>
+                        <h5 class="font-outfit fw-bold text-dark mb-2">How to Torque &amp; Align an AR-15 Barrel Nut to Mil-Spec</h5>
+                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Step-by-step tutorial on applying AeroShell grease, using an armorer's wrench, and indexing gas tube channels for extreme accuracy.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
+                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 8 MIN READ</span>
+                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guide 2 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/armor_plate.png' %}" alt="Armor Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">BALLISTICS 101</span>
+                        </div>
+                        <h5 class="font-outfit fw-bold text-dark mb-2">Ceramic vs. UHMWPE Body Armor: Understanding NIJ Levels</h5>
+                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">An in-depth analysis of Level III+ vs Level IV multi-hit capabilities, weight tradeoffs, and plate carrier sizing for tactical operators.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
+                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 12 MIN READ</span>
+                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guide 3 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/night_vision.png' %}" alt="Optics Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">OPTICS &amp; NV</span>
+                        </div>
+                        <h5 class="font-outfit fw-bold text-dark mb-2">Zeroing First Focal Plane (FFP) LPVOs at 100 vs 50 Yards</h5>
+                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Learn how reticle subtensions scale across magnification ranges and how to set up true ballistic holdovers for precision engagement.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
+                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 10 MIN READ</span>
+                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guide 4 -->
+            <div class="swiper-slide" style="height: auto;">
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
+                    <div>
+                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
+                            <img src="{% static 'images/sniper_rifle.png' %}" alt="Suppressor Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">NFA SILENCERS</span>
+                        </div>
+                        <h5 class="font-outfit fw-bold text-dark mb-2">Suppressor Maintenance &amp; Baffle Cleaning Protocols</h5>
+                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Best practices for ultrasonic cleaning of titanium and Inconel baffles, anti-seize thread treatments, and direct-thread alignment.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
+                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 6 MIN READ</span>
+                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 10. NEWSLETTER STRIP -->
+<section class="container pb-5 mb-5">
+    <div class="p-5 rounded-4 shadow-lg text-center" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
+        <div class="max-w-2xl mx-auto">
+            <span class="badge-hud mb-3" style="background: #334155; color: #f8fafc; border: 1px solid #475569;">ARMORY DISPATCH ALERT</span>
+            <h2 class="display-6 fw-extrabold text-white font-outfit mb-3" style="font-weight: 900; color: #ffffff !important;">Want Exclusive VIP Deals &amp; Tech Tips in Your Inbox?</h2>
+            <p class="font-monospace mb-4" style="color: #cbd5e1 !important;">
+                Subscribe to get exclusive personal store discount codes, flash sale alerts, new AR-15 part drops, and Trigger Times video guides directly in your inbox.
+            </p>
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                <input type="email" class="form-control bg-dark text-white font-monospace px-4 py-3 rounded-3" placeholder="Enter your email address..." style="max-width: 400px; border-color: #334155 !important;">
+                <button type="button" class="btn btn-light px-5 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">
+                    SUBSCRIBE NOW &gt;
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    if (typeof Swiper !== 'undefined') {
+        new Swiper(".hero-swiper", {
+            loop: true,
+            effect: "fade",
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+
+        new Swiper(".categoriesSwiper", {
+            slidesPerView: 2,
+            spaceBetween: 16,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".cat-next",
+                prevEl: ".cat-prev",
+            },
+            breakpoints: {
+                576: { slidesPerView: 3, spaceBetween: 16 },
+                768: { slidesPerView: 4, spaceBetween: 20 },
+                1024: { slidesPerView: 5, spaceBetween: 24 },
+            },
+        });
+
+        new Swiper(".featuredSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".feat-next",
+                prevEl: ".feat-prev",
+            },
+            breakpoints: {
+                576: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 24 },
+            },
+        });
+
+        new Swiper(".brandsSwiper", {
+            slidesPerView: 2,
+            spaceBetween: 16,
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".brand-next",
+                prevEl: ".brand-prev",
+            },
+            breakpoints: {
+                576: { slidesPerView: 3, spaceBetween: 16 },
+                768: { slidesPerView: 4, spaceBetween: 20 },
+                1024: { slidesPerView: 6, spaceBetween: 20 },
+            },
+        });
+
+        new Swiper(".testimonialsSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".test-next",
+                prevEl: ".test-prev",
+            },
+            breakpoints: {
+                576: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 24 },
+            },
+        });
+
+        new Swiper(".guidesSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 4500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: ".guide-next",
+                prevEl: ".guide-prev",
+            },
+            breakpoints: {
+                576: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 24 },
+            },
+        });
+    }
+});
+</script>
+{% endblock %}

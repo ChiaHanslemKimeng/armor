@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Gun Schematics | Armor Systems{% endblock %}
+
+{% block content %}
+<!-- Top Header / Banner -->
+<div class="bg-light py-4 border-bottom text-center">
+    <div class="container">
+        <h1 class="display-6 fw-black font-outfit text-dark mb-0 text-uppercase">GUN SCHEMATICS - BROWSE</h1>
+    </div>
+</div>
+
+<div class="container py-4 my-2">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb small fw-bold text-uppercase justify-content-center">
+            <li class="breadcrumb-item"><a href="/" class="text-dark text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item"><a href="/resources/" class="text-dark text-decoration-none">Resources</a></li>
+            <li class="breadcrumb-item active text-danger" aria-current="page">Gun Schematics</li>
+        </ol>
+    </nav>
+
+    <!-- Alphabet Navigation -->
+    <div class="text-center mb-5 border-bottom border-top py-3" style="background-color: #fdfdfd;">
+        <div class="d-flex flex-wrap justify-content-center gap-3 fs-6 fw-bold">
+            {% for group in grouped_schematics %}
+                <a href="#letter-{{ group.letter }}" class="text-secondary hover-text-danger text-decoration-none px-1">{{ group.letter }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Grouped Schematics -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            {% for group in grouped_schematics %}
+            <div id="letter-{{ group.letter }}" class="mb-5 pt-4">
+                <div class="d-flex align-items-center mb-5">
+                    <h2 class="fs-4 fw-black text-danger mb-0" style="font-size: 2rem !important;">{{ group.letter }}</h2>
+                    <hr class="flex-grow-1 ms-3 border-2" style="border-color: #902613; opacity: 1;">
+                </div>
+                
+                {% for brand in group.brands %}
+                    <div class="mb-5 pb-3">
+                        <!-- Brand Header -->
+                        <div class="text-center mb-4">
+                            {% if brand.logo %}
+                                <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" class="img-fluid" style="max-height: 50px; object-fit: contain;">
+                            {% else %}
+                                <h3 class="fw-bold text-dark text-uppercase">{{ brand.name }}</h3>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Categories for the Brand -->
+                        {% for cat_name, schematics in brand.categories.items %}
+                            <div class="mb-4">
+                                <!-- Beige Category Bar -->
+                                <div class="px-3 py-2 mb-3 fw-bold text-uppercase" style="background-color: #f1ebd8; color: #5a3c20;">
+                                    {{ cat_name }}
+                                </div>
+                                
+                                <!-- Links grid -->
+                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 px-2">
+                                    {% for sch in schematics %}
+                                        <div class="col">
+                                            <a href="/gun-schematics/{{ sch.slug }}/" class="text-decoration-none text-primary hover-text-danger small fw-bold d-block text-truncate">
+                                                <i class="bi bi-file-earmark-image me-1 text-muted"></i> {{ sch.title }}
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-text-danger:hover {
+        color: #dc3545 !important;
+        text-decoration: underline !important;
+    }
+    .text-primary {
+        color: #0d6efd !important;
+    }
+</style>
+{% endblock %}
