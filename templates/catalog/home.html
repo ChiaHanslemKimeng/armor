@@ -9,7 +9,7 @@
         <div class="swiper-wrapper">
             
             <!-- Slide 1: Tactical Sniper System -->
-            <div class="swiper-slide" style="background-image: url('{% static 'images/sniper_rifle.png' %}');">
+            <div class="swiper-slide" style="background-image: url('{% static 'images/430107495_1w.avif' %}');">
                 <div class="hero-slide-overlay"></div>
                 <div class="container position-relative z-2 py-5">
                     <div class="row align-items-center">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Slide 2: Ballistic Armor & Tactical Gear -->
-            <div class="swiper-slide" style="background-image: url('{% static 'images/armor_plate.png' %}');">
+            <div class="swiper-slide" style="background-image: url('{% static 'images/430107490_1w.avif' %}');">
                 <div class="hero-slide-overlay"></div>
                 <div class="container position-relative z-2 py-5">
                     <div class="row align-items-center">
@@ -115,13 +115,13 @@
 <section class="container py-4 mb-5">
     <div class="p-5 rounded-4 shadow-lg border" style="background: #0f172a; border-color: #334155 !important; color: #ffffff;">
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6">
+            <div class="col-lg-6 text-center text-lg-start">
                 <span class="badge-hud mb-3" style="background: #2563eb; color: #ffffff; border: 1px solid #1d4ed8;"><i class="bi bi-shield-fill-check me-1"></i> ABOUT GLOCKS AND ARMOR</span>
                 <h2 class="display-6 fw-black text-white font-outfit mb-3" style="font-weight: 900;">Defending Freedom With Precision Engineering</h2>
                 <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.7;">
                     Founded by military armorers and competitive precision shooters, Glocks And Armor was built on a singular philosophy: never compromise on weapon reliability. We curate and inspect every firearm, match suppressor, and ceramic armor system before it enters our climate-controlled Quantico vault.
                 </p>
-                <div class="row g-3 pt-2 mb-4">
+                <div class="row g-3 pt-2 mb-4 justify-content-center justify-content-lg-start">
                     <div class="col-6">
                         <div class="p-3 rounded-3 border" style="background: #1e293b; border-color: #475569 !important;">
                             <h4 class="fw-bold font-monospace mb-1" style="color: #f59e0b;">50,000+</h4>
@@ -659,7 +659,7 @@
                         <span class="fs-2 fw-bold font-monospace" style="color: #ffffff;">$1,150.00</span>
                         <span class="text-muted text-decoration-line-through font-monospace fs-5" style="color: #94a3b8 !important;">$1,450.00</span>
                     </div>
-                    <a href="/product/level-iv-ceramic-armor/" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">CLAIM DEAL NOW &gt;</a>
+                    <a href="/products/?q=ceramic+armor" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">CLAIM DEAL NOW &gt;</a>
                 </div>
             </div>
         </div>
@@ -676,7 +676,7 @@
                         <span class="fs-2 fw-bold font-monospace" style="color: #ffffff;">$1,850.00</span>
                         <span class="badge bg-success font-monospace">IN STOCK</span>
                     </div>
-                    <a href="/product/titanium-suppressor/" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">SHOP SILENCERS &gt;</a>
+                    <a href="/products/?q=suppressor" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">SHOP SILENCERS &gt;</a>
                 </div>
             </div>
         </div>
@@ -831,77 +831,38 @@
 
     <div class="swiper guidesSwiper px-1 py-3">
         <div class="swiper-wrapper">
-            <!-- Guide 1 -->
+            {% for guide in trigger_times_guides %}
             <div class="swiper-slide" style="height: auto;">
                 <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
                     <div>
                         <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
-                            <img src="{% static 'images/sniper_rifle.png' %}" alt="AR-15 Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
-                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">AR-15 BUILD GUIDE</span>
+                            <img src="{{ guide.thumbnail_url }}" alt="{{ guide.title }}" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
+                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">{{ guide.category|upper }}</span>
+                            <!-- Play Overlay -->
+                            <div class="position-absolute top-50 start-50 translate-middle">
+                                <div class="bg-dark bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center border border-2 border-white text-white" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-play-fill fs-4 ms-1"></i>
+                                </div>
+                            </div>
                         </div>
-                        <h5 class="font-outfit fw-bold text-dark mb-2">How to Torque &amp; Align an AR-15 Barrel Nut to Mil-Spec</h5>
-                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Step-by-step tutorial on applying AeroShell grease, using an armorer's wrench, and indexing gas tube channels for extreme accuracy.</p>
+                        <h5 class="font-outfit fw-bold text-dark mb-2">{{ guide.title }}</h5>
+                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Watch our detailed video guide on {{ guide.title|lower }}.</p>
                     </div>
                     <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
-                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 8 MIN READ</span>
-                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
+                        <span class="small text-muted font-monospace"><i class="bi bi-calendar3 me-1"></i> {{ guide.date_published|date:"M d, Y" }}</span>
+                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">WATCH VIDEO &gt;</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Guide 2 -->
+            {% empty %}
             <div class="swiper-slide" style="height: auto;">
-                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
-                    <div>
-                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
-                            <img src="{% static 'images/armor_plate.png' %}" alt="Armor Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
-                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">BALLISTICS 101</span>
-                        </div>
-                        <h5 class="font-outfit fw-bold text-dark mb-2">Ceramic vs. UHMWPE Body Armor: Understanding NIJ Levels</h5>
-                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">An in-depth analysis of Level III+ vs Level IV multi-hit capabilities, weight tradeoffs, and plate carrier sizing for tactical operators.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
-                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 12 MIN READ</span>
-                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
-                    </div>
+                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-center align-items-center border shadow-sm text-center" style="background: #ffffff !important; border-color: #cbd5e1 !important; min-height: 250px;">
+                    <i class="bi bi-camera-video text-muted" style="font-size: 3rem;"></i>
+                    <h5 class="font-outfit fw-bold text-dark mt-3">New Guides Coming Soon</h5>
+                    <p class="small text-secondary mb-0">Check back later for new armory guides.</p>
                 </div>
             </div>
-
-            <!-- Guide 3 -->
-            <div class="swiper-slide" style="height: auto;">
-                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
-                    <div>
-                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
-                            <img src="{% static 'images/night_vision.png' %}" alt="Optics Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
-                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">OPTICS &amp; NV</span>
-                        </div>
-                        <h5 class="font-outfit fw-bold text-dark mb-2">Zeroing First Focal Plane (FFP) LPVOs at 100 vs 50 Yards</h5>
-                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Learn how reticle subtensions scale across magnification ranges and how to set up true ballistic holdovers for precision engagement.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
-                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 10 MIN READ</span>
-                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guide 4 -->
-            <div class="swiper-slide" style="height: auto;">
-                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
-                    <div>
-                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
-                            <img src="{% static 'images/sniper_rifle.png' %}" alt="Suppressor Guide" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
-                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">NFA SILENCERS</span>
-                        </div>
-                        <h5 class="font-outfit fw-bold text-dark mb-2">Suppressor Maintenance &amp; Baffle Cleaning Protocols</h5>
-                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Best practices for ultrasonic cleaning of titanium and Inconel baffles, anti-seize thread treatments, and direct-thread alignment.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
-                        <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> 6 MIN READ</span>
-                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">READ GUIDE &gt;</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

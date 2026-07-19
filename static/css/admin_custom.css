@@ -1,14 +1,40 @@
 /* admin_custom.css - Custom overrides for Django Jazzmin */
 
-/* Resize the login logo and center the container */
-.login-box-msg, .login-logo {
+/* Center the entire login page */
+body.login-page {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    background-color: #1e293b; /* Dark tactical background */
+}
+
+/* Ensure the login box is centered and well-proportioned */
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Resize the login logo and center the container */
+.login-box-msg, .login-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .login-logo img {
-    max-width: 150px !important;
+    max-width: 180px !important;
     height: auto !important;
     margin: 0 auto;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.login-logo a {
+    color: #f59e0b !important;
+    font-weight: 900;
+    margin-top: 15px;
 }

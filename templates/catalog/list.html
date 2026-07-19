@@ -61,27 +61,29 @@
 
                     <!-- Category Filter -->
                     <div class="mb-4">
-                        <label class="form-label small font-monospace text-secondary fw-bold d-flex justify-content-between">
-                            <span>CATEGORY</span>
+                        <label class="form-label small font-monospace text-secondary fw-bold d-flex justify-content-between align-items-center mb-2" data-bs-toggle="collapse" data-bs-target="#categoryFilterCollapse" aria-expanded="false" aria-controls="categoryFilterCollapse" style="cursor: pointer;">
+                            <span>CATEGORY <i class="bi bi-chevron-down d-lg-none ms-1"></i></span>
                             <span class="badge bg-dark border border-glass text-info">{{ sidebar_categories|length|default:"13" }}</span>
                         </label>
-                        <div class="d-flex flex-column gap-2 font-monospace small" style="max-height: 400px; overflow-y: auto;">
-                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
-                                <div>
-                                    <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="" {% if not current_category %}checked{% endif %} onchange="this.form.submit()">
-                                    All Store Products
-                                </div>
-                                <span class="badge bg-dark border border-glass text-info">{{ total_products_count|default:products.paginator.count }}</span>
-                            </label>
-                            {% for cat in sidebar_categories %}
-                            <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
-                                <div>
-                                    <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="{{ cat.slug }}" {% if current_category == cat.slug %}checked{% endif %} onchange="this.form.submit()">
-                                    {{ cat.name }}
-                                </div>
-                                <span class="badge bg-dark border border-glass text-muted">{{ cat.count|default:"0" }}</span>
-                            </label>
-                            {% endfor %}
+                        <div class="collapse d-lg-block" id="categoryFilterCollapse">
+                            <div class="d-flex flex-column gap-2 font-monospace small" style="max-height: 400px; overflow-y: auto;">
+                                <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                    <div>
+                                        <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="" {% if not current_category %}checked{% endif %} onchange="this.form.submit()">
+                                        All Store Products
+                                    </div>
+                                    <span class="badge bg-dark border border-glass text-info">{{ total_products_count|default:products.paginator.count }}</span>
+                                </label>
+                                {% for cat in sidebar_categories %}
+                                <label class="form-check-label d-flex justify-content-between align-items-center cursor-pointer text-secondary hover-glass">
+                                    <div>
+                                        <input class="form-check-input bg-dark border-glass me-2" type="radio" name="category" value="{{ cat.slug }}" {% if current_category == cat.slug %}checked{% endif %} onchange="this.form.submit()">
+                                        {{ cat.name }}
+                                    </div>
+                                    <span class="badge bg-dark border border-glass text-muted">{{ cat.count|default:"0" }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
 

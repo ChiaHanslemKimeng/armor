@@ -12,10 +12,13 @@ def home_view(request):
     featured_products = Product.objects.filter(is_active=True)[:6]
     categories = Category.objects.filter(is_active=True)
     brands = Brand.objects.filter(is_active=True)
+    trigger_times_guides = TriggerTimesVideo.objects.all().order_by('-date_published')[:4]
+    
     return render(request, 'catalog/home.html', {
         'featured_products': featured_products,
         'categories': categories,
         'brands': brands,
+        'trigger_times_guides': trigger_times_guides,
     })
 
 
