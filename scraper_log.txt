@@ -1,5 +1,5 @@
 ERROR: No source URL provided.
-[INFO] Initializing Armor Systems Scraper Engine in BACKGROUND...
+[INFO] Initializing Glocks And Armor Scraper Engine in BACKGROUND...
 [INFO] Target Start URL: https://www.brownells.com/guns/rifles/semi-auto-rifles/
 [INFO] Target End URL: http://127.0.0.1:8000/products/?category=rifles&sub=semi-auto
 

@@ -4,7 +4,7 @@ from .models import ProductReview
 
 
 def reviews_list_view(request):
-    """Customer Reviews & Testimonials across Armor Systems."""
+    """Customer Reviews & Testimonials across Glocks And Armor."""
     reviews = ProductReview.objects.filter(is_approved=True).select_related('product', 'user')[:20]
     return render(request, 'reviews/list.html', {'reviews': reviews})
 

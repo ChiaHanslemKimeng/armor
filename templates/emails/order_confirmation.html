@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f1f5f9; color: #0f172a; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-top: 5px solid #ffb800; }
+        h1 { color: #0f172a; margin-bottom: 5px; font-size: 24px; }
+        p { color: #475569; font-size: 16px; line-height: 1.5; }
+        .order-details { margin: 30px 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+        .order-header { background: #0f172a; color: #ffffff; padding: 15px; font-weight: bold; }
+        .order-body { padding: 20px; background: #f8fafc; }
+        .item { display: flex; justify-content: space-between; border-bottom: 1px solid #e2e8f0; padding: 10px 0; }
+        .item:last-child { border-bottom: none; }
+        .total { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; padding-top: 15px; border-top: 2px solid #cbd5e1; margin-top: 15px; color: #0f172a; }
+        .btn { display: inline-block; background: #ffb800; color: #0f172a; text-decoration: none; padding: 12px 25px; border-radius: 4px; font-weight: bold; margin-top: 20px; text-transform: uppercase; }
+        .footer { text-align: center; margin-top: 40px; font-size: 12px; color: #94a3b8; }
+        .logo { font-size: 24px; font-weight: 900; color: #0f172a; margin-bottom: 20px; text-align: center; letter-spacing: -1px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">GLOCKS AND ARMOR</div>
+        <h1>Order Confirmed!</h1>
+        <p>Thank you for your business, {{ order.customer_name|default:"Customer" }}. Your order <strong>#{{ order.order_number }}</strong> has been received and is currently being processed by our armory.</p>
+        
+        <div class="order-details">
+            <div class="order-header">Order Summary</div>
+            <div class="order-body">
+                {% for item in order.items.all %}
+                <div class="item">
+                    <span>{{ item.quantity }}x {{ item.product.name }}</span>
+                    <span>${{ item.price }}</span>
+                </div>
+                {% empty %}
+                <div class="item">
+                    <span>Order items will be detailed here.</span>
+                </div>
+                {% endfor %}
+                <div class="total">
+                    <span>Total</span>
+                    <span>${{ order.total_price }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <p>We will notify you once your order has been dispatched or is ready for FFL transfer.</p>
+        
+        <div style="text-align: center;">
+            <a href="{{ request.scheme }}://{{ request.get_host }}/users/dashboard/#order-history" class="btn">View Order Status</a>
+        </div>
+        
+        <div class="footer">
+            &copy; 2026 Glocks And Armor. All rights reserved.<br>
+            If you have any questions, please reply to this email or call our support line.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Live Order Tracking • Order #{{ order.order_number|default:"8899" }} | Armor Systems{% endblock %}
+{% block title %}Live Order Tracking • Order #{{ order.order_number|default:"8899" }} | Glocks And Armor{% endblock %}
 
 {% block content %}
 <div class="container py-5" x-data="{
@@ -55,7 +55,7 @@
         <div>
             <h5 class="fw-bold text-white font-outfit mb-1">Payment &amp; Dispatch Notification</h5>
             <p class="small text-secondary font-monospace mb-0 lh-base">
-                Your order <strong class="text-white">#{{ order.order_number|default:"2026-8899" }}</strong> has been logged into the secure queue! <strong class="text-warning">The Armor Systems admin team will contact you shortly via email or phone with your official payment details and step-by-step instructions with regards to the payment method you chose ({% if order.payment_gateway == 'etransfer' %}E-Transfer{% elif order.payment_gateway == 'crypto' %}Cryptocurrency (BTC/ETH/USDT){% elif order.payment_gateway == 'cashapp' %}CashApp ($Cashtag){% elif order.payment_gateway == 'paypal' %}PayPal Checkout{% elif order.payment_gateway == 'bankwire' %}Bank Transfer (ACH / Wire){% else %}{{ order.payment_gateway|default:"Credit/Debit Card" }}{% endif %}).</strong> Once verified, real-time GPS courier dispatch will commence automatically below.
+                Your order <strong class="text-white">#{{ order.order_number|default:"2026-8899" }}</strong> has been logged into the secure queue! <strong class="text-warning">The Glocks And Armor admin team will contact you shortly via email or phone with your official payment details and step-by-step instructions with regards to the payment method you chose ({% if order.payment_gateway == 'etransfer' %}E-Transfer{% elif order.payment_gateway == 'crypto' %}Cryptocurrency (BTC/ETH/USDT){% elif order.payment_gateway == 'cashapp' %}CashApp ($Cashtag){% elif order.payment_gateway == 'paypal' %}PayPal Checkout{% elif order.payment_gateway == 'bankwire' %}Bank Transfer (ACH / Wire){% else %}{{ order.payment_gateway|default:"Credit/Debit Card" }}{% endif %}).</strong> Once verified, real-time GPS courier dispatch will commence automatically below.
             </p>
         </div>
     </div>

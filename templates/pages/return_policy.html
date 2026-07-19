@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Return Policy - Glocks And Armor{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="margin-top: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="font-outfit fw-bold text-dark mb-4 border-bottom border-warning pb-3">
+                <i class="bi bi-shield-check text-warning me-2"></i> Return Policy & RMA
+            </h1>
+            
+            <div class="glass-card p-4 p-md-5">
+                <h4 class="font-outfit fw-bold text-dark mb-3">30-Day Tactical Return Guarantee</h4>
+                <p class="text-secondary font-monospace mb-4">
+                    At Glocks And Armor, we stand behind our ordnance. If your gear doesn't meet your tactical requirements, you may return most new, unopened items within 30 days of delivery for a full refund (minus shipping costs and applicable restocking fees).
+                </p>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3" style="background: rgba(15, 23, 42, 0.03); border: 1px solid rgba(15, 23, 42, 0.1);">
+                            <h5 class="fw-bold text-dark font-outfit mb-3"><i class="bi bi-box-seam me-2 text-primary"></i> Returnable Items</h5>
+                            <ul class="list-unstyled text-secondary font-monospace small mb-0">
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Unused Gear & Optics</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Unopened Gun Parts & Accessories</li>
+                                <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Defective Firearms (subject to manufacturer warranty)</li>
+                                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Unworn Apparel & Armor Carriers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 rounded-3" style="background: rgba(15, 23, 42, 0.03); border: 1px solid rgba(15, 23, 42, 0.1);">
+                            <h5 class="fw-bold text-dark font-outfit mb-3"><i class="bi bi-slash-circle me-2 text-danger"></i> Non-Returnable Items</h5>
+                            <ul class="list-unstyled text-secondary font-monospace small mb-0">
+                                <li class="mb-2"><i class="bi bi-x-circle-fill text-danger me-2"></i> Ammunition (for safety reasons)</li>
+                                <li class="mb-2"><i class="bi bi-x-circle-fill text-danger me-2"></i> Fired or Altered Firearms</li>
+                                <li class="mb-2"><i class="bi bi-x-circle-fill text-danger me-2"></i> Custom Built AR-15 Lowers/Uppers</li>
+                                <li><i class="bi bi-x-circle-fill text-danger me-2"></i> Used Ceramic/Steel Body Armor Plates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-outfit fw-bold text-dark mb-3">Restocking Fees</h4>
+                <p class="text-secondary font-monospace mb-4">
+                    Returned firearms and serialized items that are not defective are subject to a 15% restocking fee. This covers the FFL transfer logistics and background check administrative overhead. If an item is returned due to our error (e.g., incorrect item shipped), the restocking fee is waived and we cover return shipping.
+                </p>
+
+                <h4 class="font-outfit fw-bold text-dark mb-3">RMA Process</h4>
+                <div class="bg-dark text-white p-4 rounded-3 font-monospace mb-0">
+                    <ol class="mb-0">
+                        <li class="mb-2">Log into your <a href="{% url 'user_dashboard' %}" class="text-warning">Command Center (Dashboard)</a>.</li>
+                        <li class="mb-2">Locate the order in your Order History.</li>
+                        <li class="mb-2">Contact support via the order page or email returns@glocksandarmor.com to request an RMA (Return Merchandise Authorization) number.</li>
+                        <li>Package the item securely, write the RMA number on the outside of the box, and ship to the provided Hub address.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

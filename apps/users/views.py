@@ -79,3 +79,19 @@ def two_factor_setup_view(request):
             messages.error(request, "Invalid authentication token code. Please try again.")
 
     return render(request, 'users/2fa_setup.html', {'qr_image_b64': qr_b64})
+
+@login_required
+def edit_profile_view(request):
+    if request.method == 'POST':
+        request.user.first_name = request.POST.get('first_name', '')
+        request.user.last_name = request.POST.get('last_name', '')
+        request.user.phone_number = request.POST.get('phone_number', '')
+        
+        if 'avatar' in request.FILES:
+            request.user.avatar = request.FILES['avatar']
+            
+        request.user.save()
+        messages.success(request, "Profile updated successfully.")
+        return redirect('user_dashboard')
+        
+    return render(request, 'users/edit_profile.html', {'user': request.user})

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Edit Profile - Glocks And Armor{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="margin-top: 80px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="glass-card p-4">
+                <div class="d-flex align-items-center mb-4">
+                    <a href="{% url 'user_dashboard' %}" class="btn btn-outline-dark rounded-circle me-3 border-glass shadow-sm" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-arrow-left"></i></a>
+                    <h3 class="font-outfit fw-bold text-dark mb-0">Edit Profile</h3>
+                </div>
+                
+                {% if messages %}
+                <div class="mb-4">
+                    {% for msg in messages %}
+                        <div class="alert alert-{{ msg.tags }} border-glass shadow-sm rounded-3 small font-monospace">{{ msg }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="text-center mb-4">
+                        <div class="position-relative d-inline-block">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}" alt="Profile Picture" class="rounded-circle border border-warning shadow-sm" style="width: 120px; height: 120px; object-fit: cover;">
+                            {% else %}
+                                <div class="rounded-circle d-flex align-items-center justify-content-center text-white fs-1 fw-bold shadow-sm" style="width:120px; height:120px; background: var(--accent-gradient);">
+                                    {{ user.email.0|upper }}
+                                </div>
+                            {% endif %}
+                            <label for="id_avatar" class="position-absolute bottom-0 end-0 bg-warning text-dark rounded-circle p-2 shadow cursor-pointer border border-dark" title="Change Avatar" style="cursor: pointer;">
+                                <i class="bi bi-camera-fill"></i>
+                            </label>
+                            <input type="file" name="avatar" id="id_avatar" class="d-none" accept="image/*">
+                        </div>
+                    </div>
+
+                    <div class="row g-3 font-monospace small">
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">First Name</label>
+                            <input type="text" name="first_name" class="form-control bg-dark text-white border-glass rounded-3 py-2" value="{{ user.first_name }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">Last Name</label>
+                            <input type="text" name="last_name" class="form-control bg-dark text-white border-glass rounded-3 py-2" value="{{ user.last_name }}">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-secondary fw-bold">Phone Number</label>
+                            <input type="tel" name="phone_number" class="form-control bg-dark text-white border-glass rounded-3 py-2" value="{{ user.phone_number|default_if_none:'' }}">
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-tactical-yellow w-100 fw-bold py-2 shadow-sm rounded-3"><i class="bi bi-save me-2"></i> Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

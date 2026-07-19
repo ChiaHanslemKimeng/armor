@@ -1,5 +1,8 @@
 import io
 from decimal import Decimal
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -258,6 +261,26 @@ def checkout_view(request):
             'bankwire': 'Bank Transfer (ACH / Wire)'
         }
         pm_display = pm_display_map.get(payment_method, payment_method.replace('_', ' ').title())
+        
+        # Send Order Confirmation Email
+        try:
+            subject = f"Order Confirmation #{order.order_number} - Glocks And Armor"
+            html_message = render_to_string('emails/order_confirmation.html', {
+                'order': order,
+                'request': request
+            })
+            plain_message = strip_tags(html_message)
+            msg = EmailMultiAlternatives(
+                subject,
+                plain_message,
+                'support@glocksandarmor.com',
+                [email]
+            )
+            msg.attach_alternative(html_message, "text/html")
+            msg.send()
+        except Exception as e:
+            pass # Silent fail for email in dev if not configured
+
         messages.success(request, f"Order #{order.order_number} placed successfully! Please note: The admin will contact you shortly via email or phone with the official payment instructions and details with regards to your chosen payment method ({pm_display}).")
         return redirect('order_tracking', order_number=order.order_number)
 
@@ -299,7 +322,7 @@ def invoice_pdf_view(request, order_number):
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Invoice #{order.order_number} - Armor Systems</title>
+        <title>Invoice #{order.order_number} - Glocks And Armor</title>
         <style>
             @media print {{
                 @page {{ margin: 0.5cm; }}
@@ -324,7 +347,7 @@ def invoice_pdf_view(request, order_number):
         </div>
         <div class="header">
             <div>
-                <div class="title">ARMOR SYSTEMS</div>
+                <div class="title">GLOCKS AND ARMOR</div>
                 <p>Tactical &amp; Ballistic Catalog<br>Austin, TX 78701 • Authorized Dealer</p>
             </div>
             <div style="text-align: right;">

@@ -1,107 +1,79 @@
 import os
 import django
-import random
-from datetime import timedelta
-from django.utils import timezone
+import uuid
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'armor_project.settings')
 django.setup()
 
-from apps.catalog.models import Product, Category, Brand
-from apps.reviews.models import ProductReview
 from django.contrib.auth import get_user_model
+import random
 
 User = get_user_model()
+from apps.catalog.models import Product, Category, Brand
+from apps.reviews.models import ProductReview, QuestionAnswer
 
-print("Cleaning up old reviews...")
-ProductReview.objects.all().delete()
+user, _ = User.objects.get_or_create(email='reviewer@glocksandarmor.com', defaults={'first_name': 'Tactical', 'last_name': 'Reviewer', 'is_active': True, 'username': 'reviewer'})
+admin_user, _ = User.objects.get_or_create(email='admin@glocksandarmor.com', defaults={'first_name': 'Admin', 'is_superuser': True, 'is_staff': True, 'username': 'admin'})
 
-products = list(Product.objects.all()[:50])
+products = list(Product.objects.all())
+
 if not products:
-    print("No products found, creating a dummy product for reviews...")
-    brand = Brand.objects.first()
-    if not brand:
-        brand = Brand.objects.create(name="Armor Tactical", slug="armor-tactical-dummy")
-    category = Category.objects.first()
-    if not category:
-        category = Category.objects.create(name="Accessories", slug="accessories-dummy")
+    print("No products found in DB. Creating dummy products...")
+    slug_suffix = str(uuid.uuid4())[:8]
+    category = Category.objects.create(name=f'Rifles {slug_suffix}', slug=f'rifles-{slug_suffix}')
+    brand = Brand.objects.create(name=f'ArmoryWorks {slug_suffix}', slug=f'armoryworks-{slug_suffix}')
     
-    dummy_product = Product.objects.create(
-        name="Tactical Carrier Plate",
-        slug="tactical-carrier-plate",
-        brand=brand,
-        price=199.99,
-        sku="TCP-001"
-    )
-    dummy_product.categories.add(category)
-    products = [dummy_product]
+    p1 = Product.objects.create(name='Tactical AR-15 Base', slug='tactical-ar15-base', brand=brand, price=799.99, sku='AR15-BASE-01')
+    p1.categories.add(category)
+    p2 = Product.objects.create(name='Glock 19 Gen 5', slug='glock-19-gen-5', brand=brand, price=599.99, sku='GLK-19-G5')
+    p2.categories.add(category)
+    p3 = Product.objects.create(name='Level IV Ceramic Plate', slug='level-iv-plate', brand=brand, price=199.99, sku='ARMOR-L4-01')
+    p3.categories.add(category)
+    
+    products = [p1, p2, p3]
 
-titles = [
-    "Solid replacement part",
-    "Fits perfect",
-    "Does the job",
-    "Great product",
-    "Machining is slightly off",
-    "Will buy again",
-    "Decent for the price",
-    "Works flawlessly",
-    "Highly recommended",
-    "Average",
-    "Very high quality",
-    "Exceeded expectations"
+review_data = [
+    ("Exceptional Quality", "This is exactly what I was looking for. Machining is flawless, fits perfectly. Highly recommend Glocks And Armor for fast shipping.", 5),
+    ("Solid Performer", "Good price for the quality. Has held up well after 500 rounds. No issues.", 4),
+    ("Best in class", "I've tried multiple brands and this is by far the most reliable setup I've owned. Customer service was also top notch.", 5),
+    ("Decent but could be better", "It works as advertised, but the finish was a bit rough on the edges. Overall satisfactory.", 3),
+    ("Absolute Tank", "Ran this through the mud and it didn't skip a beat. Worth every penny.", 5)
 ]
 
-comments = [
-    "The build quality is very solid. Fits my setup perfectly.",
-    "Installed it yesterday and took it to the range. No issues so far.",
-    "This is a high quality component. Very satisfied with the purchase.",
-    "I had to make some minor adjustments to get it to fit, but it works now.",
-    "Exactly as described. Fast shipping and good customer service.",
-    "Very easy to install. Took me less than 5 minutes.",
-    "I've used this brand before and they always deliver good quality.",
-    "Does exactly what it's supposed to do. No complaints.",
-    "Machining tolerances are tight and the finish is excellent.",
-    "Reliable and durable. Have put over 500 rounds through it.",
-    "I was on the fence but glad I purchased this. Good value.",
-    "A reliable addition to my custom build."
+qa_data = [
+    ("Does this require an FFL to ship?", "Yes, this item is a serialized firearm/receiver and must be shipped to a valid FFL dealer."),
+    ("Is this compatible with mil-spec parts?", "Yes, it is 100% mil-spec compatible out of the box."),
+    ("What is the warranty on this?", "This product carries a lifetime manufacturer defect warranty through Glocks And Armor."),
+    ("Will this run steel case ammo?", "While it can run steel case, we highly recommend brass for longevity and reliability."),
+    ("Does it come with a magazine?", "Yes, one 30-round magazine is included in the box where state laws permit.")
 ]
 
-ratings_distribution = [
-    3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5
-]
+reviews_created = 0
+qa_created = 0
 
-first_names = ["John", "Sarah", "Michael", "David", "Jessica", "Robert", "William", "James", "Charles", "Daniel", "Matthew", "Anthony", "Mark", "Paul", "Steven", "Andrew", "Kenneth", "Joshua", "Kevin", "Brian"]
-last_initials = ["A.", "B.", "C.", "D.", "F.", "G.", "H.", "K.", "M.", "P.", "R.", "S.", "T.", "V.", "W."]
+for product in products:
+    num_reviews = random.randint(1, 3)
+    samples = random.sample(review_data, num_reviews)
+    for title, comment, rating in samples:
+        review, created = ProductReview.objects.get_or_create(
+            product=product,
+            user=user,
+            title=title,
+            comment=comment,
+            defaults={'rating': rating, 'helpful_votes': random.randint(0, 15)}
+        )
+        if created:
+            reviews_created += 1
 
-print("Seeding 30 reviews...")
-reviews_created = []
+    num_qa = random.randint(1, 2)
+    qa_samples = random.sample(qa_data, num_qa)
+    for q, a in qa_samples:
+        qa, created = QuestionAnswer.objects.get_or_create(
+            product=product,
+            question_text=q,
+            defaults={'answer_text': a, 'user': user, 'answered_by': admin_user}
+        )
+        if created:
+            qa_created += 1
 
-for i in range(30):
-    product = random.choice(products)
-    rating = random.choice(ratings_distribution)
-    title = random.choice(titles)
-    comment = random.choice(comments)
-    
-    # Create fake user
-    fake_name = f"{random.choice(first_names)} {random.choice(last_initials)}"
-    fake_email = f"user_{random.randint(10000, 99999)}@example.com"
-    fake_user, created = User.objects.get_or_create(email=fake_email, defaults={'first_name': fake_name})
-    if not created and not fake_user.first_name:
-        fake_user.first_name = fake_name
-        fake_user.save()
-    
-    review = ProductReview.objects.create(
-        product=product,
-        user=fake_user,
-        rating=rating,
-        title=title,
-        comment=comment
-    )
-    reviews_created.append(review)
-
-for review in reviews_created:
-    random_days = random.randint(1, 365)
-    random_date = timezone.now() - timedelta(days=random_days)
-    ProductReview.objects.filter(id=review.id).update(created_at=random_date)
-
-print(f"Successfully seeded {len(reviews_created)} reviews!")
+print(f"Successfully seeded {reviews_created} new reviews and {qa_created} new FAQs across {len(products)} products.")

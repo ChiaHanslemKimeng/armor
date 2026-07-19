@@ -67,7 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin, UUIDModel, TimeStampedModel):
         secret = self.generate_2fa_secret()
         return pyotp.totp.TOTP(secret).provisioning_uri(
             name=self.email,
-            issuer_name="Armor Systems"
+            issuer_name="Glocks And Armor"
         )
 
     def verify_totp(self, code):

@@ -14,6 +14,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0,tes
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin',
     'daphne',  # Must be first or before django.contrib.staticfiles for ASGI support
     'django.contrib.admin',
     'django.contrib.auth',
@@ -182,3 +183,91 @@ MEILISEARCH_KEY = os.environ.get('MEILISEARCH_KEY', 'masterKey')
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/users/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+# Email Configuration
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+
+DEFAULT_FROM_EMAIL = 'Glocks And Armor <support@glocksandarmor.com>'
+SERVER_EMAIL = 'support@glocksandarmor.com'
+
+
+# Jazzmin Admin Theme Settings
+JAZZMIN_SETTINGS = {
+    "site_title": "Glocks And Armor Admin",
+    "site_header": "Glocks And Armor",
+    "site_brand": "Glocks And Armor",
+    "site_logo": "images/glocks_and_armor_logo.png",
+    "site_logo_classes": "img-circle",
+    "site_icon": None,
+    "welcome_sign": "Welcome to Glocks And Armor Command Center",
+    "copyright": "Glocks And Armor",
+    "search_model": ["auth.User", "catalog.Product", "orders.Order"],
+    "user_avatar": None,
+    "topmenu_links": [
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Storefront", "url": "/", "new_window": True},
+        {"name": "Orders", "url": "admin:orders_order_changelist"},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "catalog.Product": "fas fa-crosshairs",
+        "catalog.Category": "fas fa-list",
+        "catalog.Brand": "fas fa-industry",
+        "orders.Order": "fas fa-shopping-cart",
+        "reviews.Review": "fas fa-star",
+    },
+    "custom_css": "css/admin_custom.css",
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": False,
+    "custom_css": None,
+    "custom_js": None,
+    "show_ui_builder": False,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-dark",
+    "accent": "accent-warning",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-warning",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": True,
+    "theme": "darkly",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}

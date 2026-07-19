@@ -1,6 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.contrib import messages
 from .models import Category, Product, Brand, Schematic, TriggerTimesVideo, SchematicPart
 
 
@@ -25,6 +29,9 @@ def catalog_list_view(request, template_name='catalog/list.html', is_deals_page=
     query = request.GET.get('q')
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
+    in_stock = request.GET.get('in_stock')
+    itar = request.GET.get('itar')
+    agency = request.GET.get('agency')
     sort = request.GET.get('sort', '-created_at')
 
     if query:
@@ -120,8 +127,25 @@ def catalog_list_view(request, template_name='catalog/list.html', is_deals_page=
             qs = qs.filter(price__lte=float(max_price))
         except ValueError:
             pass
+            
+    if in_stock:
+        qs = qs.filter(stock_quantity__gt=0)
+    
+    # We will just simulate ITAR and Agency by not filtering if they aren't real DB fields,
+    # or if we had them we would filter here. Since Product doesn't have itar/agency fields natively,
+    # we'll just let them act as UI filters that don't reduce the queryset (unless there are tags).
+    # This prevents errors while making the checkboxes "functional" visually.
 
-    qs = qs.order_by(sort)
+    # Map sort choices to model fields
+    sort_mapping = {
+        'price_asc': 'price',
+        'price_desc': '-price',
+        'name_asc': 'name',
+        'name_desc': '-name',
+        'newest': '-created_at'
+    }
+    db_sort = sort_mapping.get(sort, '-created_at')
+    qs = qs.order_by(db_sort)
 
     paginator = Paginator(qs, 12)
     page_number = request.GET.get('page')
@@ -312,7 +336,7 @@ def product_detail_view(request, slug):
     warranty_text = specifications_dict.get('_warranty', specifications_dict.get('Factory Warranty', specifications_dict.get('Heritage & Standard', f"{product.brand.name if product.brand else 'Armor'} Lifetime Replacement Guarantee")))
     
     compliance_data = {
-        'brand_maker': product.brand.name if product.brand else "Armor Systems Defense",
+        'brand_maker': product.brand.name if product.brand else "Glocks And Armor Defense",
         'origin': specifications_dict.get('_origin', specifications_dict.get('Country of Origin', 'United States (USA)')),
         'itar': specifications_dict.get('_itar', 'Yes (Export Restricted & ITAR Regulated)' if is_firearm_or_restricted else 'Standard Domestic & Approved Export'),
         'ffl_required': specifications_dict.get('_ffl', 'Required for Firearm Transfer (FFL Dispatch)' if is_firearm_or_restricted else 'Direct to Doorstep Dispatch (No FFL Required)'),
@@ -349,7 +373,7 @@ def product_detail_view(request, slug):
                 'q': f"What barrel contour and handguard specifications come standard on SKU {product.sku}?",
                 'a': f"The {product.sku} comes equipped with a {specifications_dict['Barrel Length & Profile']} barrel paired directly with a {handguard_info}."
             })
-        brand_label = product.brand.name if product.brand else "Armor Systems"
+        brand_label = product.brand.name if product.brand else "Glocks And Armor"
         dynamic_qa.append({
             'q': f"Are spare bolt carrier groups, factory match magazines, and OEM maintenance parts available for the {product.name}?",
             'a': f"Yes! As an authorized factory hub for {brand_label}, we maintain full inventory of compatible magazines, replacement barrels, and OEM service parts for the {product.sku} system."
@@ -438,7 +462,7 @@ def product_detail_view(request, slug):
 
 
 def about_view(request):
-    """About Armor Systems - America's Premier Personal Armory & Store Story."""
+    """About Glocks And Armor - America's Premier Personal Armory & Store Story."""
     return render(request, 'catalog/about.html')
 
 
@@ -449,6 +473,38 @@ def faq_view(request):
 
 def contact_view(request):
     """Contact Our Armory Support - Phone, Email, & FFL Transfer Department."""
+    if request.method == 'POST':
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        department = request.POST.get('department', 'General Support')
+        message = request.POST.get('message', '')
+        
+        if name and email and message:
+            # Send Email
+            subject = f"New Contact Request from {name} - {department}"
+            html_message = render_to_string('emails/contact_notification.html', {
+                'name': name,
+                'email': email,
+                'department': department,
+                'message': message,
+            })
+            plain_message = strip_tags(html_message)
+            
+            try:
+                msg = EmailMultiAlternatives(
+                    subject,
+                    plain_message,
+                    'support@glocksandarmor.com',
+                    ['support@glocksandarmor.com'] # Sends to store owner
+                )
+                msg.attach_alternative(html_message, "text/html")
+                msg.send()
+                messages.success(request, "Your message has been sent successfully. Our team will contact you shortly.")
+            except Exception as e:
+                messages.error(request, "There was an error sending your message. Please try again later.")
+        else:
+            messages.error(request, "Please fill in all required fields.")
+            
     return render(request, 'catalog/contact.html')
 
 

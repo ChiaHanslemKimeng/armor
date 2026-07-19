@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Tactical Weapons, Ballistic Armor & Ordnance Marketplace | Armor Systems{% endblock %}
+{% block title %}Tactical Weapons, Ballistic Armor & Ordnance Marketplace | Glocks And Armor{% endblock %}
 
 {% block content %}
 <!-- Compact Catalog Command Header -->
@@ -100,15 +100,15 @@
                         <label class="form-label small font-monospace text-secondary fw-bold">PROCUREMENT STATUS</label>
                         <div class="d-flex flex-column gap-2 font-monospace small">
                             <div class="form-check">
-                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="inStock" checked>
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" name="in_stock" value="1" id="inStock" {% if request.GET.in_stock %}checked{% endif %}>
                                 <label class="form-check-label text-secondary" for="inStock">In Stock (Hub East/West)</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="itarCompliant" checked>
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" name="itar" value="1" id="itarCompliant" {% if request.GET.itar %}checked{% endif %}>
                                 <label class="form-check-label text-secondary" for="itarCompliant">ITAR Verified Export Ready</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input bg-dark border-glass" type="checkbox" value="1" id="agencyDiscount">
+                                <input class="form-check-input bg-dark border-glass" type="checkbox" name="agency" value="1" id="agencyDiscount" {% if request.GET.agency %}checked{% endif %}>
                                 <label class="form-check-label text-secondary" for="agencyDiscount">LE / MIL Agency Discount</label>
                             </div>
                         </div>

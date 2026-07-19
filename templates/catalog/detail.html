@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ product.name|default:"Defense Weapon System" }} | Armor Systems{% endblock %}
+{% block title %}{{ product.name|default:"Defense Weapon System" }} | Glocks And Armor{% endblock %}
 
 {% block content %}
 <div class="container py-5" x-data="{ 
@@ -517,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
   "sku": "{{ product.sku }}",
   "brand": {
     "@type": "Brand",
-    "name": "{{ product.brand.name|default:'Armor Systems Defense' }}"
+    "name": "{{ product.brand.name|default:'Glocks And Armor Defense' }}"
   },
   "offers": {
     "@type": "Offer",
@@ -528,7 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
     "availability": "https://schema.org/InStock",
     "seller": {
       "@type": "Organization",
-      "name": "Armor Systems"
+      "name": "Glocks And Armor"
     }
   }
 }
