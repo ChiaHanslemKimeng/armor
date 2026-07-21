@@ -3,11 +3,38 @@
 {% block title %}Trigger Times | Glocks And Armor{% endblock %}
 
 {% block content %}
+
+<style>
+/* Override the global !important light-mode rules for these dark cards */
+.news-card-dark {
+    background-color: #1e293b !important;
+    border-color: #334155 !important;
+    color: #cbd5e1 !important;
+}
+.news-card-dark h2, .news-card-dark h4 {
+    color: #ffffff !important;
+}
+.news-card-dark p.text-secondary {
+    color: #94a3b8 !important;
+}
+.news-card-dark .content-article p {
+    color: #cbd5e1 !important;
+}
+</style>
+
+
 <!-- Top Header / Breadcrumbs -->
-<div class="bg-white py-2 border-bottom">
+<div class="py-2 border-bottom">
     <div class="container text-center">
-        <small class="text-muted font-monospace">
-            Home &gt; <span class="fw-bold text-dark">The Trigger Times</span> &gt; How To &gt; <span class="fw-bold color-primary-red">Rifle Builds &amp; Installs</span>
+        <small class="text-secondary font-monospace">
+            Home &gt; <span class="fw-bold">The Trigger Times</span>
+            {% if request.GET.cat == 'schools' %} &gt; <span class="fw-bold text-danger">Gunsmithing Schools</span>
+            {% elif request.GET.cat == 'sports-month' %} &gt; <span class="fw-bold text-danger">Shooting Sports Month</span>
+            {% elif request.GET.cat == 'preparedness' %} &gt; <span class="fw-bold text-danger">Preparedness</span>
+            {% elif request.GET.cat == 'adventure' %} &gt; <span class="fw-bold text-danger">Adventure</span>
+            {% elif request.GET.cat == 'sunday-gunday' %} &gt; <span class="fw-bold text-danger">Sunday Gunday</span>
+            {% else %} &gt; <span class="fw-bold text-danger">News</span>
+            {% endif %}
         </small>
     </div>
 </div>
@@ -15,118 +42,564 @@
 <!-- Banner -->
 <div class="bg-black py-4 text-center border-bottom border-danger border-3">
     <h1 class="font-outfit fw-bold text-white mb-0" style="letter-spacing: 2px;">
-        Trigger<span class="text-danger">Times</span>
+        TRIGGER<span class="text-danger">TIMES</span>
+        <br><span style="font-size: 14px; letter-spacing: 4px;" class="text-danger">BLOG</span>
     </h1>
-    <span class="badge bg-danger mt-2 font-monospace">RIFLE BUILDS / INSTALLS</span>
+    {% if request.GET.cat == 'schools' %}
+    <div class="bg-white text-dark mt-4 py-2 w-100 fw-bold border-top border-bottom border-secondary">GUNSMITHING SCHOOLS <i class="bi bi-chevron-down float-end me-3"></i></div>
+    {% elif request.GET.cat == 'preparedness' %}
+    <div class="bg-white text-dark mt-4 py-2 w-100 fw-bold border-top border-bottom border-secondary">EMERGENCY PREPAREDNESS 101 <i class="bi bi-chevron-down float-end me-3"></i></div>
+    {% elif request.GET.cat == 'sports-month' %}
+    <div class="bg-white text-dark mt-4 py-2 w-100 fw-bold border-top border-bottom border-secondary">SHOOTING SPORTS MONTH <i class="bi bi-chevron-down float-end me-3"></i></div>
+
+    {% elif request.GET.cat == 'adventure' %}
+    <div class="bg-white text-dark mt-4 py-2 w-100 fw-bold border-top border-bottom border-secondary">AFRICAN PLAINS GAME SAFARI <i class="bi bi-chevron-down float-end me-3"></i></div>
+    {% elif request.GET.cat == 'sunday-gunday' %}
+    <div class="bg-white text-dark mt-4 py-2 w-100 fw-bold border-top border-bottom border-secondary">SUNDAY GUNDAY <i class="bi bi-chevron-down float-end me-3"></i></div>
+    {% endif %}
 </div>
 
-<section class="container py-4 my-3">
+<section class="container py-4 my-3 text-dark">
+
+    {% if request.GET.cat == 'schools' %}
+    <!-- SCHOOLS CONTENT -->
+    <div class="mb-2">
+        <img src="{% static 'img/0050-00-gunsmith_schools.avif' %}" class="img-fluid w-100 mb-0" alt="Gunsmithing School">
+        <div class="bg-warning text-dark text-center py-2 fw-bold font-monospace small">
+            Summer Cleanup Sale!<br>
+            Huge Savings On 2000+ Items From 200+ Brands - SHOP NOW
+        </div>
+    </div>
+    <div class="text-center mb-3">
+        <h1 class="font-outfit fw-bold text-dark" style="font-size: 3rem;">Gunsmithing Schools</h1>
+        <p class="text-secondary"><i class="bi bi-clock"></i> 9 months ago</p>
+    </div>
     
-    {% if featured_video %}
-    <!-- Featured Video -->
-    <div class="mb-5">
-        <div class="card border-0 shadow-sm rounded-0">
-            <div class="position-relative">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ featured_video.video_url }}" class="d-block text-decoration-none">
-                    <img src="{{ featured_video.thumbnail_url }}" class="img-fluid w-100 object-fit-cover" style="max-height: 500px;" alt="{{ featured_video.title }}">
-                    <!-- Play Overlay -->
-                    <div class="position-absolute top-50 start-50 translate-middle">
-                        <div class="bg-dark bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center border border-2 border-white text-white" style="width: 60px; height: 60px;">
-                            <i class="bi bi-play-fill fs-2 ms-1"></i>
-                        </div>
-                    </div>
-                </a>
+    <div class="content-article mx-auto text-dark" style="max-width: 900px; font-size: 1.1rem; line-height: 1.8;">
+        <p>At Glocks & Armor, we believe the heart of the firearms industry is craftsmanship, and that starts with education.</p>
+        <p>Whether you're taking your first step toward a professional career or expanding your skills as an experienced builder, gunsmithing schools provide the foundation for excellence. These programs combine hands-on instruction, technical expertise, and real-world application to help students master everything from firearm repair and finishing to custom builds and precision fitting.</p>
+        <p>As the trusted source for gunsmithing tools and supplies since 1939, Glocks & Armor is proud to support the next generation of gunsmiths and armorers through partnerships with leading schools and training programs across the country.</p>
+        <p>Sharpen your skills. Build your future. Learn from the best and join a tradition that keeps American craftsmanship alive.</p>
+        
+        {% comment %} <h4 class="fw-bold mt-4">Supporting Links:</h4> {% endcomment %}
+        {% comment %} <ul class="lh-lg">
+            <li><strong>How-To: The Complete Beginner's Guide to Becoming a Gunsmith:</strong> Do you like firearms? Do you enjoy repairing, upgrading, and customizing guns for yourself and others? If your answer to these questions is 'YES', a career in gunsmithing could be right for you!</li>
+            <li><strong>List Of Gunsmithing Schools:</strong> Find accredited programs across the U.S.</li>
+            <li><strong>Materials for Gunsmithing Schools:</strong> Tools, kits, and classroom supplies designed for precision learning.</li>
+            <li><strong>Ask An Expert:</strong> Connect with our in-house gunsmiths for advice on program selection, curriculum, and getting started.</li>
+        </ul> {% endcomment %}
+
+        <div class="text-center mt-5">
+            <hr class="mb-4">
+            <h5 class="fw-bold">Share this:</h5>
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <a href="#" class="text-dark text-decoration-none text-center"><div class="rounded-circle border d-flex align-items-center justify-content-center mx-auto mb-1" style="width: 40px; height: 40px;"><i class="bi bi-facebook"></i></div><small>Facebook</small></a>
+                <a href="#" class="text-dark text-decoration-none text-center"><div class="rounded-circle border d-flex align-items-center justify-content-center mx-auto mb-1" style="width: 40px; height: 40px;"><i class="bi bi-twitter"></i></div><small>Twitter</small></a>
+                <a href="#" class="text-dark text-decoration-none text-center"><div class="rounded-circle border d-flex align-items-center justify-content-center mx-auto mb-1" style="width: 40px; height: 40px;"><i class="bi bi-link-45deg"></i></div><small>Link</small></a>
             </div>
-            <div class="card-body px-0 py-3">
-                <h3 class="font-outfit fw-bold text-dark mb-1">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ featured_video.video_url }}" class="text-dark text-decoration-none hover-danger">{{ featured_video.title }}</a>
-                </h3>
-                <div class="d-flex align-items-center text-muted small font-monospace">
-                    <i class="bi bi-person-fill text-danger me-1"></i> Brownells
-                    <span class="mx-2">•</span>
-                    <i class="bi bi-calendar3 me-1"></i> {{ featured_video.date_published|date:"M d, Y" }}
+        </div>
+    </div>
+
+
+    {% elif request.GET.cat == 'preparedness' %}
+    <!-- PREPAREDNESS CONTENT -->
+    <div class="mb-2">
+        <img src="{% static "img/hero.avif" %}" class="img-fluid w-100 mb-0" alt="Preparedness">
+    </div>
+    <div class="text-center mb-3">
+        <h1 class="font-outfit fw-bold text-dark" style="font-size: 3rem;">Emergency Preparedness 101</h1>
+        <p class="text-secondary"><i class="bi bi-clock"></i> 10 months ago</p>
+    </div>
+    
+    <div class="content-article mx-auto text-dark" style="max-width: 900px; font-size: 1.1rem; line-height: 1.8;">
+        <h2 class="fw-bold mb-4">Emergency Preparedness 101: Get Ready Before Trouble Starts!</h2>
+        <p>Every family should consider having an Emergency Action Plan. Sometimes that means staying in and hunkering down. Other times it means evacuating the area. Regardless of the plan, you need to prepare well in advance of a major emergency like a hurricane or an earthquake. You can't just run out to the store and expect to get everything you need in the minutes before a storm hits.</p>
+        <p>A true disaster, whether man-made or natural, has the potential to shut down the power grid and disrupt the supply chain for days or even weeks. Preparing your home in advance will help you weather the storm and keep your family safe until order is restored.</p>
+        
+        <h4 class="fw-bold mt-5 mb-3">The Most Critical Resource - Water</h4>
+        <p>You can live without food for a while, but you can't survive without water for long. Most survival experts recommend having at least one gallon of water per person per day. It's best to have a combination of bottled water and larger storage containers.</p>
+        <img src="{% static "img/waterbricks.jpg" %}">
+        <p>You should also have a plan for purifying water if your tap water becomes contaminated or you have to rely on natural sources. Boiling is the most reliable method, but you should also have water purification tablets or a portable water filter on hand.</p>
+
+        <h4 class="fw-bold mt-5 mb-3">Food - The Other Essential</h4>
+        <p>While you can survive longer without food, it's still essential to have a supply of non-perishable food on hand. Canned goods, dry pasta, rice, and beans are all good options. Don't forget to include comfort foods, especially if you have children. It's important to rotate your food supply regularly so that it doesn't expire. Keep a running inventory of what you have and use the oldest items first.</p>
+
+        <h4 class="fw-bold mt-5 mb-3">Let There Be Light - Flashlights</h4>
+        <p>When the power goes out, you'll need a reliable source of light. Flashlights and headlamps are essential for navigating in the dark. Make sure you have plenty of extra batteries on hand. Candles can also be useful, but they pose a fire hazard, so use them with caution. Chemical light sticks are another good option for emergency lighting.</p>
+
+        <h4 class="fw-bold mt-5 mb-3">Also Vital For Staying Alive - Medical Kits</h4>
+        <p>A well-stocked first-aid kit is crucial for treating minor injuries and preventing infections when medical help is unavailable. Your kit should include bandages, gauze, antiseptic wipes, antibiotic ointment, pain relievers, and any prescription medications your family needs.</p>
+        <img src="{% static "img/med-kit.jpg" %}">
+        <p>It's also a good idea to take a first-aid and CPR class so you know how to use the items in your kit effectively.</p>
+
+        <h4 class="fw-bold mt-5 mb-3">As Vital As Staying Alive - Personal Protection Gear</h4>
+        <p>In a survival situation, you may need to protect yourself and your family. A firearm can provide security and peace of mind. Make sure you are properly trained in its use and store it safely. Other personal protection gear, such as pepper spray or a sturdy knife, can also be useful for self-defense and everyday tasks.</p>
+
+        <h4 class="fw-bold mt-5 mb-3">The Basic Kit - Have A Bail Out Bag</h4>
+        <p>A bail out bag, also known as a bug out bag, should contain all the essential items you need to survive for at least 72 hours. This includes water, food, shelter, fire-starting materials, a first-aid kit, and navigation tools.</p>
+        <img src="{% static "img/chest-rig.jpg" %}">
+        <p>Keep your bail out bag in a readily accessible location so you can grab it and go if you need to evacuate quickly.</p>
+
+        <h4 class="fw-bold mt-5 mb-3">Preparing Your Home - Survival Mindset</h4>
+        <p>Being prepared is as much about mindset as it is about having the right gear. Take the time to think through potential scenarios and plan accordingly. Discuss your emergency plan with your family and practice it regularly.</p>
+        <p>By taking these steps, you can give yourself and your loved ones the best chance of surviving and thriving in any emergency.</p>
+        
+        <div class="text-center mt-5">
+            <hr class="mb-4">
+            <h5 class="fw-bold">Share this:</h5>
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <a href="#" class="text-dark text-decoration-none text-center"><div class="rounded-circle border d-flex align-items-center justify-content-center mx-auto mb-1" style="width: 40px; height: 40px;"><i class="bi bi-facebook"></i></div><small>Facebook</small></a>
+                <a href="#" class="text-dark text-decoration-none text-center"><div class="rounded-circle border d-flex align-items-center justify-content-center mx-auto mb-1" style="width: 40px; height: 40px;"><i class="bi bi-twitter"></i></div><small>Twitter</small></a>
+                <a href="#" class="text-dark text-decoration-none text-center"><div class="rounded-circle border d-flex align-items-center justify-content-center mx-auto mb-1" style="width: 40px; height: 40px;"><i class="bi bi-link-45deg"></i></div><small>Link</small></a>
+            </div>
+        </div>
+    </div>
+
+
+    {% elif request.GET.cat == 'sports-month' or request.GET.cat == 'sunday-gunday' or request.GET.cat == 'news' or not request.GET.cat %}
+    <!-- FEED LAYOUT (SPORTS MONTH / SUNDAY GUNDAY / NEWS) -->
+    
+    {% if request.GET.cat == 'sports-month' %}
+    <div class="mb-2">
+        <img src="{% static "img/cnc_machining.avif" %}" class="img-fluid w-100 mb-0">
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2 class="font-outfit fw-bold text-dark">Shooting Sports Month</h2>
+            <p class="text-secondary small"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <i class="bi bi-clock ms-2"></i> 2 years ago</p>
+        </div>
+    </div>
+    <p class="text-secondary mb-5">Celebrate national shooting sports month this August with NSSF and Glocks & Armor.</p>
+    <div class="text-center mb-4">
+        <h2 class="font-outfit fw-bold text-dark" style="font-size: 2.5rem;">Trigger Feed</h2>
+    </div>
+    {% endif %}
+
+    {% if request.GET.cat == 'sunday-gunday' %}
+    <div class="text-center mb-3 mt-4">
+        <h1 class="font-outfit fw-bold text-dark" style="font-size: 3rem;">SUNDAY GUNDAY</h1>
+    </div>
+    {% endif %}
+
+    
+    {% if request.GET.cat == 'news' or not request.GET.cat %}
+    <div class="row g-5 pb-5">
+        <!-- Post 1 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/tactical_gear.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Industry Trends">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">INDUSTRY UPDATE</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">News Update: Industry Trends in 2024</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Editorial Team &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> January 15, 2024</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>The firearms industry is experiencing a massive paradigm shift in 2024, characterized by the rapid adoption of smart technologies and advanced material sciences. Manufacturers are moving away from traditional steel components, embracing ultra-lightweight titanium and carbon fiber composites. These changes are drastically reducing the weight of everyday carry (EDC) items without compromising structural integrity or reliability.</p>
+                        <p>Moreover, the integration of electronic optics and digital firing mechanisms continues to blur the lines between traditional marksmanship and modern technology. We are seeing unprecedented demand for modular firearm systems that allow the end-user to hot-swap calibers, handguards, and optical suites within minutes. This adaptability is particularly appealing to both competitive shooters and tactical professionals who require a single platform to serve multiple mission profiles.</p>
+                        <p>As the regulatory landscape continues to evolve, manufacturers are also investing heavily in compliance-friendly variants of their flagship models. The push for suppressor-ready platforms right out of the box is stronger than ever, reflecting a broader cultural shift towards responsible, hearing-safe shooting practices. This year promises to be a landmark period for innovation, and we're excited to see what the leading brands bring to the table.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/rifle_scope.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Product Announcements">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">GEAR PREVIEW</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">New Product Announcements for Fall</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Gear Editor &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> August 22, 2023</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>Fall is traditionally the season where the most highly anticipated products hit the shelves, and this year is certainly no exception. Leading brands have unveiled a stunning array of new tactical gear, optics, and firearms designed specifically for the modern enthusiast. From ultra-compact concealed carry pistols with enhanced capacity to precision bolt-action rifles featuring match-grade barrels, the lineup is incredibly diverse.</p>
+                        <p>One of the most notable trends this fall is the rise of micro-compact red dot sights. These optics have been completely re-engineered to sit lower on the slide, offering co-witness capabilities with standard height iron sights. The battery life on these new models has also seen a significant boost, with several brands now advertising over 50,000 hours of continuous use on a single CR1632 battery.</p>
+                        <p>In the apparel and load-bearing category, we're seeing the introduction of laser-cut plate carriers that shed unnecessary bulk while maintaining high tensile strength. By utilizing advanced laminate materials, these carriers offer superior breathability and comfort for extended wear. Stay tuned as we will be publishing in-depth, hands-on reviews of these products as soon as they hit our testing range.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 3 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/shooting_range.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Optics">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">TECHNOLOGY</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">The Future of Optics in Firearms</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Tech Reviewer &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> June 05, 2023</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>The days of relying solely on traditional iron sights for tactical and defensive applications are rapidly coming to a close. The optical revolution has fundamentally changed how shooters acquire targets, track movement, and engage at distance. Low Power Variable Optics (LPVOs) have dominated the carbine market over the last five years, but we are now seeing the emergence of prism scopes and holographic hybrids that push the boundaries even further.</p>
+                        <p>Modern reticle designs are becoming increasingly sophisticated. Bullet Drop Compensator (BDC) reticles are now specifically tailored to specific barrel lengths and ammunition loads, allowing for rapid, math-free holdovers at extended ranges. Furthermore, the integration of smart technology is bringing ballistic calculators directly into the optical housing. Imagine looking through your scope and seeing a dynamically updated holdover dot based on real-time environmental data—this is no longer science fiction, it's reality.</p>
+                        <p>Durability has also reached unprecedented levels. Manufacturers are subjecting their optics to rigorous drop tests, extreme temperature fluctuations, and submersion tests to ensure they can survive the harshest environments on Earth. As the cost of manufacturing these advanced optics continues to decrease, we expect to see them become the standard, baseline equipment for shooters of all disciplines.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 4 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/gunsmithing_workbench.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Range Etiquette">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">TRAINING</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">Safety First: Range Etiquette</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Range Master &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> March 12, 2023</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>Whether you're visiting a high-tech indoor facility or a sprawling outdoor shooting club, range etiquette is the invisible glue that keeps the environment safe, welcoming, and productive for everyone. Understanding the rules goes far beyond just keeping your finger off the trigger; it encompasses how you handle your gear, communicate with others, and respect the commands of the Range Safety Officer (RSO).</p>
+                        <p>One of the most critical aspects of range etiquette is understanding the concepts of a "cold" and "hot" range. When a range is declared cold, all firearms must be unloaded, actions opened, and placed on the bench facing downrange. Under no circumstances should a shooter handle a firearm, load a magazine, or adjust an optic while the range is cold and people are downrange setting targets. Failing to adhere to this simple rule is the quickest way to be ejected from any reputable facility.</p>
+                        <p>Additionally, being mindful of your brass and your target placement is key. Ensure your targets are hung at the appropriate height to ensure rounds impact the backstop directly. Clean up your brass when you're finished, and always be willing to lend a hand or offer polite guidance to new shooters if they seem lost. A positive, safety-oriented attitude ensures that the range remains a fantastic place for the community to gather and train.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 5 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/hunter_dawn.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Accessories">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">GEAR GUIDE</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">Top 10 Accessories for Your Rifle</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Staff Writer &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> November 02, 2022</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>Outfitting a new rifle can be a daunting task, especially with the overwhelming number of aftermarket parts and accessories available today. However, focusing on the fundamentals will ensure that your rifle is reliable, ergonomic, and effective for its intended purpose. The very first accessory any rifle needs is a high-quality, adjustable two-point sling. A sling is to a rifle what a holster is to a pistol; it provides retention and allows you to transition to a secondary weapon or use your hands for other tasks.</p>
+                        <p>Following the sling, a reliable weapon-mounted light is non-negotiable for a defensive setup. Identifying your target in low-light conditions is a critical requirement. We recommend lights with a minimum output of 500 lumens, paired with a solid pressure switch or tailcap that allows for momentary and constant-on activation without breaking your grip on the handguard.</p>
+                        <p>Other essential accessories include an optic suited for your engagement distances, upgraded furniture (such as a comfortable pistol grip and a sturdy buttstock), and a set of backup iron sights (BUIS). While the temptation to bolt every available gadget onto your rails is strong, remember that ounces equal pounds. Keep your setup streamlined, focus on quality over quantity, and invest the rest of your budget into ammunition and professional training.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Post 6 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/tactical_gear.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Gunsmithing Tips">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">MAINTENANCE</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">Gunsmithing Tips: Cleaning Your Firearm</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Master Gunsmith &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> September 18, 2022</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>Proper firearm maintenance is the bedrock of reliability and longevity. While modern firearms are incredibly resilient and can endure thousands of rounds between deep cleanings, neglecting basic maintenance will eventually lead to malfunctions and degraded accuracy. The goal of cleaning isn't necessarily to make the gun look brand new, but to remove carbon buildup, copper fouling, and debris from critical operating surfaces.</p>
+                        <p>When cleaning a barrel, always push your patches and bore brushes in the direction of bullet travel—from the chamber to the muzzle. Pulling a brush backward through the muzzle crown can cause micro-abrasions that will negatively impact the rifle's precision over time. Use a high-quality solvent designed to break down carbon, and follow it up with a lightly oiled patch to protect the bore against corrosion.</p>
+                        <p>Lubrication is just as important as cleaning. A firearm that is run completely dry will suffer from accelerated wear on the bolt carrier group, slide rails, and trigger components. Apply a light coat of synthetic gun oil to the contact points specified in your owner's manual. Remember the golden rule: if it slides, grease it; if it rotates, oil it. Regular, mindful maintenance guarantees your firearm will be ready when you need it most.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 7 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/rifle_scope.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Ammunition">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">BALLISTICS</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">Choosing the Right Ammunition</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Ammo Expert &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> July 04, 2022</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>Ammunition selection is a critical variable that directly affects the performance, terminal ballistics, and reliability of your firearm. The market is saturated with options ranging from cheap steel-cased plinking rounds to highly engineered, match-grade hollow points. Understanding the differences between these loads is essential for any responsible shooter, whether you're hunting, competing, or carrying for self-defense.</p>
+                        <p>For training and target practice, Full Metal Jacket (FMJ) ammunition is the standard choice. It's cost-effective and feeds reliably in almost all firearms. However, FMJ rounds are notorious for over-penetration and should never be used for self-defense. For defensive applications, Jacketed Hollow Points (JHP) are required. JHP rounds are designed to expand upon impact, transferring their kinetic energy into the target and mitigating the risk of passing through and hitting an unintended backdrop.</p>
+                        <p>When selecting defensive ammo, it is imperative that you test it thoroughly in your specific firearm. Just because a hollow point performs exceptionally well in gelatin tests does not guarantee it will feed reliably up your pistol's feed ramp. Purchase a few boxes of your chosen defensive load and run them through your gun at the range. Once you verify 100% reliability, you can confidently carry that ammunition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 8 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/shooting_range.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Competitive Shooting">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">COMPETITION</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">Getting Started in Competitive Shooting</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Match Director &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> April 11, 2022</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>Competitive shooting is one of the most effective and exhilarating ways to stress-test your marksmanship skills under the pressure of a ticking clock. Whether you are interested in the dynamic movement of USPSA, the scenario-based challenges of IDPA, or the extreme long-range precision of PRS, there is a discipline tailored to every interest. Getting started can seem intimidating, but the community is famously welcoming to newcomers.</p>
+                        <p>Your first step should be to attend a local match as a spectator. Introduce yourself to the Match Director, observe the safety protocols, and watch how the stages are navigated. You don't need a custom $5,000 race gun to start; a reliable stock pistol, a secure Outside the Waistband (OWB) holster, a few magazine pouches, and standard ammunition are more than enough to compete in the production or stock divisions.</p>
+                        <p>When you shoot your first match, your sole objective should be to finish without a safety disqualification (DQ). Forget about your time, forget about winning, and focus entirely on safe gun handling and muzzle awareness. Moving with a loaded firearm introduces complex variables that static range shooting cannot prepare you for. Take it slow, learn the ropes, and you'll quickly find yourself addicted to the sport.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 9 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/gunsmithing_workbench.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="Ballistics">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">EDUCATION</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">Understanding Ballistics for Beginners</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> Science Desk &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> February 28, 2022</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>Ballistics is the science of projectiles and their flight dynamics, and having a fundamental grasp of this subject is essential for extending your effective range and accuracy. Ballistics is generally divided into three phases: internal (what happens inside the barrel), external (the bullet's flight through the air), and terminal (what happens when the bullet strikes the target). For most shooters, external ballistics is the most critical area of study.</p>
+                        <p>Once a bullet leaves the muzzle, it is immediately subjected to gravity and air resistance. Gravity causes the bullet to drop in a parabolic arc, while air resistance causes it to shed velocity. A bullet's Ballistic Coefficient (BC) is a mathematical representation of its aerodynamic efficiency. Bullets with a high BC retain velocity better, resist wind drift more effectively, and fly flatter over long distances compared to low-BC projectiles.</p>
+                        <p>Environmental factors such as altitude, temperature, and humidity also play a significant role. Cold, dense air at sea level creates more drag on a bullet than warm, thin air at high altitudes. Understanding these variables allows shooters to input accurate data into ballistic solvers, generating precise elevation and windage holdovers. Mastering ballistics turns long-range shooting from a game of guesswork into a calculated science.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 10 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white text-dark news-card-dark">
+                <img src="{% static "images/news/hunter_dawn.png" %}" class="card-img-top object-fit-cover" style="height: 450px;" alt="AR-15 Build">
+                <div class="card-body p-5">
+                    <span class="badge bg-danger mb-3 font-monospace px-3 py-2">BUILD GUIDE</span>
+                    <h2 class="font-outfit fw-bold text-white mb-3">Building Your First AR-15: A Comprehensive Guide</h2>
+                    <p class="text-secondary small mb-4"><i class="bi bi-person-fill text-danger"></i> DIY Gunsmith &nbsp;&nbsp;|&nbsp;&nbsp; <i class="bi bi-clock text-danger"></i> December 10, 2021</p>
+                    <div class="content-article" style="font-size: 1.15rem; line-height: 1.8; color: #cbd5e1;">
+                        <p>The AR-15 is often affectionately referred to as "Lego for adults," and for good reason. Its modular design allows anyone with a few basic hand tools to assemble a customized, highly capable rifle from scratch. Building your own AR-15 not only saves you money but also provides you with an intimate understanding of the weapon's mechanics, empowering you to diagnose and repair any issues that may arise in the future.</p>
+                        <p>The process begins with acquiring a stripped lower receiver, which is the only part legally considered a firearm. From there, you will install a lower parts kit (LPK), the trigger group, buffer tube assembly, and stock. The upper receiver is often purchased fully assembled for beginners, as properly torquing a barrel and aligning a gas block requires specialized vise blocks and torque wrenches. However, assembling an upper from scratch is entirely achievable with patience and the right tools.</p>
+                        <p>When selecting components, pay close attention to the barrel twist rate, as this will dictate the optimal bullet weights your rifle will stabilize. A 1:7 or 1:8 twist rate is highly versatile and handles standard 55-grain and heavier 77-grain projectiles exceptionally well. Take your time, watch instructional videos from trusted armorers, and never force a part into place. The satisfaction of firing a rifle you built with your own hands is truly unparalleled.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    
+    <!-- Fallback layout for other categories -->
+    <div class="row g-4 pb-5">
+        <!-- Post 1 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/clays-feature-image.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sports-month' %}Shooting Sports Month Trap, Skeet &amp; Sporting Clays
+                        {% elif request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Benelli Lupo
+                        {% else %}News Update: Industry Trends in 2024{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/steel-nssm-feature-image.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sports-month' %}Shooting Sports Month Steel Challenge / Rimfire
+                        {% elif request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Ruger American Rifle
+                        {% else %}New Product Announcements for Fall{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 3 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <div class="bg-warning text-white text-center py-1 fw-bold font-monospace small">Summer Cleanup Sale! Huge Savings - SHOP NOW</div>
+                <img src="{% static "img/tactical-games-feature-image.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sports-month' %}Shooting Sports Month Tactical Games
+                        {% elif request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Winchester Model 70
+                        {% else %}The Future of Optics in Firearms{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 4 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/prs-feature-image.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sports-month' %}Shooting Sports Month Precision Rifle Series
+                        {% elif request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Browning X-Bolt
+                        {% else %}Safety First: Range Etiquette{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Post 5 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/cnc_machining.avif" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sports-month' %}Shooting Sports Month
+                        {% elif request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Savage 110
+                        {% else %}Top 10 Accessories for Your Rifle{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+        
+        {% if request.GET.cat == 'sunday-gunday' or request.GET.cat == 'news' or not request.GET.cat %}
+        <!-- Generate 5 more posts for sunday-gunday and news to make 10 -->
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/custom-f-class-rifle.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Remington 700
+                        {% else %}Gunsmithing Tips: Cleaning Your Firearm{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/colt-police-positive-revolver.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Weatherby Mark V
+                        {% else %}Understanding Ballistics and Ammunition{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/custom-sig-p320.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Tikka T3x
+                        {% else %}Choosing the Right Holster{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/cz-455-and-colt-frontier.jpg" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sunday-gunday' %}Sunday Gunday: CZ 457
+                        {% else %}Beginner's Guide to Reloading{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-0 bg-white text-dark">
+                <img src="{% static "img/custom-bolt-rifle.webp" %}" class="card-img-top rounded-0 object-fit-cover" style="height: 400px;">
+                <div class="card-body">
+                    <h4 class="font-outfit fw-bold text-dark mb-2">
+                        {% if request.GET.cat == 'sunday-gunday' %}Sunday Gunday: Howa 1500
+                        {% else %}The History of the AR-15{% endif %}
+                    </h4>
+                    <p class="text-secondary small mb-0"><i class="bi bi-person-fill text-danger"></i> Glocks & Armor &nbsp; <span class="float-end"><i class="bi bi-clock"></i> 2 years ago</span></p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+
+    {% endif %}
+
+    {% elif request.GET.cat == 'adventure' %}
+    <!-- ADVENTURE CONTENT (TIMELINE) -->
+    <div class="text-center mb-3 mt-4">
+        <h1 class="font-outfit fw-bold text-dark text-uppercase" style="font-size: 3rem;">AFRICAN PLAINS GAME SAFARI</h1>
+        <p class="text-secondary"><i class="bi bi-person-fill text-danger"></i> Roy Huntington &nbsp;&nbsp;&nbsp; <i class="bi bi-clock"></i> March 6, 2024</p>
+    </div>
+    
+    <div class="content-article mx-auto text-dark" style="max-width: 1000px; font-size: 1.1rem; line-height: 1.8;">
+        <p>Africa. The word alone conjures up images of vast savannas, towering mountains, and exotic wildlife. For many hunters, an African safari is the ultimate dream trip. I was fortunate enough to realize that dream recently on a plains game safari in South Africa.</p>
+        <p>The journey was long, but the experience was unforgettable. From the thrill of the stalk to the camaraderie of the campfire, every moment was etched into my memory. Here is a day-by-day account of my African adventure.</p>
+        
+        <div class="timeline-section mt-5">
+            <h3 class="fw-bold border-bottom pb-2 mb-4">January 11, 2024</h3>
+            <div class="row">
+                <div class="col-md-7">
+                    <h5 class="fw-bold">Arriving in Johannesburg</h5>
+                    <p>After a grueling 15-hour flight from Atlanta, we finally touched down in Johannesburg. The anticipation was palpable as we cleared customs and met our outfitter. We loaded our gear into the truck and began the scenic drive to our hunting concession in the Limpopo province.</p>
+                    <p>The landscape changed dramatically as we left the city behind. Rolling hills gave way to dense bushveld, and we spotted our first wildlife - a herd of impala grazing near the road.</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static "img/jeremiah-r-deer.jpg" %}" class="img-fluid rounded mb-3">
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section mt-5">
+            <h3 class="fw-bold border-bottom pb-2 mb-4 bg-warning px-2">January 7, 2024 (Preparation)</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="fw-bold">Packing and Preparation</h5>
+                    <p>The weeks leading up to the trip were a blur of packing and preparation. I spent hours at the range fine-tuning my rifle and practicing from various shooting positions. Selecting the right gear was crucial - from comfortable boots to lightweight clothing suitable for the African sun.</p>
+                    <p>I also spent time studying the different plains game species we would be hunting, learning about their habits and anatomy to ensure clean, ethical shots.</p>
+                    <img src="{% static "img/richard-g.jpg" %}" class="img-fluid rounded mt-3">
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section mt-5">
+            <h3 class="fw-bold border-bottom pb-2 mb-4">December 29, 2023</h3>
+            <div class="row">
+                <div class="col-md-7">
+                    <h5 class="fw-bold">The First Stalk</h5>
+                    <p>Our first day in the bush started early. We were up before dawn, sipping coffee and watching the sunrise over the savanna. Our professional hunter (PH) spotted a nice blesbok in the distance, and the stalk was on.</p>
+                    <p>We crept through the tall grass, using the sparse cover to close the distance. My heart pounded as we finally got within range. The shot was true, and I had my first African trophy.</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static "img/don-dall-sheep-hunt.jpg" %}" class="img-fluid rounded mb-3">
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section mt-5">
+            <h3 class="fw-bold border-bottom pb-2 mb-4">December 19, 2023</h3>
+            <div class="row">
+                <div class="col-md-7">
+                    <h5 class="fw-bold">The Elusive Kudu</h5>
+                    <p>The greater kudu is often referred to as the "Grey Ghost" of the African bush. They are notoriously elusive, disappearing into the thick brush at the slightest hint of danger.</p>
+                    <p>We spent hours tracking a massive bull, following his tracks through the dense thorns. Just as we were about to give up, he stepped out into a small clearing. It was a moment of pure magic, a testament to the beauty and wildness of Africa.</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static "img/right-of-passage.jpg" %}" class="img-fluid rounded mb-3">
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-section mt-5">
+            <h3 class="fw-bold border-bottom pb-2 mb-4">December 12, 2023</h3>
+            <div class="row">
+                <div class="col-md-7">
+                    <h5 class="fw-bold">A Successful Safari</h5>
+                    <p>As the safari came to an end, I reflected on the incredible experiences of the past few weeks. I had taken some magnificent trophies, but more importantly, I had forged lifelong friendships and gained a deep appreciation for the African wilderness.</p>
+                    <p>The memories of this trip will stay with me forever. I know that I will return to Africa one day, drawn back by the irresistible call of the wild.</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{% static "img/robert-bucket-list.jpg" %}" class="img-fluid rounded mb-3">
                 </div>
             </div>
         </div>
     </div>
     {% endif %}
 
-    <!-- Trigger Feed Header -->
-    <div class="d-flex align-items-center mb-4">
-        <h2 class="font-outfit fw-bold mb-0 text-uppercase" style="color: #933311;">Trigger Feed</h2>
-        <hr class="flex-grow-1 ms-3 border-2" style="border-color: #933311; opacity: 1;">
-    </div>
 
-    <!-- Feed Videos -->
-    <div class="row g-4">
-        {% for video in feed_videos %}
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm rounded-0">
-                <div class="position-relative">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ video.video_url }}" class="d-block text-decoration-none">
-                        <img src="{{ video.thumbnail_url }}" class="card-img-top rounded-0 object-fit-cover" style="height: 200px;" alt="{{ video.title }}">
-                        <!-- Play Overlay -->
-                        <div class="position-absolute top-50 start-50 translate-middle">
-                            <div class="bg-dark bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center border border-2 border-white text-white" style="width: 40px; height: 40px;">
-                                <i class="bi bi-play-fill fs-4 ms-1"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="card-body px-0 py-3 d-flex flex-column justify-content-between">
-                    <h5 class="font-outfit fw-bold text-dark mb-2 lh-sm">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#videoModal" data-video-url="{{ video.video_url }}" class="text-dark text-decoration-none hover-danger">{{ video.title }}</a>
-                    </h5>
-                    <div class="d-flex align-items-center text-muted small font-monospace mt-2">
-                        <i class="bi bi-person-fill text-danger me-1"></i> Brownells
-                        <span class="mx-2">•</span>
-                        <i class="bi bi-calendar3 me-1"></i> {{ video.date_published|date:"M d, Y" }}
-                    </div>
+    </section>
+
+<!-- Newsletter Subscribe -->
+<div class="container mb-5">
+    <div class="bg-primary text-white p-4 text-center" style="background-color: #D35400 !important;">
+        <h5 class="fw-bold mb-1"><i class="bi bi-envelope-paper"></i> NEW SUBS SAVE 10% ON FIRST ORDER + $100!</h5>
+        <p class="small mb-3">Plus receive emails on future promotions, content and more.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="email" class="form-control rounded-0" placeholder="Please enter your email">
+                    <button class="btn btn-warning rounded-0 fw-bold" type="button">Subscribe</button>
                 </div>
             </div>
         </div>
-        {% empty %}
-        <div class="col-12 text-center py-5">
-            <p class="text-muted font-monospace">No videos found for this category.</p>
-        </div>
-        {% endfor %}
     </div>
-
-</section>
-
-<!-- Video Modal -->
-<div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content bg-dark border-danger border-2">
-      <div class="modal-header border-0 pb-0">
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body pt-0 pb-4 px-4">
-        <div class="ratio ratio-16x9">
-          <iframe id="videoIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var videoModal = document.getElementById('videoModal');
-        var videoIframe = document.getElementById('videoIframe');
-        
-        videoModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var videoUrl = button.getAttribute('data-video-url');
-            if(videoUrl) {
-                var sep = videoUrl.indexOf('?') !== -1 ? '&' : '?';
-                videoIframe.src = videoUrl + sep + "autoplay=1";
-            }
-        });
-        
-        videoModal.addEventListener('hide.bs.modal', function () {
-            videoIframe.src = ""; // Stop video when modal closes
-        });
-    });
-</script>
 {% endblock %}

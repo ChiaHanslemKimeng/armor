@@ -114,3 +114,17 @@ class SavedPaymentMethod(UUIDModel, TimeStampedModel):
 
     def __str__(self):
         return f"{self.card_brand} **** {self.last_four} (exp {self.exp_month}/{self.exp_year})"
+
+
+class PushSubscription(TimeStampedModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='push_subscriptions')
+    endpoint = models.URLField(max_length=500, unique=True)
+    p256dh = models.CharField(max_length=200)
+    auth = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = 'Push Subscription'
+        verbose_name_plural = 'Push Subscriptions'
+
+    def __str__(self):
+        return f"Push Subscription for {self.user.email}"

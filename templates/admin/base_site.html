@@ -5,3 +5,102 @@
 {% block branding %}
 <h1 id="site-name"><a href="{% url 'admin:index' %}">Glocks And Armor Administration</a></h1>
 {% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    .ios-pwa-warning {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        display: none;
+    }
+    .push-subscribe-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        display: none;
+    }
+</style>
+<script>
+    function urlB64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/\-/g, '+')
+            .replace(/_/g, '/');
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.getElementById('site-name');
+        if (!header) return;
+        
+        const container = document.createElement('div');
+        header.parentNode.insertBefore(container, header.nextSibling);
+        
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+        if (isIOS && !isStandalone) {
+            const warningBtn = document.createElement('div');
+            warningBtn.className = 'ios-pwa-warning';
+            warningBtn.style.display = 'block';
+            warningBtn.innerHTML = '⚠️ Setup iOS Push Alerts<br><small>Tap Share -> Add to Home Screen to enable</small>';
+            warningBtn.onclick = () => alert("To receive push notifications on iOS, you must add this site to your Home Screen. Tap the 'Share' icon in Safari, then select 'Add to Home Screen'.");
+            container.appendChild(warningBtn);
+        } else if ('Notification' in window) {
+            const subBtn = document.createElement('div');
+            subBtn.className = 'push-subscribe-btn';
+            subBtn.style.display = 'block';
+            subBtn.innerHTML = '🔔 Subscribe to Push Alerts';
+            subBtn.onclick = async () => {
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    try {
+                        const vapidResponse = await fetch('/users/vapid_public_key/');
+                        const vapidData = await vapidResponse.json();
+                        const applicationServerKey = urlB64ToUint8Array(vapidData.public_key);
+                        
+                        const registration = await navigator.serviceWorker.register('/static/sw.js');
+                        const subscription = await registration.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: applicationServerKey
+                        });
+                        
+                        const saveResponse = await fetch('/users/save_push_subscription/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ subscription: subscription })
+                        });
+                        if(saveResponse.ok) {
+                            subBtn.innerHTML = '✅ Push Alerts Active';
+                            subBtn.style.backgroundColor = '#28a745';
+                        }
+                    } catch (err) {
+                        console.error('Failed to subscribe:', err);
+                        alert('Subscription failed. Please check console for details.');
+                    }
+                }
+            };
+            container.appendChild(subBtn);
+        }
+    });
+</script>
+{% endblock %}

@@ -181,6 +181,45 @@
                                     <span class="text-muted font-monospace" style="font-size:0.65rem;">Direct ACH / Wire Transfer</span>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'zelle' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'zelle'">
+                                    <i class="bi bi-send fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">Zelle</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">Direct Zelle Pay</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'applepay' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'applepay'">
+                                    <i class="bi bi-apple fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">Apple Pay</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">Pay via Apple Device</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded-3 border cursor-pointer text-center h-100 d-flex flex-column justify-content-center align-items-center shadow-sm" 
+                                     :class="paymentMethod === 'other' ? 'border-primary bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary bg-white'" 
+                                     @click="paymentMethod = 'other'">
+                                    <i class="bi bi-three-dots fs-3 d-block mb-1"></i>
+                                    <strong class="d-block small font-outfit text-dark">Other</strong>
+                                    <span class="text-muted font-monospace" style="font-size:0.65rem;">Custom Method</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div x-show="paymentMethod === 'other'" class="p-4 rounded-4 bg-light border border-secondary border-opacity-25 shadow-sm mb-3">
+                            <h6 class="fw-bold text-dark font-outfit mb-3 d-flex align-items-center gap-2">
+                                <i class="bi bi-question-circle-fill text-primary"></i> Other Payment Method
+                            </h6>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label small text-secondary font-monospace fw-bold">PREFERRED PAYMENT METHOD</label>
+                                    <input type="text" name="other_payment_method" class="form-control bg-white border text-dark font-monospace" placeholder="e.g. Venmo, Google Pay, etc.">
+                                </div>
+                            </div>
                         </div>
 
                         <div x-show="paymentMethod === 'card'" class="p-4 rounded-4 bg-light border border-secondary border-opacity-25 shadow-sm mb-3">

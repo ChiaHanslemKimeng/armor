@@ -1,4 +1,4 @@
-{% load static %}
+﻿{% load static %}
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
@@ -804,11 +804,6 @@
                                         <a class="dropdown-item small py-1 fw-bold text-info" href="/trigger-times/">Watch All Videos &gt;</a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="accordion-item bg-transparent border-0">
-                                <a href="/trigger-times/?cat=news" class="nav-subcategory-btn text-decoration-none d-block mt-2">
-                                    <span><i class="bi bi-caret-right-fill me-1 text-info"></i> News</span>
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -2077,9 +2072,19 @@
                                     </div>
                                 </div>
                                 <div class="accordion-item bg-transparent border-0">
-                                    <a href="/trigger-times/?cat=news" class="nav-subcategory-btn text-decoration-none text-white d-block py-2">
+                                    <button class="nav-subcategory-btn collapsed py-2 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#offTrigNews">
                                         <span><i class="bi bi-caret-right-fill me-1 text-info"></i> News</span>
-                                    </a>
+                                        <i class="bi bi-chevron-down small"></i>
+                                    </button>
+                                    <div id="offTrigNews" class="collapse" data-bs-parent="#offAccTrigger">
+                                        <div class="py-1 px-3 bg-dark rounded-3 mb-2 d-flex flex-column gap-1">
+                                            <a href="/trigger-times/?cat=2a-action" class="text-white text-decoration-none small py-1">2A Action Center</a>
+                                            <a href="/trigger-times/?cat=press" class="text-white text-decoration-none small py-1">Press Releases</a>
+                                            <a href="/trigger-times/?cat=new-website" class="text-white text-decoration-none small py-1">Great News: A New Brownells Website!</a>
+                                            <a href="/trigger-times/?cat=monthly-picks" class="text-white text-decoration-none small py-1">Monthly Picks</a>
+                                            <a href="/trigger-times/?cat=video-requests" class="text-white text-decoration-none small py-1">What Videos Would You Like To See Us Do?</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2261,7 +2266,7 @@
                             <h5 class="font-outfit fw-black mb-0 text-white tracking-wide" style="font-weight: 900;">ACCESS RESTRICTED BY FEDERAL LAW</h5>
                         </div>
                         <p class="small font-inter mb-3" style="color: #fca5a5; line-height: 1.6;">
-                            You must be of legal age (18+ for long guns, 21+ for handguns and NFA items) to view or purchase regulated defense equipment under 18 U.S.C. § 922. For your safety and compliance, your session cannot proceed into the armory.
+                            You must be of legal age (18+ for long guns, 21+ for handguns and NFA items) to view or purchase regulated defense equipment under 18 U.S.C. ┬º 922. For your safety and compliance, your session cannot proceed into the armory.
                         </p>
                         <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-2">
                             <span class="badge bg-danger font-monospace px-3 py-2 fs-6" id="underAgeCountdownBadge">Redirecting to safe exit in 4s...</span>
@@ -2273,7 +2278,7 @@
                 </div>
 
                 <div class="p-3 text-center border-top font-monospace" style="border-color: #334155 !important; background: #070a10; color: #64748b; font-size: 0.75rem;">
-                    Falsifying age verification to purchase regulated firearms or ammunition is a violation of federal law under 18 U.S.C. § 922.
+                    Falsifying age verification to purchase regulated firearms or ammunition is a violation of federal law under 18 U.S.C. ┬º 922.
                 </div>
             </div>
         </div>
@@ -2537,14 +2542,14 @@
             apiKey: 'f7eced53612342a3b751bc83ea9cf87a',
             currencies: [
                 { code: 'USD', symbol: '$', name: 'US Dollar' },
-                { code: 'EUR', symbol: '€', name: 'Euro' },
-                { code: 'GBP', symbol: '£', name: 'British Pound' },
+                { code: 'EUR', symbol: 'Ôé¼', name: 'Euro' },
+                { code: 'GBP', symbol: '┬ú', name: 'British Pound' },
                 { code: 'CAD', symbol: 'C$', name: 'Canadian Dollar' },
                 { code: 'AUD', symbol: 'A$', name: 'Australian Dollar' },
                 { code: 'CHF', symbol: 'CHF', name: 'Swiss Franc' },
-                { code: 'JPY', symbol: '¥', name: 'Japanese Yen' },
+                { code: 'JPY', symbol: '┬Ñ', name: 'Japanese Yen' },
                 { code: 'MXN', symbol: 'Mex$', name: 'Mexican Peso' },
-                { code: 'BTC', symbol: '₿', name: 'Bitcoin' },
+                { code: 'BTC', symbol: 'Ôé┐', name: 'Bitcoin' },
                 { code: 'ZAR', symbol: 'R', name: 'South African Rand' }
             ],
             rates: {},

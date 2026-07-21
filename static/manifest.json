@@ -1,0 +1,21 @@
+{
+  "name": "Glocks And Armor",
+  "short_name": "Armor",
+  "description": "America's premier personal firearms and tactical armory.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#ffb800",
+  "icons": [
+    {
+      "src": "/static/images/glocks_and_armor_logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/images/glocks_and_armor_logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

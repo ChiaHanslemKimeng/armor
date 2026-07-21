@@ -25,3 +25,8 @@ requests>=2.31.0
 python-dotenv>=1.0.1
 pytest>=8.0.0
 pytest-django>=4.8.0
+django-jazzmin>=3.0.0
+pywebpush>=1.14.0
+ecdsa>=0.18.0
+pywebpush
+ecdsa

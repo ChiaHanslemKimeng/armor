@@ -3,6 +3,22 @@
 {% block title %}Glocks And Armor | Premier Personal Firearms, Gun Parts & Reloading Armory{% endblock %}
 
 {% block content %}
+
+<style>
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
+
 <!-- 1. HERO SWIPER BANNER SECTION (Swiper Images with Text) -->
 <section class="mb-4">
     <div class="swiper hero-swiper shadow-lg">
@@ -115,27 +131,27 @@
 <section class="container py-4 mb-5">
     <div class="p-5 rounded-4 shadow-lg border" style="background: #0f172a; border-color: #334155 !important; color: #ffffff;">
         <div class="row g-5 align-items-center">
-            <div class="col-lg-6 text-center text-lg-start">
-                <span class="badge-hud mb-3" style="background: #2563eb; color: #ffffff; border: 1px solid #1d4ed8;"><i class="bi bi-shield-fill-check me-1"></i> ABOUT GLOCKS AND ARMOR</span>
+            <div class="col-lg-6 text-center">
+                <span class="badge-hud mx-auto mb-3 d-inline-block" style="background: #2563eb; color: #ffffff; border: 1px solid #1d4ed8;"><i class="bi bi-shield-fill-check me-1"></i> ABOUT GLOCKS AND ARMOR</span>
                 <h2 class="display-6 fw-black text-white font-outfit mb-3" style="font-weight: 900;">Defending Freedom With Precision Engineering</h2>
-                <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.7;">
+                <p class="font-monospace mb-4 mx-auto" style="color: #cbd5e1 !important; line-height: 1.7; max-width: 600px;">
                     Founded by military armorers and competitive precision shooters, Glocks And Armor was built on a singular philosophy: never compromise on weapon reliability. We curate and inspect every firearm, match suppressor, and ceramic armor system before it enters our climate-controlled Quantico vault.
                 </p>
-                <div class="row g-3 pt-2 mb-4 justify-content-center justify-content-lg-start">
-                    <div class="col-6">
+                <div class="row g-3 pt-2 mb-4 justify-content-center">
+                    <div class="col-6 col-md-5">
                         <div class="p-3 rounded-3 border" style="background: #1e293b; border-color: #475569 !important;">
                             <h4 class="fw-bold font-monospace mb-1" style="color: #f59e0b;">50,000+</h4>
                             <small class="text-light font-outfit d-block">Verified Armorers &amp; Shooters Served</small>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 col-md-5">
                         <div class="p-3 rounded-3 border" style="background: #1e293b; border-color: #475569 !important;">
                             <h4 class="fw-bold font-monospace mb-1" style="color: #3b82f6;">100% MIL-SPEC</h4>
                             <small class="text-light font-outfit d-block">Rigorous QC &amp; Headspace Inspection</small>
                         </div>
                     </div>
                 </div>
-                <a href="/about/" class="btn rounded-pill px-4 py-3 font-monospace fw-bold shadow-sm transition-all" style="background: #2563eb; border: 1px solid #1d4ed8; color: #ffffff !important;">READ OUR FULL STORY &gt;</a>
+                <a href="/about/" class="btn rounded-pill px-4 py-3 font-monospace fw-bold shadow-sm transition-all" style="background: #2563eb; border: 1px solid #1d4ed8; color: #ffffff !important;">FULL STORY &gt;</a>
             </div>
             <div class="col-lg-6">
                 <!-- Editable About Us Image -->
@@ -153,30 +169,24 @@
 
 <!-- 2. STACKED HORIZONTAL PROMO BANNERS -->
 <section class="container mb-5">
-    <div class="row g-4">
-        <div class="col-md-6">
-            <div class="bg-tactical-navy p-4 d-flex align-items-center justify-content-between h-100 position-relative overflow-hidden shadow-lg">
-                <div class="z-1 pe-3">
-                    <span class="sale-tag-red mb-2">AR-15 BUILDERS SPECIAL</span>
-                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900;">COMPLETE AR-15 BUILD KITS &amp; UPPERS</h3>
-                    <p class="small text-secondary font-monospace mb-3">Mil-Spec forged 7075-T6 upper receivers, bolt carrier groups, barrels, and custom triggers.</p>
-                    <a href="/products/?category=ar-15" class="btn-tactical-yellow py-2 px-4 small">SHOP AR-15 PARTS &gt;</a>
-                </div>
-                <div class="d-none d-xl-flex align-items-center justify-content-center z-0" style="width: 140px; height: 140px; opacity: 0.85;">
-                    <img src="{% static 'images/armor_plate.png' %}" alt="AR-15 Parts" class="img-fluid rounded-3 border border-glass" onerror="this.style.display='none'">
+    <div class="row g-4 flex-column">
+        <div class="col-12">
+            <div class="bg-tactical-navy p-5 text-center position-relative overflow-hidden shadow-lg rounded-4 border-glass">
+                <div class="z-1 mx-auto" style="max-width: 700px;">
+                    <span class="sale-tag-red mb-3 mx-auto d-inline-block">AR-15 BUILDERS SPECIAL</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-3 display-6" style="font-weight: 900;">COMPLETE AR-15 BUILD KITS &amp; UPPERS</h3>
+                    <p class="lead text-secondary font-monospace mb-4">Mil-Spec forged 7075-T6 upper receivers, bolt carrier groups, barrels, and custom triggers.</p>
+                    <a href="/products/?category=ar-15" class="btn-tactical-yellow py-3 px-5 fw-bold rounded-pill">SHOP AR-15 PARTS &gt;</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="bg-tactical-olive p-4 d-flex align-items-center justify-content-between h-100 position-relative overflow-hidden shadow-lg">
-                <div class="z-1 pe-3">
-                    <span class="badge-hud badge-hud-gold mb-2" style="background: #ffb800 !important; color: #000 !important;">RELOADING HQ</span>
-                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900;">PRECISION RELOADING DIES &amp; PRESSES</h3>
-                    <p class="small text-secondary font-monospace mb-3">Everything you need for match-grade handloading: presses, dies, brass, bullets, and powder scales.</p>
-                    <a href="/products/?category=reloading" class="btn-tactical-yellow py-2 px-4 small">SHOP RELOADING &gt;</a>
-                </div>
-                <div class="d-none d-xl-flex align-items-center justify-content-center z-0" style="width: 140px; height: 140px; opacity: 0.85;">
-                    <img src="{% static 'images/night_vision.png' %}" alt="Reloading Supplies" class="img-fluid rounded-3 border border-glass" onerror="this.style.display='none'">
+        <div class="col-12">
+            <div class="bg-tactical-olive p-5 text-center position-relative overflow-hidden shadow-lg rounded-4 border-glass">
+                <div class="z-1 mx-auto" style="max-width: 700px;">
+                    <span class="badge-hud badge-hud-gold mx-auto mb-3 d-inline-block" style="background: #ffb800 !important; color: #000 !important;">RELOADING HQ</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-3 display-6" style="font-weight: 900;">PRECISION RELOADING DIES &amp; PRESSES</h3>
+                    <p class="lead text-secondary font-monospace mb-4">Everything you need for match-grade handloading: presses, dies, brass, bullets, and powder scales.</p>
+                    <a href="/products/?category=reloading" class="btn-tactical-yellow py-3 px-5 fw-bold rounded-pill">SHOP RELOADING &gt;</a>
                 </div>
             </div>
         </div>
@@ -647,36 +657,32 @@
 <!-- 7. TACTICAL DEALS & SPECIALTY BLOCKS -->
 <section class="container mb-5">
     <div class="row g-4">
-        <div class="col-md-6">
-            <div class="p-5 rounded-4 d-flex flex-column justify-content-between h-100 shadow-lg" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
-                <div>
-                    <span class="badge-hud mb-3" style="background: #334155; color: #f8fafc; border: 1px solid #475569;">BULLETPROOF DEAL</span>
-                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900; color: #ffffff !important;">LEVEL IV CERAMIC ARMOR BUNDLE</h3>
-                    <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.6;">Get a pair of Level IV standalone ceramic plates plus a Mil-Spec laser-cut plate carrier. Rated for multi-hit armor piercing protection.</p>
-                </div>
-                <div>
-                    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="col-12 col-lg-6 d-flex">
+            <div class="p-5 rounded-4 text-center shadow-lg w-100" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
+                <div class="mx-auto" style="max-width: 700px;">
+                    <span class="badge-hud mx-auto mb-3 d-inline-block" style="background: #334155; color: #f8fafc; border: 1px solid #475569;">BULLETPROOF DEAL</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-3 display-6" style="font-weight: 900; color: #ffffff !important;">LEVEL IV CERAMIC ARMOR BUNDLE</h3>
+                    <p class="lead font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.6;">Get a pair of Level IV standalone ceramic plates plus a Mil-Spec laser-cut plate carrier. Rated for multi-hit armor piercing protection.</p>
+                    <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
                         <span class="fs-2 fw-bold font-monospace" style="color: #ffffff;">$1,150.00</span>
                         <span class="text-muted text-decoration-line-through font-monospace fs-5" style="color: #94a3b8 !important;">$1,450.00</span>
                     </div>
-                    <a href="/products/?q=ceramic+armor" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">CLAIM DEAL NOW &gt;</a>
+                    <a href="/products/?q=ceramic+armor" class="btn btn-light px-5 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">CLAIM DEAL NOW &gt;</a>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="p-5 rounded-4 d-flex flex-column justify-content-between h-100 shadow-lg" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
-                <div>
-                    <span class="badge-hud mb-3" style="background: #334155; color: #f8fafc; border: 1px solid #475569;">NFA QUICK DISPATCH</span>
-                    <h3 class="font-outfit fw-extrabold text-white mb-2" style="font-weight: 900; color: #ffffff !important;">TITANIUM QD SUPPRESSORS</h3>
-                    <p class="font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.6;">3D-printed Grade 5 Titanium silencers with monolithic baffle core. Zero point-of-impact shift guarantee. Fast e-file Form 3 transfer.</p>
-                </div>
-                <div>
-                    <div class="d-flex align-items-center gap-3 mb-4">
+        <div class="col-12 col-lg-6 d-flex">
+            <div class="p-5 rounded-4 text-center shadow-lg w-100" style="background: #0f172a; border: 1px solid #334155; color: #ffffff;">
+                <div class="mx-auto" style="max-width: 700px;">
+                    <span class="badge-hud mx-auto mb-3 d-inline-block" style="background: #334155; color: #f8fafc; border: 1px solid #475569;">NFA QUICK DISPATCH</span>
+                    <h3 class="font-outfit fw-extrabold text-white mb-3 display-6" style="font-weight: 900; color: #ffffff !important;">TITANIUM QD SUPPRESSORS</h3>
+                    <p class="lead font-monospace mb-4" style="color: #cbd5e1 !important; line-height: 1.6;">3D-printed Grade 5 Titanium silencers with monolithic baffle core. Zero point-of-impact shift guarantee. Fast e-file Form 3 transfer.</p>
+                    <div class="d-flex align-items-center justify-content-center gap-3 mb-4">
                         <span class="fs-2 fw-bold font-monospace" style="color: #ffffff;">$1,850.00</span>
                         <span class="badge bg-success font-monospace">IN STOCK</span>
                     </div>
-                    <a href="/products/?q=suppressor" class="btn btn-light px-4 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">SHOP SILENCERS &gt;</a>
+                    <a href="/products/?q=suppressor" class="btn btn-light px-5 py-3 fw-bold rounded-pill" style="color: #0f172a !important;">SHOP SILENCERS &gt;</a>
                 </div>
             </div>
         </div>
@@ -831,39 +837,277 @@
 
     <div class="swiper guidesSwiper px-1 py-3">
         <div class="swiper-wrapper">
-            {% for guide in trigger_times_guides %}
-            <div class="swiper-slide" style="height: auto;">
-                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between border shadow-sm transition-all hover-glass" style="background: #ffffff !important; border-color: #cbd5e1 !important;">
-                    <div>
-                        <div class="rounded-3 mb-3 overflow-hidden bg-dark position-relative d-flex align-items-center justify-content-center" style="height: 160px; border: 1px solid #cbd5e1;">
-                            <img src="{{ guide.thumbnail_url }}" alt="{{ guide.title }}" class="img-fluid object-fit-cover w-100 h-100" onerror="this.style.display='none'">
-                            <span class="badge bg-dark text-white font-monospace position-absolute top-0 start-0 m-3">{{ guide.category|upper }}</span>
-                            <!-- Play Overlay -->
-                            <div class="position-absolute top-50 start-50 translate-middle">
-                                <div class="bg-dark bg-opacity-75 rounded-circle d-flex align-items-center justify-content-center border border-2 border-white text-white" style="width: 40px; height: 40px;">
-                                    <i class="bi bi-play-fill fs-4 ms-1"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <h5 class="font-outfit fw-bold text-dark mb-2">{{ guide.title }}</h5>
-                        <p class="small text-secondary font-inter mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">Watch our detailed video guide on {{ guide.title|lower }}.</p>
-                    </div>
-                    <div class="mt-4 pt-3 border-top border-light d-flex justify-content-between align-items-center">
-                        <span class="small text-muted font-monospace"><i class="bi bi-calendar3 me-1"></i> {{ guide.date_published|date:"M d, Y" }}</span>
-                        <a href="/trigger-times/" class="small font-monospace fw-bold text-primary text-decoration-none">WATCH VIDEO &gt;</a>
-                    </div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/tactical_gear.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Industry Trends in 2024">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
                 </div>
             </div>
-            {% empty %}
-            <div class="swiper-slide" style="height: auto;">
-                <div class="glass-card p-4 h-100 d-flex flex-column justify-content-center align-items-center border shadow-sm text-center" style="background: #ffffff !important; border-color: #cbd5e1 !important; min-height: 250px;">
-                    <i class="bi bi-camera-video text-muted" style="font-size: 3rem;"></i>
-                    <h5 class="font-outfit fw-bold text-dark mt-3">New Guides Coming Soon</h5>
-                    <p class="small text-secondary mb-0">Check back later for new armory guides.</p>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Industry Trends in 2024
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        The firearms industry is experiencing a massive paradigm shift in 2024. Manufacturers are focusing heavily on modularity, allowing users to customize their platforms seamlessly across different calibers.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 15, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
                 </div>
             </div>
-            {% endfor %}
         </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/rifle_scope.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="New Product Announcements for Fall">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        New Product Announcements for Fall
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        With the upcoming fall season, major manufacturers have announced a slew of new products aimed at both competitive shooters and hunting enthusiasts. Expect to see significant upgrades in optics.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 16, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/rifle_scope.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="The Future of Optics in Firearms">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        The Future of Optics in Firearms
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Smart optics are no longer a concept of the future; they are here. Integrated rangefinders, ballistic calculators, and heads-up displays are becoming standard features on high-end scopes.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 17, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/shooting_range.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Safety First: Range Etiquette">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Safety First: Range Etiquette
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Whether you are a seasoned veteran or a first-time shooter, range etiquette is paramount. Understanding the fundamental rules of firearms safety ensures that everyone has a safe and enjoyable time.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 18, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/tactical_gear.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Top 10 Accessories for Your Rifle">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Top 10 Accessories for Your Rifle
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Outfitting your rifle with the right accessories can drastically improve your shooting experience. From advanced slings and bipods to high-lumen weapon lights, we break down the top 10 must-haves.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 19, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/gunsmithing_workbench.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Gunsmithing Tips: Cleaning Your Firearm">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Gunsmithing Tips: Cleaning Your Firearm
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Regular maintenance is the key to ensuring your firearm's longevity and reliability. In this guide, we cover the essential steps to properly clean and lubricate your weapon.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 20, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/tactical_gear.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Choosing the Right Ammunition">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Choosing the Right Ammunition
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Not all ammunition is created equal. Understanding the difference between FMJ, hollow points, and ballistic tips is crucial for making the right choice for self-defense, hunting, or target practice.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 21, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/shooting_range.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Getting Started in Competitive Shooting">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Getting Started in Competitive Shooting
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Competitive shooting is one of the fastest-growing sports in the nation. We cover the basics of getting involved in USPSA, IDPA, and 3-Gun competitions.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 22, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/rifle_scope.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Understanding Ballistics for Beginners">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Understanding Ballistics for Beginners
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Ballistics can be a complex science, but understanding the basics of trajectory, wind drift, and bullet drop is essential for any serious marksman looking to improve their accuracy at range.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 23, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<div class="swiper-slide" style="width: 350px;">
+    <a href="/trigger-times/?cat=news" class="text-decoration-none">
+        <div class="glass-card p-0 h-100 d-flex flex-column border shadow-sm transition-all hover-glass bg-white text-dark rounded-4 overflow-hidden">
+            <div class="position-relative" style="height: 220px; flex-shrink: 0;">
+                <img src="{% static 'images/news/gunsmithing_workbench.png' %}" class="img-fluid w-100 h-100 object-fit-cover" alt="Building Your First AR-15: A Comprehensive Guide">
+                <div class="position-absolute bottom-0 start-0 w-100 p-2" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+                    <span class="badge bg-danger small font-monospace"><i class="bi bi-play-circle me-1"></i> News</span>
+                </div>
+            </div>
+            <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                <div>
+                    <h5 class="font-outfit fw-bold text-dark mb-2 line-clamp-2" style="line-height: 1.4; min-height: 2.8em;">
+                        Building Your First AR-15: A Comprehensive Guide
+                    </h5>
+                    <p class="small text-secondary mb-3 line-clamp-3" style="line-height: 1.5;">
+                        Building an AR-15 from scratch is a rewarding experience that teaches you the ins and outs of the platform. We guide you through the process, from selecting the right lower receiver to torquing the barrel.
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-auto border-top pt-3">
+                    <small class="text-secondary font-monospace"><i class="bi bi-clock me-1"></i> January 24, 2024</small>
+                    <i class="bi bi-arrow-right text-danger"></i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+</div>
     </div>
 </section>
 

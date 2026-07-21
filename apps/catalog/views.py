@@ -502,6 +502,14 @@ def contact_view(request):
                 )
                 msg.attach_alternative(html_message, "text/html")
                 msg.send()
+                
+                from apps.users.utils import send_web_push
+                send_web_push(
+                    title="New Support Request",
+                    body=f"{name} contacted {department}.",
+                    url="/admin/"
+                )
+                
                 messages.success(request, "Your message has been sent successfully. Our team will contact you shortly.")
             except Exception as e:
                 messages.error(request, "There was an error sending your message. Please try again later.")

@@ -18,6 +18,7 @@ urlpatterns = [
     path('api/v1/', include('apps.core.api_urls')),
     path('robots.txt', robots_txt_view, name='robots_txt'),
     path('robot.txt', robots_txt_view),  # Alias for common typo
+    path('sw.js', TemplateView.as_view(template_name='sw.js', content_type='application/javascript'), name='sw_js'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('return-policy/', TemplateView.as_view(template_name='pages/return_policy.html'), name='return_policy'),
     path('', include('apps.catalog.urls')),

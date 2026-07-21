@@ -57,10 +57,19 @@ class Order(UUIDModel, TimeStampedModel):
         ordering = ['-created_at']
 
     def save(self, *args, **kwargs):
+        is_new = self.pk is None
         if not self.order_number:
             rand = ''.join(random.choices(string.digits, k=6))
             self.order_number = f"ARM-ORD-{rand}"
         super().save(*args, **kwargs)
+        
+        if is_new:
+            from apps.users.utils import send_web_push
+            send_web_push(
+                title="New Order Received",
+                body=f"Order #{self.order_number} for ${self.total_amount} was just placed.",
+                url=f"/admin/orders/order/{self.pk}/change/"
+            )
 
     def __str__(self):
         return f"Order #{self.order_number} (${self.total_amount})"

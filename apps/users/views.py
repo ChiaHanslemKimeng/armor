@@ -6,7 +6,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
-from .models import User, Address
+import json
+from django.views.decorators.csrf import csrf_exempt
+from .models import User, Address, PushSubscription
 
 
 def login_view(request):
@@ -95,3 +97,43 @@ def edit_profile_view(request):
         return redirect('user_dashboard')
         
     return render(request, 'users/edit_profile.html', {'user': request.user})
+
+
+@csrf_exempt
+@login_required
+def save_push_subscription(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            subscription_info = data.get('subscription')
+            
+            if not subscription_info:
+                return JsonResponse({'status': 'error', 'message': 'Invalid subscription info'}, status=400)
+            
+            endpoint = subscription_info.get('endpoint')
+            keys = subscription_info.get('keys', {})
+            p256dh = keys.get('p256dh')
+            auth = keys.get('auth')
+
+            if not endpoint or not p256dh or not auth:
+                return JsonResponse({'status': 'error', 'message': 'Missing keys or endpoint'}, status=400)
+
+            # Check if exists, update or create
+            sub, created = PushSubscription.objects.update_or_create(
+                endpoint=endpoint,
+                defaults={
+                    'user': request.user,
+                    'p256dh': p256dh,
+                    'auth': auth,
+                }
+            )
+            return JsonResponse({'status': 'success', 'message': 'Subscription saved.'})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON data'}, status=400)
+    return JsonResponse({'status': 'error', 'message': 'Only POST allowed'}, status=405)
+
+
+@login_required
+def get_vapid_public_key(request):
+    from django.conf import settings
+    return JsonResponse({'public_key': settings.VAPID_PUBLIC_KEY})
