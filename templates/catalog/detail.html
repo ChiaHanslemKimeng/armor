@@ -9,13 +9,32 @@
     basePrice: {{ product.price|default:'1099.00' }},
     priceOffset: 0,
     selectedVariant: '{{ dynamic_variants.0.name|escapejs }}', 
+    selectedVariantId: '{{ dynamic_variants.0.id|default:"" }}',
     selectedFinish: '{{ dynamic_finishes.0.label|escapejs }}',
     isZoomOpen: false,
     zoomImageUrl: '',
+    currency: localStorage.getItem('armor_currency_code') || 'USD',
+    rates: JSON.parse(localStorage.getItem('currency_rates')) || null,
     get currentPrice() {
-        return ((parseFloat(this.basePrice) + parseFloat(this.priceOffset)) * this.qty).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        let price = (parseFloat(this.basePrice) + parseFloat(this.priceOffset)) * this.qty;
+        let rate = 1;
+        let symbol = '$';
+        if (this.rates && this.rates[this.currency] && this.currency !== 'USD') {
+            rate = parseFloat(this.rates[this.currency]);
+            if (this.currency === 'EUR') symbol = '€';
+            else if (this.currency === 'GBP') symbol = '£';
+            else if (this.currency === 'CAD') symbol = 'C$';
+            else if (this.currency === 'AUD') symbol = 'A$';
+            else if (this.currency === 'BTC') symbol = '₿';
+        } else {
+            this.currency = 'USD';
+        }
+        let converted = price * rate;
+        let fmt = this.currency === 'BTC' ? converted.toFixed(6) : converted.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        if (this.currency === 'USD') return symbol + fmt;
+        return symbol + fmt + ' ' + this.currency;
     }
-}">
+}" @currency-changed.window="currency = $event.detail.currency; rates = $event.detail.rates;">
     <!-- Breadcrumb Navigation -->
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb small font-monospace">
@@ -130,7 +149,7 @@
                         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                             <div>
                                 <span class="small text-secondary font-monospace d-block">ARMORY DIRECT PRICE:</span>
-                                <span class="fs-1 fw-black text-dark font-monospace tracking-tight" style="color: #0f172a !important;">$<span x-text="currentPrice">{{ product.price }}</span></span>
+                                <span class="fs-1 fw-black text-dark font-monospace tracking-tight" style="color: #0f172a !important;" x-text="currentPrice">${{ product.price }}</span>
                             </div>
                             <span class="badge bg-success font-monospace px-3 py-2 fs-6 text-nowrap">Ready to Ship</span>
                         </div>
@@ -140,6 +159,7 @@
                             {% csrf_token %}
                             <input type="hidden" name="sku" value="{{ product.sku }}">
                             <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="hidden" name="variant_id" :value="selectedVariantId">
                             <input type="hidden" name="qty" :value="qty">
                             <div class="col-auto" style="width: 125px;">
                                 <div class="d-flex align-items-center justify-content-between border border-secondary rounded-pill px-2 h-100" style="min-height: 52px; background-color: #ffffff !important; flex-wrap: nowrap !important;">
@@ -167,7 +187,7 @@
                         </div>
                         <div class="d-flex flex-column gap-2 mb-4">
                             {% for var in dynamic_variants %}
-                            <button type="button" @click="selectedVariant = '{{ var.name|escapejs }}'; priceOffset = {{ var.price_offset }}" class="btn text-start p-3 rounded-3 d-flex justify-content-between align-items-center transition-all border overflow-hidden" :style="selectedVariant === '{{ var.name|escapejs }}' ? 'background-color: #2563eb !important; color: #ffffff !important; border-color: #1d4ed8 !important;' : 'background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important;'">
+                            <button type="button" @click="selectedVariant = '{{ var.name|escapejs }}'; selectedVariantId = '{{ var.id|default:"" }}'; priceOffset = {{ var.price_offset }}" class="btn text-start p-3 rounded-3 d-flex justify-content-between align-items-center transition-all border overflow-hidden" :style="selectedVariant === '{{ var.name|escapejs }}' ? 'background-color: #2563eb !important; color: #ffffff !important; border-color: #1d4ed8 !important;' : 'background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important;'">
                                 <div class="flex-grow-1 pe-2 overflow-hidden">
                                     <strong class="d-block font-outfit fs-6 fw-bold text-wrap mb-1 lh-sm">{{ var.name }}</strong>
                                     <small class="font-monospace opacity-75 d-block text-wrap lh-sm" style="font-size: 0.75rem;">{{ var.description }}</small>

@@ -269,6 +269,7 @@ def product_detail_view(request, slug):
     if variants.exists():
         for var in variants:
             dynamic_variants.append({
+                'id': var.id,
                 'name': var.color or var.sku_suffix or f"Variant {var.id}",
                 'sku': var.sku_suffix,
                 'description': var.size or f"Verified Factory Complete • {product.sku}",
@@ -282,6 +283,7 @@ def product_detail_view(request, slug):
             cal_str = product.name.split(' ')[0] if ' ' in product.name else "Standard"
         dynamic_variants = [
             {
+                'id': '',
                 'name': f"{brand_str} Match Complete Configuration",
                 'sku': f"{product.sku}-STD",
                 'description': f"100% Factory Complete • {cal_str} Chambered • Verified QC",

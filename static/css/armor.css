@@ -384,10 +384,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Global Responsive Overflow Safeguards */
-.container, .container-fluid, .row, .col, [class*="col-"], .glass-card, .card, .alert, .accordion-item, .offcanvas-body, .modal-body {
-  max-width: 100% !important;
-}
+
 
 img, video, canvas, svg {
   max-width: 100% !important;

@@ -37,13 +37,13 @@
                 <span class="badge bg-success animate-pulse"><i class="bi bi-broadcast"></i> LIVE TRACKING TELEMETRY</span>
                 <span class="font-monospace small text-muted">ORDER NUMBER: #{{ order.order_number|default:"2026-8899" }}</span>
             </div>
-            <h2 class="fw-bold mb-0 text-white font-outfit">Order &amp; Shipment Tracking</h2>
+            <h2 class="fw-bold mb-0 text-dark font-outfit">Order &amp; Shipment Tracking</h2>
         </div>
         <div class="d-flex gap-2">
-            <a href="/orders/invoice/{{ order.id|default:'101' }}/" target="_blank" class="btn btn-outline-secondary border-glass rounded-3 px-4 d-flex align-items-center gap-2 text-white hover-glass font-monospace">
+            <a href="/orders/invoice/{{ order.order_number|default:'101' }}/" target="_blank" class="btn btn-outline-secondary border-glass rounded-3 px-4 d-flex align-items-center gap-2 text-dark hover-glass font-monospace">
                 <i class="bi bi-file-earmark-pdf-fill text-danger"></i> Download Receipt / Invoice
             </a>
-            <button class="btn-tactical-yellow rounded-3 px-4 d-flex align-items-center gap-2" @click="progress = Math.min(100, progress + 25)">
+            <button class="btn-tactical-yellow rounded-3 px-4 d-flex align-items-center gap-2" @click="window.location.reload()">
                 <i class="bi bi-arrow-clockwise"></i> Refresh Status
             </button>
         </div>
@@ -53,9 +53,9 @@
     <div class="p-4 rounded-4 border border-warning border-opacity-50 mb-5 d-flex align-items-start gap-3 shadow-sm" style="background: rgba(255, 184, 0, 0.08);">
         <i class="bi bi-bell-fill text-warning fs-3 flex-shrink-0 mt-1"></i>
         <div>
-            <h5 class="fw-bold text-white font-outfit mb-1">Payment &amp; Dispatch Notification</h5>
+            <h5 class="fw-bold text-dark font-outfit mb-1">Payment &amp; Dispatch Notification</h5>
             <p class="small text-secondary font-monospace mb-0 lh-base">
-                Your order <strong class="text-white">#{{ order.order_number|default:"2026-8899" }}</strong> has been logged into the secure queue! <strong class="text-warning">The Glocks And Armor admin team will contact you shortly via email or phone with your official payment details and step-by-step instructions with regards to the payment method you chose ({% if order.payment_gateway == 'etransfer' %}E-Transfer{% elif order.payment_gateway == 'crypto' %}Cryptocurrency (BTC/ETH/USDT){% elif order.payment_gateway == 'cashapp' %}CashApp ($Cashtag){% elif order.payment_gateway == 'paypal' %}PayPal Checkout{% elif order.payment_gateway == 'bankwire' %}Bank Transfer (ACH / Wire){% else %}{{ order.payment_gateway|default:"Credit/Debit Card" }}{% endif %}).</strong> Once verified, real-time GPS courier dispatch will commence automatically below.
+                Your order <strong class="text-dark">#{{ order.order_number|default:"2026-8899" }}</strong> has been logged into the secure queue! <strong class="text-warning">The Glocks And Armor admin team will contact you shortly via email or phone with your official payment details and step-by-step instructions with regards to the payment method you chose ({% if order.payment_gateway == 'etransfer' %}E-Transfer{% elif order.payment_gateway == 'crypto' %}Cryptocurrency (BTC/ETH/USDT){% elif order.payment_gateway == 'cashapp' %}CashApp ($Cashtag){% elif order.payment_gateway == 'paypal' %}PayPal Checkout{% elif order.payment_gateway == 'bankwire' %}Bank Transfer (ACH / Wire){% else %}{{ order.payment_gateway|default:"Credit/Debit Card" }}{% endif %}).</strong> Once verified, real-time GPS courier dispatch will commence automatically below.
             </p>
         </div>
     </div>
@@ -88,51 +88,51 @@
     </div>
 
     <!-- 4-Stage Tactical Dispatch Timeline -->
-    <div class="glass-card p-5 border-glass mb-5">
-        <h5 class="fw-bold mb-4 text-white font-outfit">Order &amp; Delivery Status</h5>
+    <div class="glass-card p-5 border-glass mb-5 bg-white shadow-sm rounded-4">
+        <h5 class="fw-bold mb-4 text-dark font-outfit">Order &amp; Delivery Status</h5>
         
         <div class="row g-4 position-relative">
             <!-- Progress bar line behind steps -->
-            <div class="position-absolute top-50 start-0 translate-middle-y w-100 d-none d-md-block" style="height: 4px; background: rgba(255,255,255,0.1); z-index: 1;">
+            <div class="position-absolute top-50 start-0 translate-middle-y w-100 d-none d-md-block" style="height: 4px; background: rgba(0,0,0,0.1); z-index: 1;">
                 <div class="bg-info h-100 transition-all" :style="'width: ' + progress + '%;'"></div>
             </div>
 
             <!-- Stage 1 -->
             <div class="col-md-3 text-center position-relative z-2">
-                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-lg" :class="progress >= 25 ? 'bg-info text-dark fw-bold' : 'bg-dark border border-glass text-muted'" style="width: 64px; height: 64px;">
+                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" :class="progress >= 25 ? 'bg-info text-dark fw-bold' : 'bg-light border border-glass text-muted'" style="width: 64px; height: 64px;">
                     <i class="bi bi-check-lg fs-3"></i>
                 </div>
-                <h6 class="fw-bold mb-1 text-white font-outfit">1. Order Confirmed</h6>
+                <h6 class="fw-bold mb-1 text-dark font-outfit">1. Order Confirmed</h6>
                 <p class="small text-secondary mb-0 font-monospace">Payment verified and items allocated from inventory.</p>
                 <span class="badge bg-success bg-opacity-10 text-success mt-2 font-monospace">COMPLETED</span>
             </div>
 
             <!-- Stage 2 -->
             <div class="col-md-3 text-center position-relative z-2">
-                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-lg" :class="progress >= 50 ? 'bg-info text-dark fw-bold' : 'bg-dark border border-glass text-muted'" style="width: 64px; height: 64px;">
+                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" :class="progress >= 50 ? 'bg-info text-dark fw-bold' : 'bg-light border border-glass text-muted'" style="width: 64px; height: 64px;">
                     <i class="bi bi-box-seam fs-3"></i>
                 </div>
-                <h6 class="fw-bold mb-1 text-white font-outfit">2. Quality Check &amp; Packing</h6>
+                <h6 class="fw-bold mb-1 text-dark font-outfit">2. Quality Check &amp; Packing</h6>
                 <p class="small text-secondary mb-0 font-monospace">Items inspected, verified, and packed securely for shipment.</p>
                 <span class="badge bg-success bg-opacity-10 text-success mt-2 font-monospace">COMPLETED</span>
             </div>
 
             <!-- Stage 3 -->
             <div class="col-md-3 text-center position-relative z-2">
-                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-lg" :class="progress >= 75 ? 'bg-info text-dark fw-bold animate-pulse' : 'bg-dark border border-glass text-muted'" style="width: 64px; height: 64px;">
+                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" :class="progress >= 75 ? 'bg-info text-dark fw-bold animate-pulse' : 'bg-light border border-glass text-muted'" style="width: 64px; height: 64px;">
                     <i class="bi bi-truck fs-3"></i>
                 </div>
-                <h6 class="fw-bold mb-1 text-white font-outfit">3. In Transit</h6>
+                <h6 class="fw-bold mb-1 text-dark font-outfit">3. In Transit</h6>
                 <p class="small text-secondary mb-0 font-monospace">Shipped via UPS Priority Insured with real-time tracking.</p>
                 <span class="badge bg-info bg-opacity-10 text-info mt-2 font-monospace">IN TRANSIT</span>
             </div>
 
             <!-- Stage 4 -->
             <div class="col-md-3 text-center position-relative z-2">
-                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-lg" :class="progress >= 100 ? 'bg-success text-white' : 'bg-dark border border-glass text-muted'" style="width: 64px; height: 64px;">
+                <div class="p-3 rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" :class="progress >= 100 ? 'bg-success text-white' : 'bg-light border border-glass text-muted'" style="width: 64px; height: 64px;">
                     <i class="bi bi-house-door fs-3"></i>
                 </div>
-                <h6 class="fw-bold mb-1 text-white font-outfit">4. Delivered to FFL / Home</h6>
+                <h6 class="fw-bold mb-1 text-dark font-outfit">4. Delivered to FFL / Home</h6>
                 <p class="small text-secondary mb-0 font-monospace">Delivered to your local FFL gun store or home address.</p>
                 <span class="badge bg-secondary bg-opacity-25 text-muted mt-2 font-monospace">PENDING DELIVERY</span>
             </div>
@@ -142,33 +142,27 @@
     <!-- Ordnance Manifest & FFL Transfer Notes -->
     <div class="row g-4">
         <div class="col-lg-6">
-            <div class="glass-card p-4 border-glass h-100">
-                <h5 class="fw-bold mb-3 text-white font-outfit"><i class="bi bi-box-seam text-info me-2"></i> Shipped Items</h5>
+            <div class="glass-card p-4 border-glass h-100 bg-white shadow-sm rounded-4">
+                <h5 class="fw-bold mb-3 text-dark font-outfit"><i class="bi bi-box-seam text-info me-2"></i> Shipped Items</h5>
                 <div class="d-flex flex-column gap-3">
-                    <div class="p-3 rounded-3 bg-dark bg-opacity-50 border border-glass d-flex justify-content-between align-items-center">
+                    {% for item in items %}
+                    <div class="p-3 rounded-3 bg-light border border-glass d-flex justify-content-between align-items-center shadow-sm">
                         <div>
-                            <span class="badge bg-info bg-opacity-25 text-info small mb-1">SNIPER RIFLE</span>
-                            <strong class="d-block text-white">Armor Tactical PSR-338 System (.338 Lapua)</strong>
-                            <small class="text-secondary font-monospace">Serial: #ARM-2026-99114 • Qty: 1</small>
+                            <span class="badge bg-secondary bg-opacity-25 text-dark small mb-1">{{ item.sku }}</span>
+                            <strong class="d-block text-dark">{{ item.product_name }}</strong>
+                            <small class="text-secondary font-monospace">Qty: {{ item.quantity }}</small>
                         </div>
-                        <span class="fw-bold font-monospace" style="color: #ffb800;">$8,450.00</span>
+                        <span class="fw-bold font-monospace text-dark">${{ item.total_price }}</span>
                     </div>
-                    <div class="p-3 rounded-3 bg-dark bg-opacity-50 border border-glass d-flex justify-content-between align-items-center">
-                        <div>
-                            <span class="badge bg-success bg-opacity-25 text-success small mb-1">BALLISTIC ARMOR</span>
-                            <strong class="d-block text-white">Aegis Level IV Ceramic Plates (Pair)</strong>
-                            <small class="text-secondary font-monospace">Batch: #SAPI-LV4-0088 • Qty: 2 Pairs</small>
-                        </div>
-                        <span class="fw-bold font-monospace" style="color: #ffb800;">$2,500.00</span>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
 
         <div class="col-lg-6">
-            <div class="glass-card p-4 border-glass h-100 d-flex flex-column justify-content-between">
+            <div class="glass-card p-4 border-glass h-100 d-flex flex-column justify-content-between bg-white shadow-sm rounded-4">
                 <div>
-                    <h5 class="fw-bold mb-3 text-white font-outfit"><i class="bi bi-shield-check text-success me-2"></i> Pickup &amp; Transfer Instructions</h5>
+                    <h5 class="fw-bold mb-3 text-dark font-outfit"><i class="bi bi-shield-check text-success me-2"></i> Pickup &amp; Transfer Instructions</h5>
                     <p class="small text-secondary mb-3 font-monospace">
                         When your shipment arrives at your chosen local FFL dealer, please bring a valid state-issued photo ID (driver's license) to complete your standard ATF Form 4473 background check.
                     </p>
@@ -179,7 +173,7 @@
                     </ul>
                 </div>
                 <div class="mt-4 pt-3 border-top border-glass d-flex justify-content-between align-items-center">
-                    <span class="small text-muted font-monospace">CUSTOMER SUPPORT: 1-800-555-ARMOR</span>
+                    <span class="small text-muted font-monospace">CUSTOMER SUPPORT: support@glocksandarmor.com</span>
                     <span class="badge bg-success">INSURED SHIPMENT</span>
                 </div>
             </div>

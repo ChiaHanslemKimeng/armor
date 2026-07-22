@@ -35,9 +35,15 @@
             <div class="glass-card p-4 h-100 d-flex flex-column justify-content-between">
                 <div>
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fs-4 fw-bold" style="width:64px; height:64px; background: var(--accent-gradient);">
+                        {% if user.avatar %}
+                        <div class="rounded-circle overflow-hidden d-flex align-items-center justify-content-center shadow-sm border border-glass" style="width:64px; height:64px;">
+                            <img src="{{ user.avatar.url }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        {% else %}
+                        <div class="rounded-circle d-flex align-items-center justify-content-center text-white fs-4 fw-bold shadow-sm" style="width:64px; height:64px; background: var(--accent-gradient);">
                             {{ user.email.0|upper }}
                         </div>
+                        {% endif %}
                         <div style="min-width: 0;">
                             <h5 class="fw-bold mb-0 text-dark font-outfit text-truncate" style="max-width: 100%;">{{ user.email }}</h5>
                             <span class="badge bg-success bg-opacity-10 text-success small mt-1 font-monospace"><i class="bi bi-shield-check me-1"></i> Verified Customer</span>

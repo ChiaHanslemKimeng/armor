@@ -93,15 +93,21 @@ def cart_add_view(request, product_id=None, sku=None):
     except (ValueError, TypeError):
         qty = 1
     
+    variant_id = request.POST.get('variant_id')
+    variant = None
+    if variant_id:
+        from apps.catalog.models import ProductVariant
+        variant = ProductVariant.objects.filter(id=variant_id).first()
+
     if not request.session.session_key:
         request.session.create()
     session_key = request.session.session_key
     user = request.user if request.user.is_authenticated else None
 
     if user:
-        item, created = CartItem.objects.get_or_create(user=user, product=product, defaults={'quantity': qty})
+        item, created = CartItem.objects.get_or_create(user=user, product=product, variant=variant, defaults={'quantity': qty})
     else:
-        item, created = CartItem.objects.get_or_create(session_key=session_key, product=product, defaults={'quantity': qty})
+        item, created = CartItem.objects.get_or_create(session_key=session_key, product=product, variant=variant, defaults={'quantity': qty})
     
     if not created:
         item.quantity += qty
@@ -236,13 +242,23 @@ def checkout_view(request):
         )
 
         for item in items:
+            p_name = item.product.name
+            p_sku = item.product.sku
+            u_price = item.product.price
+            if item.variant:
+                if item.variant.color:
+                    p_name += f" ({item.variant.color})"
+                if item.variant.sku_suffix:
+                    p_sku = item.variant.sku_suffix
+                u_price += item.variant.price_adjustment
+
             OrderItem.objects.create(
                 order=order,
                 product=item.product,
-                product_name=item.product.name,
-                sku=item.product.sku,
+                product_name=p_name,
+                sku=p_sku,
                 quantity=item.quantity,
-                unit_price=item.product.price,
+                unit_price=u_price,
                 total_price=item.item_total
             )
             try:
@@ -351,7 +367,9 @@ def invoice_pdf_view(request, order_number):
                 <p>Tactical &amp; Ballistic Catalog<br>Austin, TX 78701 • Authorized Dealer</p>
             </div>
             <div style="text-align: right;">
-                <span class="badge">OFFICIAL INVOICE</span>
+                <span class="badge" style="{ 'background: #dcfce3; color: #166534;' if order.payment_status.lower() in ['paid', 'completed', 'settled'] else '' }">
+                    { 'PAID INVOICE' if order.payment_status.lower() in ['paid', 'completed', 'settled'] else 'OFFICIAL INVOICE' }
+                </span>
                 <h2>#{order.order_number}</h2>
                 <p>Date: {order.created_at.strftime('%Y-%m-%d')}<br>Status: {order.get_status_display()}</p>
             </div>
@@ -386,7 +404,7 @@ def invoice_pdf_view(request, order_number):
         </div>
         
         <div style="margin-top: 50px; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 15px;">
-            Payment Terms: Paid via Secure Checkout. Thank you for your order.
+            Payment Terms: { 'Paid in Full via Secure Checkout' if order.payment_status.lower() in ['paid', 'completed', 'settled'] else 'Payment Pending / Due Upon Receipt' }. Thank you for your order.
         </div>
     </body>
     </html>

@@ -313,7 +313,7 @@
                             </div>
                             <div>
                                 <strong class="d-block text-dark">{{ item.product.name }}</strong>
-                                <span class="text-muted font-monospace" style="font-size:0.75rem;">Qty: {{ item.quantity }} • {{ item.product.sku }}</span>
+                                <span class="text-muted font-monospace" style="font-size:0.75rem;">Qty: {{ item.quantity }} • {% if item.variant and item.variant.sku_suffix %}{{ item.variant.sku_suffix }}{% else %}{{ item.product.sku }}{% endif %}</span>
                             </div>
                         </div>
                         <span class="fw-bold font-monospace text-dark text-nowrap">${{ item.item_total }}</span>

@@ -33,7 +33,7 @@
                             <div>
                                 <span class="badge bg-primary bg-opacity-10 text-primary small mb-1">IN STOCK</span>
                                 <h6 class="fw-bold mb-1 text-dark font-outfit">{{ item.product.name }}</h6>
-                                <small class="text-secondary font-monospace">SKU: {{ item.product.sku }} • Caliber/Variant: {{ item.product.variant|default:".338 Lapua Mag" }}</small>
+                                <small class="text-secondary font-monospace">SKU: {% if item.variant and item.variant.sku_suffix %}{{ item.variant.sku_suffix }}{% else %}{{ item.product.sku }}{% endif %} • Caliber/Variant: {% if item.variant %}{{ item.variant.color|default:item.variant.sku_suffix }}{% else %}{{ item.product.variant|default:".338 Lapua Mag" }}{% endif %}</small>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-4">
